@@ -305,29 +305,29 @@ const EmailCaptureStep: React.FC<StepProps> = ({
         </p>
         
         <div className="space-y-6 mt-8 bg-black/20 p-6 rounded-xl">
-          <h3 className="text-2xl font-serif mb-4">What happens next?</h3>
+          <h3 className="text-xl sm:text-2xl font-serif mb-4">What happens next?</h3>
           <ol className="space-y-4">
-            <li className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
+            <li className="flex flex-col items-center sm:flex-row sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0 shadow-md">
                 <span className="text-white font-bold">1</span>
               </div>
-              <p className="text-lg">
+              <p className="text-base sm:text-lg">
                 We'll analyze your selections to determine your unique style profile
               </p>
             </li>
-            <li className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
+            <li className="flex flex-col items-center sm:flex-row sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0 shadow-md">
                 <span className="text-white font-bold">2</span>
               </div>
-              <p className="text-lg">
+              <p className="text-base sm:text-lg">
                 You'll receive personalized design recommendations for your {quizData.priorityRoom}
               </p>
             </li>
-            <li className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
+            <li className="flex flex-col items-center sm:flex-row sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+              <div className="w-8 h-8 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0 shadow-md">
                 <span className="text-white font-bold">3</span>
               </div>
-              <p className="text-lg">
+              <p className="text-base sm:text-lg">
                 We'll suggest complementary styles and elements for a cohesive look
               </p>
             </li>
@@ -357,7 +357,7 @@ const EmailCaptureStep: React.FC<StepProps> = ({
                   value={quizData.email}
                   onChange={(e) => updateQuizData({ email: e.target.value })}
                   placeholder="your.email@example.com"
-                  className="w-full pl-12 pr-6 py-4 bg-white/10 border border-white/20 rounded-lg focus:ring-[#C5A267] focus:border-[#C5A267] text-white text-xl placeholder-white/40"
+                  className="w-full pl-12 pr-6 py-4 bg-white/10 border border-white/20 rounded-lg focus:ring-[#C5A267] focus:border-[#C5A267] text-white text-xl placeholder-white/40 placeholder:text-base sm:placeholder:text-xl"
                   autoComplete="off"
                 />
               </div>
@@ -371,11 +371,11 @@ const EmailCaptureStep: React.FC<StepProps> = ({
               )}
             </div>
             
-            <div ref={buttonsRef} className="flex justify-between gap-3">
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row justify-between gap-3 w-full">
               <button
                 type="button"
                 onClick={prevStep}
-                className="px-6 py-3 bg-white/20 text-white text-lg rounded-md hover:bg-white/30 transition-colors duration-300 flex items-center gap-2 min-h-[52px]"
+                className="w-full sm:w-auto px-5 py-3 bg-white/20 text-white text-base rounded-md hover:bg-white/30 transition-colors duration-300 flex items-center gap-2 min-h-[44px]"
                 disabled={isSubmitting}
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -385,7 +385,7 @@ const EmailCaptureStep: React.FC<StepProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-8 py-3 bg-[#C5A267] text-white text-lg rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center gap-2 min-h-[52px] hover:shadow-lg ${
+                className={`w-full sm:w-auto px-7 py-3 bg-[#C5A267] text-white text-base rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center gap-2 min-h-[44px] hover:shadow-lg ${
                   isSubmitting ? 'opacity-75 cursor-wait' : ''
                 }`}
               >

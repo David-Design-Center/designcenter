@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Clock, ShieldCheck, Trophy } from 'lucide-react';
+import { ArrowRight, Lightbulb, Star, Eye } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import galleryData from '../data/product-galleries/index';
 import QuizContainer from '../components/quiz/QuizContainer';
@@ -33,12 +33,13 @@ const CraftedCalm = () => {
   const subheadRef = useRef<HTMLParagraphElement>(null);
   const ctaButtonRef = useRef<HTMLButtonElement>(null);
   const quizSectionRef = useRef<HTMLElement>(null);
+  const benefitsRef = useRef<HTMLDivElement>(null); // Added for benefits section
   
   // State variables
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Intersection observers for animations
-  const { ref: featuresRef, inView: featuresInView } = useInView({
+  const { inView: featuresInView } = useInView({
     threshold: 0.25,
     triggerOnce: true,
   });
@@ -165,81 +166,79 @@ const CraftedCalm = () => {
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 sm:px-6">
           <h1 
             ref={headlineRef}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif mb-6 sm:mb-8 tracking-wide"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif mb-6 sm:mb-8 tracking-wide"
           >
-            COME HOME to CRAFTED CALM
+            Discover Your Luxury Interior Design Style
           </h1>
           <p 
             ref={subheadRef}
-            className="text-1xl sm:text-2xl md:text-2xl font-light mb-10 sm:mb-12 max-w-4xl tracking-wide"
+            className="text-lg sm:text-xl md:text-2xl font-light mb-10 sm:mb-12 max-w-4xl tracking-wide"
           >
-            Step into a sanctuary designed for your life - effortlessly.
+            Take our free quiz and get personalized design recommendations from top Italian designers in minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
+              onClick={() => quizSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#C5A267] hover:bg-[#B49157] text-white px-10 py-5 text-xl font-medium transition-colors duration-300 flex items-center justify-center gap-3 min-h-[52px] tracking-wide shadow-lg hover:shadow-xl transform hover:translate-y-[-2px]"
               ref={ctaButtonRef}
-              onClick={triggerFooterContact}
-              className="bg-[#C5A267] hover:bg-[#B49157] text-white px-10 py-5 text-xl font-medium transition-colors duration-300 flex items-center justify-center gap-3 min-h-[52px] tracking-wide shadow-lg hover:shadow-xl"
             >
-              Skip to Consultation
+              Start with Quiz
               <ArrowRight className="w-6 h-6" />
             </button>
             <button
-              onClick={() => quizSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-transparent hover:bg-white/20 border border-white text-white px-10 py-5 text-xl font-medium transition-colors duration-300 flex items-center justify-center gap-3 min-h-[52px] tracking-wide shadow-lg hover:shadow-xl"
+              onClick={() => window.location.href = '/productscollection'}
+              className="bg-transparent hover:bg-white/20 border border-white text-white px-10 py-5 text-xl font-medium transition-colors duration-300 flex items-center justify-center gap-3 min-h-[52px] tracking-wide"
             >
-              Start with Quiz
+              Explore Our Portfolio
               <ArrowRight className="w-6 h-6" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* What You Get Section */}
-      <section 
-        ref={featuresRef} 
-        className="py-20 sm:py-28 bg-gray-50"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-gray-900">
-              What you receive
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-            {/* Feature 1 */}
-            <div className="feature-item text-center">
-              <div
-                className="inline-flex bg-[#606061] items-center justify-center w-20 h-20 rounded-full bg-cover bg-center ring-1 ring-black/10 shadow-lg mb-8"
-              >
-                <ShieldCheck className="w-10 h-10 text-[#C5A267] drop-shadow" />
-              </div>
-              <h3 className="text-2xl font-serif mb-4 text-gray-900">Master your style</h3>
-              <p className="text-xl text-gray-600">Find your unique taste</p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="feature-item text-center">
-              <div
-                className="inline-flex bg-[#606061] items-center justify-center w-20 h-20 rounded-full bg-cover bg-center ring-1 ring-black/10 shadow-lg mb-8"
-              >
-                <Trophy className="w-10 h-10 text-[#C5A267] drop-shadow-md" />
-              </div>
-              <h3 className="text-2xl font-serif mb-4 text-gray-900">Weekly forecasts</h3>
-              <p className="text-xl text-gray-600">Learn tips of expert designers</p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="feature-item text-center">
-              <div
-                className="inline-flex bg-[#606061] items-center justify-center w-20 h-20 rounded-full bg-cover bg-center ring-1 ring-black/10 shadow-lg mb-8"
-              >
-                <Clock className="w-10 h-10 text-[#C5A267] drop-shadow-md" />
-              </div>
-              <h3 className="text-2xl font-serif mb-4 text-gray-900">Better investing</h3>
-              <p className="text-xl text-gray-600">Learn the secrets of design ROI</p>
-            </div>
+      {/* Benefits Section */}
+      <section className="py-20 sm:py-28 bg-gradient-to-br from-[#C5A267] via-[#606061] to-[#222]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          {/* Right side: Benefits */}
+          <div 
+            ref={benefitsRef}
+            className="bg-white/10 backdrop-blur-sm p-10 rounded-xl shadow-xl border border-white/20"
+          >
+            <h3 className="text-3xl mb-10 text-white font-bold text-center tracking-wide">
+              Unlock Your Dream Home: Discover Your Unique Design Style
+            </h3>
+            <ul className="flex flex-col gap-7">
+              {/* Benefit 1 */}
+              <li className="flex flex-col sm:flex-row sm:items-start gap-4 bg-white/5 rounded-lg p-5 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center shadow-md border-4 border-white/20 mx-auto sm:mx-0 mb-2 sm:mb-0">
+                  <Lightbulb className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-serif text-white font-semibold mb-1 leading-snug tracking-wide">Stop Guessing, Start Designing</h4>
+                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">Finally understand your personal style and create a home you'll love.</p>
+                </div>
+              </li>
+              {/* Benefit 2 */}
+              <li className="flex flex-col sm:flex-row sm:items-start gap-4 bg-white/5 rounded-lg p-5 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center shadow-md border-4 border-white/20 mx-auto sm:mx-0 mb-2 sm:mb-0">
+                  <Star className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-serif text-white font-semibold mb-1 leading-snug tracking-wide">Get Expert Advice, Without the High Cost</h4>
+                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">Receive personalized recommendations from experienced interior designers.</p>
+                </div>
+              </li>
+              {/* Benefit 3 */}
+              <li className="flex flex-col sm:flex-row sm:items-start gap-4 bg-white/5 rounded-lg p-5 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center shadow-md border-4 border-white/20 mx-auto sm:mx-0 mb-2 sm:mb-0">
+                  <Eye className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-serif text-white font-semibold mb-1 leading-snug tracking-wide">Visualize Your Dream Home</h4>
+                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">See how different styles can transform your space before you invest a dime.</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </section>

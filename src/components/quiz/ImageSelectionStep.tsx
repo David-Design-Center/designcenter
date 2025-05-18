@@ -86,6 +86,45 @@ const ImageSelectionStep: React.FC<StepProps> = ({
         <p className="text-base sm:text-lg md:text-xl text-white/80 mb-4 sm:mb-6 font-light">
           Click on any images that resonate with your style vision. These selections will help us understand your aesthetic preferences.
         </p>
+        
+        {/* Mobile carousel inside text component */}
+        <div className="block lg:hidden w-full overflow-x-auto my-6">
+          <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto pb-4 pt-4">
+            {availableImages.map(image => (
+              <div
+                key={image.id}
+                onClick={() => toggleImageSelection(image)}
+                className={`snap-center shrink-0 w-56 sm:w-64 aspect-[16/9] relative overflow-hidden rounded-xl cursor-pointer transition-all duration-500 transform hover:scale-[1.03] hover:shadow-2xl ${
+                  quizData.selectedImages.some(img => img.id === image.id)
+                    ? 'ring-4 ring-[#C5A267] shadow-lg scale-[1.02]' 
+                    : 'shadow-md'
+                }`}
+                style={{ minWidth: '220px', maxWidth: '90%' }}
+              >
+                <div className="aspect-[16/9]">
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                  
+                  {/* Display title overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+                    <h3 className="text-sm sm:text-base font-medium line-clamp-1">{image.title}</h3>
+                  </div>
+                </div>
+                {quizData.selectedImages.some(img => img.id === image.id) && (
+                  <div className="absolute top-3 right-3 bg-[#C5A267] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg z-10">
+                    <Check className="w-5 h-5" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        
         <div className="space-y-3 sm:space-y-4 mt-4 sm:mt-8">
           <h3 className="text-lg sm:text-2xl font-serif">Style Tips</h3>
           <ul className="space-y-2 sm:space-y-3 text-white/90 text-sm sm:text-base">
@@ -123,45 +162,8 @@ const ImageSelectionStep: React.FC<StepProps> = ({
           </button>
         </div>
       </div>
-      {/* Right side - Image carousel for mobile, grid for desktop */}
-      {/* Mobile carousel */}
-      <div className="block lg:hidden w-full max-w-full overflow-x-auto pb-4 pt-4 pl-3"> {/* Added pl-3 for extra left space */}
-        <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto px-1">
-          {availableImages.map(image => (
-            <div
-              key={image.id}
-              onClick={() => toggleImageSelection(image)}
-              className={`snap-center shrink-0 w-56 sm:w-64 aspect-[16/9] relative overflow-hidden rounded-xl cursor-pointer transition-all duration-500 transform hover:scale-[1.03] hover:shadow-2xl ${
-                quizData.selectedImages.some(img => img.id === image.id)
-                  ? 'ring-4 ring-[#C5A267] shadow-lg scale-[1.02]' 
-                  : 'shadow-md'
-              }`}
-              style={{ minWidth: '220px', maxWidth: '90vw', marginTop: 8, marginBottom: 8 }} // 8px top/bottom margin for border visibility
-            >
-              <div className="aspect-[16/9]">
-                <img
-                  src={image.url}
-                  alt={image.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
-                
-                {/* Display title overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                  <h3 className="text-sm sm:text-base font-medium line-clamp-1">{image.title}</h3>
-                </div>
-              </div>
-              {quizData.selectedImages.some(img => img.id === image.id) && (
-                <div className="absolute top-3 right-3 bg-[#C5A267] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg z-10">
-                  <Check className="w-5 h-5" />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Desktop grid */}
+      
+      {/* Desktop grid - keep this outside the text component */}
       <div 
         ref={gridRef}
         className="hidden lg:grid grid-cols-2 md:grid-cols-2 gap-4 max-h-[70vh] overflow-y-auto pr-4 pl-2 custom-scrollbar pt-4 pb-4"
@@ -175,7 +177,7 @@ const ImageSelectionStep: React.FC<StepProps> = ({
                 ? 'ring-4 ring-[#C5A267] shadow-lg scale-[1.02]' 
                 : 'shadow-md'
             }`}
-            style={{ marginTop: 8, marginBottom: 8 }} // 8px top/bottom margin for border visibility
+            style={{ marginTop: 8, marginBottom: 8 }}
           >
             <div className="aspect-[16/9]">
               <img 

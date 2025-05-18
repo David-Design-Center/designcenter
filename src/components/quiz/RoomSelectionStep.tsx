@@ -93,14 +93,14 @@ const RoomSelectionStep: React.FC<StepProps> = ({
           ref={titleRef}
           className="opacity-0 text-2xl sm:text-3xl lg:text-4xl font-serif mb-4 lg:mb-6"
         >
-          Which rooms are on your "It needs a little something" list?
+          Which rooms are on your "It needs a little upgrade" list?
         </h2>
         
         <p 
           ref={descRef}
           className="opacity-0 text-lg sm:text-xl text-white/80 mb-4 lg:mb-6 font-light"
         >
-          Select all the spaces in your home that you'd like to transform. Each room has unique design considerations that we'll incorporate into your personalized recommendations.
+          Select all the spaces in your home that you'd like to transform.
         </p>
         
         <div className="space-y-3 mt-6 lg:mt-8">

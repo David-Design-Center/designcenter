@@ -7,6 +7,96 @@ interface ResultsStepProps extends StepProps {
   triggerFooterContact: () => void;
 }
 
+// Testimonial type definition
+interface Testimonial {
+  initial: string;
+  name: string;
+  subtitle: string;
+  text: string;
+}
+
+// Extracted TestimonialCarousel component
+const TestimonialCarousel: React.FC = () => {
+  const testimonials: Testimonial[] = [
+    {
+      initial: "S",
+      name: "Sarah L.",
+      subtitle: "Modern Apartment Project",
+      text: "David helped me translate my quiz results into a cohesive design plan for my living room. He suggested specific pieces that worked with my existing furniture and within my budget. What would have taken me months to figure out, he solved in one consultation.",
+    },
+    {
+      initial: "M",
+      name: "Michael J.",
+      subtitle: "Contemporary Condo Redesign",
+      text: "The value I received from my consultation with David far exceeded my expectations. He identified functional issues in my layout I hadn't even noticed and provided solutions that made my space feel twice as large. His expertise saved me from making costly renovation mistakes.",
+    },
+    {
+      initial: "E",
+      name: "Elena R.",
+      subtitle: "Transitional Villa Makeover",
+      text: "After my consultation with David, I finally understood how to combine my traditional furnishings with modern elements. He created a custom color palette based on my quiz results and helped me select statement pieces that transformed my villa. The complimentary consultation was the best decision I made for my renovation.",
+    },
+  ];
+  
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const total = testimonials.length;
+  
+  // Auto-advance every 7s
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCarouselIndex((i) => (i + 1) % total);
+    }, 7000);
+    return () => clearTimeout(timer);
+  }, [carouselIndex, total]);
+  
+  return (
+    <div>
+      <div className="flex flex-col items-center">
+        <div className="w-full max-w-lg mx-auto">
+          <div className="transition-all duration-500">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/15 hover:translate-y-[-5px]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center text-white font-serif text-xl shadow-md">
+                  {testimonials[carouselIndex].initial}
+                </div>
+                <div>
+                  <h4 className="text-white font-medium">{testimonials[carouselIndex].name}</h4>
+                  <p className="text-white/60 text-sm">{testimonials[carouselIndex].subtitle}</p>
+                </div>
+              </div>
+              <p className="text-white/90 mb-3 text-sm sm:text-base">
+                "{testimonials[carouselIndex].text}"
+              </p>
+              <div className="flex text-[#C5A267]">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Carousel controls */}
+          <div className="flex justify-center gap-2 mt-4">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                aria-label={`Go to testimonial ${idx + 1}`}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  idx === carouselIndex
+                    ? 'bg-[#C5A267]'
+                    : 'bg-white/30 hover:bg-[#C5A267]/60'
+                }`}
+                onClick={() => setCarouselIndex(idx)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ResultsStep: React.FC<ResultsStepProps> = ({ 
   quizData, 
   nextStep,
@@ -162,9 +252,9 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
       {/* Header - smaller, less padding, more elegant */}
       <div
         ref={titleRef}
-        className="opacity-0 bg-[#C5A267]/90 px-4 py-3 sm:px-6 sm:py-4 rounded-lg shadow mb-6 text-center"
+        className="opacity-0 bg-[#C5A267]/90 px-4 py-2 sm:px-6 sm:py-3 rounded-lg shadow mb-4 sm:mb-6 text-center"
       >
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-semibold text-white tracking-wide leading-tight">
+        <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif text-white tracking-wide leading-tight">
           {quizData.results.title || quizData.results.mainStyle || "Your Perfect Style"}
         </h2>
       </div>
@@ -215,16 +305,16 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
                 ref={profileRef}
                 className="opacity-0 bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-white/10"
               >
-                <h3 className="text-lg sm:text-xl font-serif mb-3 text-white">
+                <h3 className="text-lg sm:text-xl font-serif mb-3 text-white text-center">
                   {quizData.name || "Your"} design profile revealed:
                 </h3>
-                <ul className="space-y-3 sm:space-y-4">
+                <ul className="space-y-4 sm:space-y-5">
                   {quizData.results.description ? (
-                    <li className="flex items-start gap-4">
-                      <div className="mt-1 bg-[#C5A267] rounded-full p-1 flex-shrink-0 shadow-md">
-                        <Check className="w-5 h-5 text-white" />
+                    <li className="flex flex-col items-center text-center gap-2">
+                      <div className="bg-[#C5A267] rounded-full p-1 shadow-md mb-1">
+                        <Check className="w-4 h-4 text-white" />
                       </div>
-                      <div className="text-lg text-white/90">
+                      <div className="text-sm sm:text-base md:text-lg text-white/90">
                         {quizData.results.description.includes('<p>') || quizData.results.description.includes('<br>') ? (
                           <div dangerouslySetInnerHTML={{ __html: quizData.results.description }} />
                         ) : (
@@ -234,42 +324,42 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
                     </li>
                   ) : (
                     <>
-                      <li className="flex items-start gap-4">
-                        <div className="mt-1 bg-[#C5A267] rounded-full p-1 flex-shrink-0 shadow-md">
-                          <Check className="w-5 h-5 text-white" />
+                      <li className="flex flex-col items-center text-center gap-2">
+                        <div className="bg-[#C5A267] rounded-full p-1 shadow-md mb-1">
+                          <Check className="w-4 h-4 text-white" />
                         </div>
-                        <p className="text-lg text-white/90">
+                        <p className="text-sm sm:text-base md:text-lg text-white/90">
                           You're drawn to <span className="text-white font-medium">{quizData.results.mainStyle || "sophisticated"}</span> spaces that feel both elegant and inviting
                         </p>
                       </li>
-                      <li className="flex items-start gap-4">
-                        <div className="mt-1 bg-[#C5A267] rounded-full p-1 flex-shrink-0 shadow-md">
-                          <Check className="w-5 h-5 text-white" />
+                      <li className="flex flex-col items-center text-center gap-2">
+                        <div className="bg-[#C5A267] rounded-full p-1 shadow-md mb-1">
+                          <Check className="w-4 h-4 text-white" />
                         </div>
-                        <p className="text-lg text-white/90">
+                        <p className="text-sm sm:text-base md:text-lg text-white/90">
                           Your priority room, the <span className="text-white font-medium">{quizData.priorityRoom || "Living Room"}</span>, should incorporate elements of {quizData.results.subStyles?.[0]?.toLowerCase() || 'warmth'} and {quizData.results.subStyles?.[1]?.toLowerCase() || 'texture'}
                         </p>
                       </li>
-                      <li className="flex items-start gap-4">
-                        <div className="mt-1 bg-[#C5A267] rounded-full p-1 flex-shrink-0 shadow-md">
-                          <Check className="w-5 h-5 text-white" />
+                      <li className="flex flex-col items-center text-center gap-2">
+                        <div className="bg-[#C5A267] rounded-full p-1 shadow-md mb-1">
+                          <Check className="w-4 h-4 text-white" />
                         </div>
-                        <p className="text-lg text-white/90">
-                          Your complementary style elements include:
-                          <span className="block mt-2 pl-2 border-l-2 border-[#C5A267]/50">
+                        <div className="text-sm sm:text-base md:text-lg text-white/90">
+                          <p className="mb-2">Your complementary style elements include:</p>
+                          <div className="flex flex-wrap justify-center gap-2">
                             {quizData.results.subStyles && quizData.results.subStyles.length > 0 ? (
                               quizData.results.subStyles.map((style, index) => (
-                                <span key={`${style}-${index}`} className="inline-block bg-white/10 px-3 py-1 rounded-full mr-2 mb-2">
+                                <span key={`${style}-${index}`} className="inline-block bg-white/10 px-3 py-1 rounded-full">
                                   {style}
                                 </span>
                               ))
                             ) : (
-                              <span className="inline-block bg-white/10 px-3 py-1 rounded-full mr-2 mb-2">
+                              <span className="inline-block bg-white/10 px-3 py-1 rounded-full">
                                 Contemporary
                               </span>
                             )}
-                          </span>
-                        </p>
+                          </div>
+                        </div>
                       </li>
                     </>
                   )}
@@ -283,34 +373,53 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
             >
               {hasImages ? (
                 <>
-                  <h3 className="text-lg sm:text-2xl font-serif mb-4 text-white">
-                    Your Complementary Style Elements
+                  {/* Mobile-only CTA button before styles */}
+                  <div className="block sm:hidden mb-4">
+                    <button
+                      onClick={() => {
+                        triggerFooterContact();
+                        restartQuiz();
+                      }}
+                      className="w-full px-6 py-4 bg-[#C5A267] text-white text-base rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center justify-center gap-2 shadow hover:shadow-xl"
+                    >
+                      Let’s Design Your Space
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                    <div className="text-xs text-white/70 mt-2 text-center">
+                      Trusted by<span className="font-semibold text-white"> NYC's </span>most design-forward homeowners.
+                    </div>
+                  </div>
+                  <h3 className="text-lg sm:text-2xl font-serif mb-4 text-white text-center">
+                    Your Complementary Styles
                   </h3>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-6 md:flex-row md:gap-6">
                     {quizData.results.recommendedImages.map((image, index) => (
-                      <div key={image.id || `image-${index}`} className="bg-white/10 rounded-lg border border-white/10 shadow-sm flex flex-row items-stretch overflow-hidden hover:bg-white/20 transition-colors duration-300">
-                        <div className="w-32 min-w-[8rem] aspect-[4/3] bg-gray-800 flex items-center justify-center overflow-hidden">
+                      <div
+                        key={image.id || `image-${index}`}
+                        className="bg-white/10 rounded-lg border border-white/10 shadow-sm overflow-hidden hover:bg-white/20 transition-colors duration-300 flex flex-col md:flex-1"
+                      >
+                        <div className="w-full aspect-[16/9] bg-gray-800 flex items-center justify-center overflow-hidden">
                           {image.url ? (
                             <img 
                               src={image.url} 
                               alt={image.title || 'Style inspiration'} 
-                              className="w-full h-full object-cover object-center rounded-l-lg"
+                              className="w-full h-full object-cover object-center"
                               loading="lazy"
-                              style={{ aspectRatio: '4/3' }}
+                              style={{ aspectRatio: '16/9' }}
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.onerror = null;
-                                target.src = "https://placehold.co/320x240/404040/CCCCCC?text=Style+Image";
+                                target.src = "https://placehold.co/640x360/404040/CCCCCC?text=Style+Image";
                               }}
                             />
                           ) : (
                             <span className="text-white/60 text-xs px-2">{image.title || 'Style inspiration'}</span>
                           )}
                         </div>
-                        <div className="flex-1 p-3 flex flex-col justify-center">
-                          <h4 className="text-base sm:text-lg font-serif text-white mb-1 font-semibold">{image.title || "Design Element"}</h4>
+                        <div className="p-4 flex flex-col justify-center">
+                          <h4 className="text-lg sm:text-xl font-serif text-white mb-2 font-semibold">{image.title || "Design Element"}</h4>
                           {image.description ? (
-                            <p className="text-white/80 text-xs sm:text-sm">
+                            <p className="text-white/80 text-sm sm:text-base">
                               {image.description.includes('<p>') || image.description.includes('<br>') ? (
                                 <span dangerouslySetInnerHTML={{ __html: image.description }} />
                               ) : (
@@ -318,7 +427,7 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
                               )}
                             </p>
                           ) : (
-                            <p className="text-white/80 text-xs sm:text-sm">
+                            <p className="text-white/80 text-sm sm:text-base">
                               A perfect complement to your main style. Incorporate elements of this style into your {quizData.priorityRoom || "space"} for a truly personalized space.
                             </p>
                           )}
@@ -347,7 +456,7 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
             </div>
           </div>
           
-          {/* Testimonials Section - New section for reviews about consulting with David */}
+          {/* Testimonials Section - Carousel for reviews about consulting with David */}
           <div 
             className="opacity-0 mt-10 mb-8"
             ref={testimonialsRef}
@@ -359,69 +468,9 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
               </span>
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-              {/* Testimonial Card 1 */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/15 hover:translate-y-[-5px]">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center text-white font-serif text-xl shadow-md">S</div>
-                  <div>
-                    <h4 className="text-white font-medium">Sarah L.</h4>
-                    <p className="text-white/60 text-sm">Modern Apartment Project</p>
-                  </div>
-                </div>
-                <p className="text-white/90 mb-3 text-sm sm:text-base">
-                  "David helped me translate my quiz results into a cohesive design plan for my living room. He suggested specific pieces that worked with my existing furniture and within my budget. What would have taken me months to figure out, he solved in one consultation."
-                </p>
-                <div className="flex text-[#C5A267]">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Testimonial Card 2 */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/15 hover:translate-y-[-5px]">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center text-white font-serif text-xl shadow-md">M</div>
-                  <div>
-                    <h4 className="text-white font-medium">Michael J.</h4>
-                    <p className="text-white/60 text-sm">Contemporary Condo Redesign</p>
-                  </div>
-                </div>
-                <p className="text-white/90 mb-3 text-sm sm:text-base">
-                  "The value I received from my consultation with David far exceeded my expectations. He identified functional issues in my layout I hadn't even noticed and provided solutions that made my space feel twice as large. His expertise saved me from making costly renovation mistakes."
-                </p>
-                <div className="flex text-[#C5A267]">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Testimonial Card 3 */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/15 hover:translate-y-[-5px]">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-[#C5A267] rounded-full flex items-center justify-center text-white font-serif text-xl shadow-md">E</div>
-                  <div>
-                    <h4 className="text-white font-medium">Elena R.</h4>
-                    <p className="text-white/60 text-sm">Transitional Villa Makeover</p>
-                  </div>
-                </div>
-                <p className="text-white/90 mb-3 text-sm sm:text-base">
-                  "After my consultation with David, I finally understood how to combine my traditional furnishings with modern elements. He created a custom color palette based on my quiz results and helped me select statement pieces that transformed my villa. The complimentary consultation was the best decision I made for my renovation."
-                </p>
-                <div className="flex text-[#C5A267]">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
+            {/* Carousel */}
+            <div className="relative w-full">
+              <TestimonialCarousel />
             </div>
           </div>
           
@@ -430,8 +479,8 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
             ref={ctaRef}
             className="opacity-0 text-center border-t border-white/10 pt-6 pb-2 mt-2"
           >
-            <p className="text-lg sm:text-xl font-serif text-white mb-4">
-              Ready to bring your luxury vision to life?
+            <p className="text-lg sm:text-xl font-sans text-white mb-4">
+              <span className="text-[#C5A267] font-semibold">Only 3 new clients</span> accepted this month to maintain our boutique service standard.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
@@ -439,15 +488,17 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
                   triggerFooterContact();
                   restartQuiz(); // This will close the quiz by resetting it
                 }}
-                className="px-8 py-4 bg-[#C5A267] text-white text-xl rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center gap-3 min-h-[52px] hover:shadow-xl transform hover:-translate-y-1"
+                className="px-8 py-4 bg-[#C5A267] text-white text-base rounded-md text-l hover:bg-[#B49157] transition-all duration-300 flex items-center gap-3 min-h-[54px] hover:shadow-xl transform hover:-translate-y-1"
               >
-                Book Your Complimentary Consultation
+                Let’s Design Your Signature Space
                 <ArrowRight className="w-5 h-5" />
               </button>
-              
+              <div className="text-xs text-white/70 mt-2 text-center">
+                  Trusted by<span className="font-semibold text-white"> NYC's </span>most design-forward homeowners.
+              </div>
               <button
                 onClick={restartQuiz}
-                className="px-6 py-3 bg-white/10 border border-white/30 text-white text-lg rounded-md hover:bg-white/20 transition-colors duration-300"
+                className="px-6 py-3 bg-white/10 border border-white/30 text-white text-m rounded-md hover:bg-white/20 transition-colors duration-300"
               >
                 Restart Quiz
               </button>

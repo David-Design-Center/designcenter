@@ -83,10 +83,10 @@ const NameCaptureStep: React.FC<StepProps> = ({
         
         <div className="space-y-6 mt-8">
           <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-            <h3 className="text-2xl font-serif mb-4">Your Design Journey So Far</h3>
+            <h3 className="text-2xl font-serif mb-4 text-center">So Far...</h3>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1">
+              <li className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0">
                   <span className="text-white font-bold text-sm">✓</span>
                 </div>
                 <p>
@@ -94,8 +94,8 @@ const NameCaptureStep: React.FC<StepProps> = ({
                   <span className="text-white/80"> You've chosen {quizData.selectedImages.length} inspiring images</span>
                 </p>
               </li>
-              <li className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1">
+              <li className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0">
                   <span className="text-white font-bold text-sm">✓</span>
                 </div>
                 <p>
@@ -103,8 +103,8 @@ const NameCaptureStep: React.FC<StepProps> = ({
                   <span className="text-white/80"> {quizData.selectedRooms.join(', ')}</span>
                 </p>
               </li>
-              <li className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mt-1">
+              <li className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 text-center sm:text-left">
+                <div className="w-6 h-6 rounded-full bg-[#C5A267] flex items-center justify-center flex-shrink-0 mb-1 sm:mb-0 sm:mt-1 mx-auto sm:mx-0">
                   <span className="text-white font-bold text-sm">✓</span>
                 </div>
                 <p>
@@ -136,7 +136,7 @@ const NameCaptureStep: React.FC<StepProps> = ({
               value={quizData.name}
               onChange={(e) => updateQuizData({ name: e.target.value })}
               placeholder="Enter your first name"
-              className="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-lg focus:ring-[#C5A267] focus:border-[#C5A267] text-white text-xl placeholder-white/40"
+              className="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-lg focus:ring-[#C5A267] focus:border-[#C5A267] text-white text-xl placeholder-white/40 placeholder:text-base sm:placeholder:text-xl"
               autoComplete="off"
             />
             {formError && (
@@ -144,11 +144,11 @@ const NameCaptureStep: React.FC<StepProps> = ({
             )}
           </div>
           
-          <div ref={buttonsRef} className="flex justify-between mt-10 gap-3">
+          <div ref={buttonsRef} className="flex flex-col sm:flex-row justify-between mt-10 gap-3 w-full">
             <button
               type="button"
               onClick={prevStep}
-              className="px-6 py-3 bg-white/20 text-white text-lg rounded-md hover:bg-white/30 transition-colors duration-300 flex items-center gap-2 min-h-[52px]"
+              className="w-full sm:w-auto px-5 py-3 bg-white/20 text-white text-base rounded-md hover:bg-white/30 transition-colors duration-300 flex items-center gap-2 min-h-[44px]"
             >
               <ChevronLeft className="w-5 h-5" />
               Back
@@ -156,7 +156,7 @@ const NameCaptureStep: React.FC<StepProps> = ({
             
             <button
               type="submit"
-              className="px-8 py-3 bg-[#C5A267] text-white text-lg rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center gap-2 min-h-[52px] hover:shadow-lg"
+              className="w-full sm:w-auto px-7 py-3 bg-[#C5A267] text-white text-base rounded-md hover:bg-[#B49157] transition-all duration-300 flex items-center gap-2 min-h-[44px] hover:shadow-lg"
             >
               Continue
               <ChevronRight className="w-5 h-5" />
