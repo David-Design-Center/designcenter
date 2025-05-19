@@ -67,6 +67,12 @@ const menuItems: MenuItem[] = [
     image: 'https://res.cloudinary.com/designcenter/image/upload/Contact%20Us%20%E2%80%93%20DnD%20Design%20Center.avif',
     alt: 'Contact Us – D&D Design Center',
   },
+  {
+    title: 'STYLE FINDER',
+    href: '/crafted-calm',
+    image: 'https://res.cloudinary.com/designcenter/image/upload/Navbar_7/Menu_Images/crafted_calm.avif',
+    alt: 'Crafted Calm – D&D Design Center',
+  },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({
