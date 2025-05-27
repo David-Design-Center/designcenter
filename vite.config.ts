@@ -23,9 +23,10 @@ export default defineConfig({
           sustainability: ['./src/pages/Sustainability.tsx'],
         },             
       },
+      external: ['gatsby'], // Exclude Gatsby from the bundle
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ['lucide-react', 'gatsby'],
   },
 });
