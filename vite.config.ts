@@ -4,8 +4,13 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [react(), visualizer()],
+  css: {
+    postcss: './postcss.config.js',
+    devSourcemap: true,
+  },
   build: {
     minify: 'esbuild', // Or 'terser' if you prefer
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
