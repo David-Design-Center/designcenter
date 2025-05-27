@@ -1,79 +1,8 @@
-"use client";
-
-import React, { useEffect, useRef } from 'react';
-import { motion, stagger, useAnimate, useInView } from "framer-motion";
-
-// Utility function to combine class names
-function cn(...classes: (string | undefined | boolean)[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-// Text Generate Effect Component
-const TextGenerateEffect = ({
-  words,
-  className,
-  filter = true,
-  duration = 0.3,
-}: {
-  words: string;
-  className?: string;
-  filter?: boolean;
-  duration?: number;
-}) => {
-  const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
-  useEffect(() => {
-    animate(
-      "span",
-      {
-        opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
-      },
-      {
-        duration: duration ? duration : 0.3,
-        delay: stagger(0.1),
-      }
-    );
-  }, [scope.current]);
-
-  const renderWords = () => {
-    return (
-      <motion.div ref={scope} className="whitespace-pre-line">
-        {wordsArray.map((word, idx) => {
-          return (
-            <motion.span
-              key={word + idx}
-              className="opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          );
-        })}
-      </motion.div>
-    );
-  };
-
-  return (
-    <div className={cn("", className)}>
-      <div className="">
-        <div className="">
-          {renderWords()}
-        </div>
-      </div>
-    </div>
-  );
-};
+import React from 'react';
 
 const ParagraphSection: React.FC = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
-    
     return (
         <section 
-            ref={ref}
             className="relative py-12 sm:py-24 px-6 md:px-12 overflow-hidden" 
             style={{ 
                 background: 'linear-gradient(to bottom, #FDFBF7, #F7F3EE)' 
@@ -87,14 +16,7 @@ const ParagraphSection: React.FC = () => {
             
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 items-start lg:items-center relative z-10">
                 {/* Left Column with enhanced gold accent line */}
-                <motion.div 
-                    className="relative pl-12 flex-shrink-0 w-full lg:w-auto max-w-md"
-                    style={{
-                        opacity: isInView ? 1 : 0,
-                        transform: isInView ? "translateY(0)" : "translateY(20px)",
-                        transition: "all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
-                    }}
-                >
+                <div className="relative pl-12 flex-shrink-0 w-full lg:w-auto max-w-md">
                     {/* Brushed gold vertical line with subtle glow */}
                     <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-[#D4B77B] via-[#C5A267] to-[#9E7F43]">
                         <div className="absolute -left-[2px] top-0 h-full w-[7px] bg-[#C5A267] opacity-40 blur-sm"></div>
@@ -102,33 +24,26 @@ const ParagraphSection: React.FC = () => {
                     
                     <h2 className="text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight tracking-wide" 
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        <span className="uppercase font-light block mb-3">Timeless Design</span>
+                        <span className="uppercase font-light block mb-3">New York City's Premier Furniture Design Center</span>
                         <span className="normal-case text-lg sm:text-xl md:text-2xl text-[#9E7F43] font-light block mt-3" 
                               style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                            Rooted in Luxury Italian interiors
+                            Timeless Italian Craftsmanship for the Modern Home
                         </span>
                     </h2>
-                </motion.div>
+                </div>
 
                 {/* Right Column – Supporting Paragraph with soft shadow */}
-                <motion.div
-                    style={{
-                        opacity: isInView ? 1 : 0,
-                        transform: isInView ? "translateY(0)" : "translateY(20px)",
-                        transition: "all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
-                    }}
-                    className="pr-4 md:pr-10"
-                >
+                <div className="pr-4 md:pr-10">
                     <div className="relative">
-                    <TextGenerateEffect 
-                    words={`At D&D, we believe true luxury lies in subtlety and detail.\n\nOur luxury Italian interiors are thoughtfully crafted to reflect decades of heritage, combining elegance with comfort for modern living.\n\nEvery element is designed with purpose — timeless, refined, and deeply personal.`}
-                    className="text-gray-700 text-base md:text-lg leading-relaxed font-light"
-                    duration={0.5}
-                    filter={false}
-                  />
+                        <p className="text-gray-700 text-base md:text-lg leading-relaxed font-light">
+                            At D&D Design Center, we curate a world of bespoke kitchens, cabinetry, and custom furnishings. 
+                            All handcrafted in Italy, within an inspiring design center in the heart of Manhattan. 
+                            Here, discerning homeowners discover more than furniture. 
+                            They uncover a canvas for personal storytelling.
+                        </p>
                         <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-radial from-[#C5A267]/10 to-transparent opacity-50"></div>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );
