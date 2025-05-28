@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": ">=22.x"
   },
   "scripts": {
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview",
     "build": "vite build",
-    "postbuild": "react-snap"
+    "postbuild": "node scripts/run-react-snap.cjs"
   },
   "reactSnap": {
     "source": "dist",
@@ -19,7 +19,33 @@
       "collapseWhitespace": false,
       "removeComments": false
     },
-    "inlineCss": false
+    "inlineCss": false,
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "concurrency": 4,
+    "skipThirdPartyRequests": true,
+    "timeout": 300000,
+    "include": [
+      "/",
+      "/blog",
+      "/collaboration",
+      "/crafted-calm",
+      "/designers",
+      "/how-we-work",
+      "/privacy",
+      "/productscollection",
+      "/sustainability",
+      "/terms"
+    ],
+    "puppeteer": {
+      "cache": false,
+      "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    },
+    "userAgent": "ReactSnap",
+    "fixWebpackChunksIssue": false,
+    "removeBlobs": true
   },
   "dependencies": {
     "@relume_io/relume-tailwind": "^1.3.0",
@@ -78,6 +104,7 @@
     "node-fetch": "^3.3.2",
     "postcss": "8.5.3",
     "postcss-import": "^16.1.0",
+    "puppeteer-core": "24.9.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sharp": "^0.34.1",
     "tailwindcss": "3.4.17",

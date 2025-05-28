@@ -16,7 +16,7 @@ interface FeatureItem {
 }
 
 interface Feature197Props {
-  features: FeatureItem[];
+  features?: FeatureItem[];
   triggerFooterContact?: () => void; // Add this prop for the button click handler
 }
 

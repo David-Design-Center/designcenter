@@ -7,12 +7,12 @@ import Footer from './components/ui/Footer';
 import Home from './pages/Home';
 import Loading from './components/ui/Loading';
 import ErrorBoundary from './components/ui/ErrorBoundary';
+import Blog from './pages/Blog';
+import ProductsCollection from './pages/ProductsCollection';
 
 const Sustainability = lazy(() => import('./pages/Sustainability'));
 const HowWeWork = lazy(() => import('./pages/HowWeWork'));
-const ProductsCollection = lazy(() => import('./pages/ProductsCollection'));
 const Collaboration = lazy(() => import('./pages/collaboration'));
-const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostPage = lazy(() => import('./components/blog/BlogPostPage'));
 const Designers = lazy(() => import('./pages/Designers'));
 const Privacy = lazy(() => import('./pages/Privacy'));

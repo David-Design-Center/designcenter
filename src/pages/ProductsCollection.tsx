@@ -11,6 +11,7 @@ import ProductCollectionCTA from '../components/productcollection/ProductCollect
 import { useFooterContact } from '../hooks/useFooterContact';
 import { Helmet } from 'react-helmet';
 import { Feature197 } from '../components/ui/accordion-feature-section';
+import { accordionFeatureSeoMetadata } from '../data/accordionFeatureSeoMetadata';
 
 const ProductsCollection = () => {
   // State for UI
@@ -112,6 +113,10 @@ const ProductsCollection = () => {
             }
           })}
         </script>
+          {/* JSON-LD FAQPage schema for accordion questions */}
+          <script type="application/ld+json">
+            {JSON.stringify(accordionFeatureSeoMetadata)}
+          </script>
       </Helmet>
       <ProductCollectionHero />
       <ProductGalleryContent />

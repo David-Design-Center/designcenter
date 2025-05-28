@@ -1,11 +1,7 @@
-import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
-import Loading from '../components/ui/Loading';
-
-// 🔄 Lazy load components
-const BlogHero = lazy(() => import('../components/blog/BlogHero'));
-const BlogGrid = lazy(() => import('../components/blog/BlogGrid'));
-const BlogCTA = lazy(() => import('../components/blog/BlogCTA'));
+import BlogHero from '../components/blog/BlogHero';
+import BlogGrid from '../components/blog/BlogGrid';
+import BlogCTA from '../components/blog/BlogCTA';
 
 const Blog = () => {
   function triggerFooterContact(): void {
@@ -27,15 +23,9 @@ const Blog = () => {
       </Helmet>
 
       <main>
-        <Suspense fallback={<Loading />}>
-          <BlogHero />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <BlogGrid />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <BlogCTA triggerFooterContact={triggerFooterContact} />
-        </Suspense>
+        <BlogHero />
+        <BlogGrid />
+        <BlogCTA triggerFooterContact={triggerFooterContact} />
       </main>
     </div>
   );

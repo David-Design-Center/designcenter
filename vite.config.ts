@@ -9,6 +9,7 @@ export default defineConfig({
     devSourcemap: true,
   },
   build: {
+    target: 'es2019', // ensure modern optional chaining is transpiled for headless Chrome
     minify: 'esbuild', // Or 'terser' if you prefer
     cssCodeSplit: true,
     rollupOptions: {
