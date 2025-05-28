@@ -1,113 +1,112 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, Tag } from "lucide-react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
 import BlogCTA from "./BlogCTA";
 import rehypeRaw from "rehype-raw";
 import { Helmet } from "react-helmet";
+import postsData from '../../data/posts.json';
+import React, { useEffect, useRef, useState } from "react";
 
-const postFiles = import.meta.glob("../../posts/*.md", { as: "raw" });
-
-function triggerFooterContact(): void {
-  const footerElement = document.querySelector("#footer");
-  if (footerElement instanceof HTMLElement) {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const windowHeight = window.innerHeight;
-    window.scrollTo({
-      top: scrollHeight - windowHeight,
-      behavior: "smooth",
-    });
-    setTimeout(() => {
-      const footerContactBtn = document.querySelector(
-        "[data-footer-contact]"
-      ) as HTMLButtonElement;
-      if (footerContactBtn) {
-        footerContactBtn.click();
-      }
-    }, 800);
-  }
+// Add a type for the posts object
+interface BlogPost {
+  data: any;
+  content: string;
 }
+const posts: Record<string, BlogPost> = postsData;
+
+const fallback =
+  "Luxury interiors and custom furniture insights from D&D Design Center.";
+
+const Divider = () => (
+  <div className="flex items-center my-12">
+    <div className="flex-grow border-t border-gray-200" />
+    <span className="mx-4 text-[#C5A267] text-xl">•</span>
+    <div className="flex-grow border-t border-gray-200" />
+  </div>
+);
+
+const PullQuote = ({ children }: { children: React.ReactNode }) => (
+  <blockquote className="bg-white/60 border-l-4 border-[#C5A267] italic px-6 py-4 my-8 rounded-xl shadow font-serif text-xl max-w-2xl mx-auto">
+    {children}
+  </blockquote>
+);
+
+// Special flag to detect if we're running in react-snap
+const isStaticRendering = typeof window !== 'undefined' && window.navigator.userAgent === 'ReactSnap';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  
+  // For static rendering, the slug parameter might not be available immediately
+  // so we try to extract it from the pathname as a fallback
+  const extractSlugFromPathname = () => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const matches = path.match(/\/blog\/([^/]+)/);
+      return matches ? matches[1] : undefined;
+    }
+    return undefined;
+  };
+  
+  // Use either the slug from useParams or extract it from the pathname
+  const effectiveSlug = slug || extractSlugFromPathname();
+  const entry = effectiveSlug ? posts[effectiveSlug] : undefined;
+  
+  // If we're in static rendering mode, signal that the content is ready
+  useEffect(() => {
+    if (isStaticRendering && effectiveSlug) {
+      console.log('React-snap detected, marking content as ready for', effectiveSlug);
+      document.body.setAttribute('data-blog-content-loaded', 'true');
+    }
+  }, [effectiveSlug]);
+  
+  // If no entry is found, show an error
+  if (!entry) {
+    return <div className="text-center py-20 text-gray-500">Post not found.</div>;
+  }
+  
+  const { data: frontmatter, content } = entry;
 
-  const { scrollYProgress, scrollY } = useScroll();
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    mass: 1,
-  });
-
-  const [, setShowButton] = useState(true);
-  const [showOverlay, setShowOverlay] = useState(true);
-  const overlayThreshold = 0.07; // ~7% scroll, adjust as needed
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setShowOverlay(latest < overlayThreshold);
-    setShowButton(scrollY.get() === 0);
-  });
-
-  const bgColor = useTransform(scrollYProgress, [0, 0.25], ["#f9fafb", "#fff"]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.03], [1, 0]);
+  // Add state for overlay opacity
+  const [overlayOpacity, setOverlayOpacity] = useState(1);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      setLoading(true);
-      const entry = Object.entries(postFiles).find(([path]) => {
-        const fileName = path.split("/").pop()?.replace(".md", "");
-        return fileName === slug;
-      });
-      if (!entry) {
-        setPost(null);
-        setLoading(false);
-        return;
+    const handleScroll = () => {
+      // Fade out overlay in first 7% of scroll
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const fadeDistance = windowHeight * 0.07;
+      let opacity = 1;
+      if (scrollY > 0) {
+        opacity = Math.max(0, 1 - scrollY / fadeDistance);
       }
-      const [, resolver] = entry;
-      const raw = await resolver();
-      const matter = (await import("gray-matter")).default; // dynamic import here
-      const { data, content } = matter(raw);
-      setPost({ ...data, content });
-      setLoading(false);
+      setOverlayOpacity(opacity);
     };
-    fetchPost();
-  }, [slug]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  if (loading) {
-    return <div className="text-center py-20 text-gray-500">Loading...</div>;
-  }
-
-  if (!post) {
-    return (
-      <div className="text-center py-20 text-gray-500">Post not found.</div>
-    );
-  }
-
-  const fallback =
-    "Luxury interiors and custom furniture insights from D&D Design Center.";
-
-  const Divider = () => (
-    <div className="flex items-center my-12">
-      <div className="flex-grow border-t border-gray-200" />
-      <span className="mx-4 text-[#C5A267] text-xl">•</span>
-      <div className="flex-grow border-t border-gray-200" />
-    </div>
-  );
-
-  const PullQuote = ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="bg-white/60 border-l-4 border-[#C5A267] italic px-6 py-4 my-8 rounded-xl shadow font-serif text-xl max-w-2xl mx-auto">
-      {children}
-    </blockquote>
-  );
+  const triggerFooterContact = () => {
+    const footerElement = document.querySelector("#footer");
+    if (footerElement instanceof HTMLElement) {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      window.scrollTo({
+        top: scrollHeight - windowHeight,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        const footerContactBtn = document.querySelector(
+          "[data-footer-contact]"
+        ) as HTMLButtonElement;
+        if (footerContactBtn) {
+          footerContactBtn.click();
+        }
+      }, 800);
+    }
+  };
 
   const renderers = {
     paragraph: (props: any) => {
@@ -200,13 +199,10 @@ const BlogPostPage = () => {
   
 
   return (
-    <motion.div
-      className="relative min-h-screen font-normal"
-      style={{ background: bgColor }}
-    >
+    <div className="relative min-h-screen font-normal bg-white">
       <Helmet>
-        <title>{post.title} | D&D Design Center</title>
-        <meta name="description" content={post.excerpt || fallback} />
+        <title>{frontmatter.title} | D&D Design Center</title>
+        <meta name="description" content={frontmatter.excerpt || fallback} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://dnddesigncenter.com/blog/${slug}`} />
 
@@ -214,32 +210,32 @@ const BlogPostPage = () => {
         <meta property="og:type" content="article" />
         <meta
           property="og:title"
-          content={`${post.title} | D&D Design Center`}
+          content={`${frontmatter.title} | D&D Design Center`}
         />
-        <meta property="og:description" content={post.excerpt || fallback} />
+        <meta property="og:description" content={frontmatter.excerpt || fallback} />
         <meta
           property="og:url"
           content={`https://dnddesigncenter.com/blog/${slug}`}
         />
-        <meta property="og:image" content={post.image?.url} />
+        <meta property="og:image" content={frontmatter.image?.url} />
         <meta property="og:site_name" content="D&D Design Center" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`${post.title} | D&D Design Center`}
+          content={`${frontmatter.title} | D&D Design Center`}
         />
-        <meta name="twitter:description" content={post.excerpt || fallback} />
-        <meta name="twitter:image" content={post.image?.url} />
+        <meta name="twitter:description" content={frontmatter.excerpt || fallback} />
+        <meta name="twitter:image" content={frontmatter.image?.url} />
 
         {/* JSON-LD (keep your current block) */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            headline: post.title,
-            image: post.image?.url,
+            headline: frontmatter.title,
+            image: frontmatter.image?.url,
             author: {
               "@type": "Organization",
               name: "D&D Design Center",
@@ -253,9 +249,9 @@ const BlogPostPage = () => {
               },
             },
             url: `https://dnddesigncenter.com/blog/${slug}`,
-            datePublished: post.date,
-            dateModified: post.date,
-            description: post.excerpt || fallback,
+            datePublished: frontmatter.date,
+            dateModified: frontmatter.date,
+            description: frontmatter.excerpt || fallback,
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": `https://dnddesigncenter.com/blog/${slug}`,
@@ -263,17 +259,17 @@ const BlogPostPage = () => {
           })}
         </script>
 
-        {post.video?.embedUrl && (
+        {frontmatter.video?.embedUrl && (
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "VideoObject",
-              name: post.video.title,
-              description: post.video.description,
-              thumbnailUrl: post.video.thumbnail,
-              uploadDate: post.date,
-              contentUrl: post.video.url,
-              embedUrl: post.video.embedUrl,
+              name: frontmatter.video.title,
+              description: frontmatter.video.description,
+              thumbnailUrl: frontmatter.video.thumbnail,
+              uploadDate: frontmatter.date,
+              contentUrl: frontmatter.video.url,
+              embedUrl: frontmatter.video.embedUrl,
               publisher: {
                 "@type": "Organization",
                 name: "D&D Design Center",
@@ -286,28 +282,25 @@ const BlogPostPage = () => {
           </script>
         )}
       </Helmet>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C5A267] to-[#e2c792] z-50"
-        style={{ scaleX: progress, transformOrigin: "0%" }}
-      />
-      {post.image?.url && (
+      {frontmatter.image?.url && (
         <div className="absolute top-0 left-0 w-full h-screen z-0 pointer-events-none">
           <img
-            src={post.image.url}
-            alt={post.image.alt}
+            src={frontmatter.image.url}
+            alt={frontmatter.image.alt}
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none" />
         </div>
       )}
-      {post.image?.url && showOverlay && (
-        <motion.div
+      {frontmatter.image?.url && (
+        <div
+          ref={overlayRef}
           className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col justify-center items-center text-center px-4 pointer-events-none"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          style={{ opacity: titleOpacity as any }}
+          style={{
+            opacity: overlayOpacity,
+            transition: "opacity 0.2s",
+            willChange: "opacity",
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-10" />
           <div className="relative flex flex-col justify-center items-center text-center px-4 z-20 pointer-events-auto">
@@ -325,20 +318,16 @@ const BlogPostPage = () => {
             >
               &larr; Back to Blog
             </Link>
-            <motion.h1
+            <h1
               className={`text-white font-serif text-4xl md:text-6xl font-bold drop-shadow-lg mb-4 ${
-                post.title && post.title.trim().split(/\s+/).length > 5
+                frontmatter.title && frontmatter.title.trim().split(/\s+/).length > 5
                   ? "break-words whitespace-normal block"
                   : ""
               }`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
               style={{
                 fontFamily: "'Playfair Display', serif",
-                opacity: titleOpacity as any,
                 maxWidth:
-                  post.title && post.title.trim().split(/\s+/).length > 5
+                  frontmatter.title && frontmatter.title.trim().split(/\s+/).length > 5
                     ? "22ch"
                     : undefined,
                 marginLeft: "auto",
@@ -347,20 +336,17 @@ const BlogPostPage = () => {
               }}
             >
               {/* ✅ This h1 is for SEO crawlers & screen readers */}
-              <h1 className="sr-only">{post.title}</h1>
+              <h1 className="sr-only">{frontmatter.title}</h1>
 
               {/* ✅ This is your styled version, still visible */}
-              {post.title}
-            </motion.h1>
-            <motion.div
+              {frontmatter.title}
+            </h1>
+            <div
               className="flex flex-wrap justify-center gap-4 bg-white/30 backdrop-blur-md rounded-full px-6 py-3 shadow-lg mb-2 text-sm md:text-base"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
             >
               <span className="flex items-center gap-2 text-gray-200 font-medium">
                 <Calendar size={18} className="text-[#C5A267]" />
-                {new Date(post.date).toLocaleDateString("en-US", {
+                {new Date(frontmatter.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -368,17 +354,17 @@ const BlogPostPage = () => {
               </span>
               <span className="flex items-center gap-2 text-gray-300 font-medium">
                 <Clock size={18} className="text-[#C5A267]" />
-                {post.readTime} min read
+                {frontmatter.readTime} min read
               </span>
               <span className="flex items-center gap-2 text-gray-300 font-medium">
                 <Tag size={18} className="text-[#C5A267]" />
                 <span className="bg-[#C5A267] text-white rounded-full px-3 py-1 text-xs font-semibold">
-                  {post.category}
+                  {frontmatter.category}
                 </span>
               </span>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       )}
       <div className="relative z-10 pt-[75vh] md:pt-[70vh]">
         <div className="max-w-xl mx-auto px-2 md:px-20">
@@ -393,15 +379,16 @@ const BlogPostPage = () => {
           >
             <div className="px-2 py-8 md:px-0">
               <ReactMarkdown components={renderers} rehypePlugins={[rehypeRaw]}>
-                {post.content}
+                {content}
               </ReactMarkdown>
             </div>
           </article>
         </div>
       </div>
       <BlogCTA triggerFooterContact={triggerFooterContact} />
-    </motion.div>
+    </div>
   );
 };
 
 export default BlogPostPage;
+
