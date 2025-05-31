@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, Tag } from "lucide-react";
+import { Calendar, Clock, Tag, Share2, Eye, Heart, Coffee, ArrowUp } from "lucide-react";
 import BlogCTA from "./BlogCTA";
 import rehypeRaw from "rehype-raw";
+import remarkBreaks from "remark-breaks";
 import { Helmet } from "react-helmet";
 import postsData from '../../data/posts.json';
 import React, { useEffect, useRef, useState } from "react";
@@ -19,18 +20,121 @@ const fallback =
   "Luxury interiors and custom furniture insights from D&D Design Center.";
 
 const Divider = () => (
-  <div className="flex items-center my-12">
-    <div className="flex-grow border-t border-gray-200" />
-    <span className="mx-4 text-[#C5A267] text-xl">•</span>
-    <div className="flex-grow border-t border-gray-200" />
+  <div className="flex items-center my-20">
+    <div className="flex-grow h-px bg-gradient-to-r from-transparent via-[#C5A267]/30 to-transparent" />
+    <div className="mx-8 flex items-center space-x-3">
+      <div className="w-2 h-2 bg-[#C5A267] rounded-full"></div>
+      <div className="w-3 h-3 bg-[#C5A267]/60 rounded-full"></div>
+      <div className="w-2 h-2 bg-[#C5A267] rounded-full"></div>
+    </div>
+    <div className="flex-grow h-px bg-gradient-to-r from-transparent via-[#C5A267]/30 to-transparent" />
   </div>
 );
 
 const PullQuote = ({ children }: { children: React.ReactNode }) => (
-  <blockquote className="bg-white/60 border-l-4 border-[#C5A267] italic px-6 py-4 my-8 rounded-xl shadow font-serif text-xl max-w-2xl mx-auto">
-    {children}
-  </blockquote>
+  <div className="relative my-16">
+    <div className="absolute -left-4 -top-2 text-6xl md:text-7xl text-[#C5A267]/20 font-serif">"</div>
+    <blockquote className="bg-gradient-to-br from-[#C5A267]/5 to-[#C5A267]/10 border-l-4 border-[#C5A267] italic px-8 md:px-12 py-8 md:py-10 rounded-r-2xl shadow-lg font-serif text-xl md:text-2xl lg:text-3xl text-gray-700 relative overflow-hidden leading-loose">
+      <div className="absolute top-0 right-0 w-20 h-20 bg-[#C5A267]/5 rounded-full -translate-y-10 translate-x-10"></div>
+      <div className="relative z-10">{children}</div>
+    </blockquote>
+  </div>
 );
+
+// Reading Progress Bar Component
+const ReadingProgress = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const progress = (scrollTop / scrollHeight) * 100;
+      setProgress(Math.min(progress, 100));
+    };
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    return () => window.removeEventListener('scroll', updateProgress);
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 w-full h-1 bg-gray-200/50 z-50">
+      <div 
+        className="h-full bg-gradient-to-r from-[#C5A267] to-[#b49554] transition-all duration-300 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+};
+
+// Scroll to Top Button
+const ScrollToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 p-3 bg-[#C5A267] text-white rounded-full shadow-lg transition-all duration-300 z-40 hover:bg-[#b49554] hover:scale-110 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+      }`}
+    >
+      <ArrowUp size={20} />
+    </button>
+  );
+};
+
+// Share Button Component
+const ShareButton = ({ title, url }: { title: string; url: string }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, url });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback to copying URL
+      navigator.clipboard.writeText(url);
+      setShowTooltip(true);
+      setTimeout(() => setShowTooltip(false), 2000);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <button
+        onClick={handleShare}
+        className="flex items-center space-x-2 px-4 py-2 bg-[#C5A267]/10 hover:bg-[#C5A267]/20 text-[#C5A267] rounded-full transition-all duration-200 hover:scale-105"
+      >
+        <Share2 size={16} />
+        <span className="text-sm font-medium">Share</span>
+      </button>
+      {showTooltip && (
+        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
+          Copied!
+        </div>
+      )}
+    </div>
+  );
+};
 
 // Special flag to detect if we're running in react-snap
 const isStaticRendering = typeof window !== 'undefined' && window.navigator.userAgent === 'ReactSnap';
@@ -67,6 +171,9 @@ const BlogPostPage = () => {
   }
   
   const { data: frontmatter, content } = entry;
+
+  // Calculate word count for reading stats
+  const wordCount = content.split(/\s+/).length;
 
   // Add state for overlay opacity
   const [overlayOpacity, setOverlayOpacity] = useState(1);
@@ -110,23 +217,32 @@ const BlogPostPage = () => {
 
   const renderers = {
     paragraph: (props: any) => {
-      if (props.node.position.start.line === 1) {
+      // Check if this is the first paragraph by looking at content
+      const textContent = props.children?.toString?.() || '';
+      const isFirstParagraph = textContent.startsWith('Are you ready to breathe new life') || 
+                              (props.node?.position?.start?.line <= 3);
+      
+      // Ensure proper spacing between paragraphs with consistent margins
+      const baseClasses = "leading-relaxed text-lg md:text-xl font-light max-w-none text-gray-700";
+      
+      if (isFirstParagraph) {
         return (
-          <p className="first-letter:text-5xl first-letter:font-serif first-letter:float-left first-letter:mr-3 first-letter:text-[#C5A267] leading-relaxed mb-6 text-sm md:text-base text-gray-800">
+          <p className={`${baseClasses} first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-[#C5A267] first-letter:leading-none text-gray-800 mb-10`}>
             {props.children}
           </p>
         );
       }
+      
       return (
-        <p className="leading-relaxed mb-6 text-sm md:text-base text-gray-800">
+        <p className={`${baseClasses} mb-8 mt-6`}>
           {props.children}
         </p>
       );
     },
-  
+
     blockquote: (props: any) => <PullQuote>{props.children}</PullQuote>,
     hr: () => <Divider />,
-  
+
     a: ({ href, children }: any) => {
       const isFooterLink = href === "#footer" || href === "/footer";
       const isExternal = href && !href.startsWith("/") && !href.startsWith("#");
@@ -138,7 +254,7 @@ const BlogPostPage = () => {
               e.preventDefault();
               triggerFooterContact();
             }}
-            className="text-[#C5A267] underline hover:text-[#b49554] cursor-pointer"
+            className="text-[#C5A267] underline hover:text-[#b49554] cursor-pointer font-medium transition-colors duration-200"
           >
             {children}
           </a>
@@ -149,57 +265,105 @@ const BlogPostPage = () => {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="text-[#C5A267] underline hover:text-[#b49554]"
+          className="text-[#C5A267] underline hover:text-[#b49554] font-medium transition-colors duration-200"
         >
           {children}
         </a>
       );
     },
-  
+
     img: ({ src, alt }: any) => (
-      <img
-        src={src}
-        alt={alt || ''}
-        loading="lazy"
-        className="my-6 mx-auto rounded-xl shadow-md max-w-full"
-      />
+      <div className="my-12 mx-auto w-full max-w-[65vw] md:max-w-[50vw]">
+        <div className="relative w-full h-auto">
+          <img
+            src={src}
+            alt={alt || ''}
+            loading="lazy"
+            className="w-full h-auto object-contain shadow-lg hover:shadow-xl transition-shadow duration-300"
+          />
+        </div>
+      </div>
     ),
-  
-    h1: (props: any) => (
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 mt-10 text-gray-900 font-serif">
-        {props.children}
-      </h1>
-    ),
-    h2: (props: any) => (
-      <h2 className="text-2xl md:text-3xl font-semibold mb-4 mt-8 text-gray-900 font-sans">
-        {props.children}
-      </h2>
-    ),
-    h3: (props: any) => (
-      <h3 className="text-xl md:text-2xl font-medium mb-3 mt-6 text-gray-800 font-sans">
-        {props.children}
-      </h3>
-    ),
+
+    h1: (props: any) => {
+      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      return (
+        <h1 id={headingId} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 mt-0 text-gray-900 font-sans leading-tight max-w-none">
+          {props.children}
+        </h1>
+      );
+    },
+    h2: (props: any) => {
+      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      return (
+        <h2 id={headingId} className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 mt-16 text-gray-900 font-serif leading-tight max-w-none">
+          <div className="flex items-center">
+            <div className="w-1 h-8 md:h-10 bg-[#C5A267] mr-4 md:mr-6 rounded-full"></div>
+            {props.children}
+          </div>
+        </h2>
+      );
+    },
+    h3: (props: any) => {
+      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      return (
+        <h3 id={headingId} className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6 mt-12 text-gray-800 font-sans leading-tight max-w-none">
+          {props.children}
+        </h3>
+      );
+    },
     h4: (props: any) => (
-      <h4 className="text-lg font-medium mt-4 mb-2 text-gray-700">
+      <h4 className="text-xl md:text-2xl font-medium mt-10 mb-6 text-gray-700 font-sans leading-tight">
         {props.children}
       </h4>
     ),
     h5: (props: any) => (
-      <h5 className="text-base font-medium mt-4 mb-2 text-gray-600">
+      <h5 className="text-lg md:text-xl font-medium mt-8 mb-4 text-gray-600 font-sans leading-tight">
         {props.children}
       </h5>
     ),
     h6: (props: any) => (
-      <h6 className="text-sm font-semibold mt-4 mb-2 text-gray-500 uppercase tracking-wide">
+      <h6 className="text-base md:text-lg font-semibold mt-8 mb-4 text-gray-500 uppercase tracking-wide font-sans">
         {props.children}
       </h6>
+    ),
+
+    ul: (props: any) => (
+      <ul className="space-y-4 mb-10 pl-0 max-w-none">
+        {props.children}
+      </ul>
+    ),
+    ol: (props: any) => (
+      <ol className="space-y-4 mb-10 pl-0 max-w-none">
+        {props.children}
+      </ol>
+    ),
+    li: (props: any) => (
+      <li className="flex items-start text-lg md:text-xl">
+        <div className="w-2 h-2 bg-[#C5A267] rounded-full mt-4 mr-4 flex-shrink-0"></div>
+        <span className="text-gray-700 leading-loose">{props.children}</span>
+      </li>
+    ),
+
+    strong: (props: any) => (
+      <strong className="font-semibold text-gray-900 bg-[#C5A267]/10 px-2 py-1 rounded">
+        {props.children}
+      </strong>
+    ),
+
+    em: (props: any) => (
+      <em className="italic text-[#C5A267] font-medium">
+        {props.children}
+      </em>
     ),
   };
   
 
   return (
-    <div className="relative min-h-screen font-normal bg-white">
+    <div className="relative min-h-screen font-normal bg-gradient-to-br from-gray-50 to-white">
+      <ReadingProgress />
+      <ScrollToTop />
+      
       <Helmet>
         <title>{frontmatter.title} | D&D Design Center</title>
         <meta name="description" content={frontmatter.excerpt || fallback} />
@@ -282,110 +446,121 @@ const BlogPostPage = () => {
           </script>
         )}
       </Helmet>
-      {frontmatter.image?.url && (
-        <div className="absolute top-0 left-0 w-full h-screen z-0 pointer-events-none">
-          <img
-            src={frontmatter.image.url}
-            alt={frontmatter.image.alt}
-            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none" />
-        </div>
-      )}
-      {frontmatter.image?.url && (
-        <div
-          ref={overlayRef}
-          className="fixed top-0 left-0 w-full h-screen z-20 flex flex-col justify-center items-center text-center px-4 pointer-events-none"
-          style={{
-            opacity: overlayOpacity,
-            transition: "opacity 0.2s",
-            willChange: "opacity",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-10" />
-          <div className="relative flex flex-col justify-center items-center text-center px-4 z-20 pointer-events-auto">
-            <Link
-              to="/blog"
-              className="mb-6 bg-[#C5A267] text-white text-lg font-medium px-6 py-3 rounded shadow transition hover:bg-[#b49554] z-30"
-              style={{
-                position: "relative",
-                top: 0,
-                left: 0,
-                width: "fit-content",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              &larr; Back to Blog
-            </Link>
-            <h1
-              className={`text-white font-serif text-4xl md:text-6xl font-bold drop-shadow-lg mb-4 ${
-                frontmatter.title && frontmatter.title.trim().split(/\s+/).length > 5
-                  ? "break-words whitespace-normal block"
-                  : ""
-              }`}
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                maxWidth:
-                  frontmatter.title && frontmatter.title.trim().split(/\s+/).length > 5
-                    ? "22ch"
-                    : undefined,
-                marginLeft: "auto",
-                marginRight: "auto",
-                wordBreak: "break-word",
-              }}
-            >
-              {/* ✅ This h1 is for SEO crawlers & screen readers */}
-              <h1 className="sr-only">{frontmatter.title}</h1>
 
-              {/* ✅ This is your styled version, still visible */}
-              {frontmatter.title}
-            </h1>
-            <div
-              className="flex flex-wrap justify-center gap-4 bg-white/30 backdrop-blur-md rounded-full px-6 py-3 shadow-lg mb-2 text-sm md:text-base"
-            >
-              <span className="flex items-center gap-2 text-gray-200 font-medium">
-                <Calendar size={18} className="text-[#C5A267]" />
-                {new Date(frontmatter.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-              <span className="flex items-center gap-2 text-gray-300 font-medium">
-                <Clock size={18} className="text-[#C5A267]" />
-                {frontmatter.readTime} min read
-              </span>
-              <span className="flex items-center gap-2 text-gray-300 font-medium">
-                <Tag size={18} className="text-[#C5A267]" />
-                <span className="bg-[#C5A267] text-white rounded-full px-3 py-1 text-xs font-semibold">
-                  {frontmatter.category}
-                </span>
-              </span>
+      {/* Hero Section with Parallax Effect */}
+      {frontmatter.image?.url && (
+        <div className="relative h-screen overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full z-0">
+            <img
+              src={frontmatter.image.url}
+              alt={frontmatter.image.alt}
+              className="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-transform duration-700 hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+          </div>
+          
+          <div
+            ref={overlayRef}
+            className="relative z-20 h-full flex flex-col justify-center items-center text-center px-6"
+            style={{
+              opacity: overlayOpacity,
+              transition: "opacity 0.3s ease-out",
+            }}
+          >
+
+            {/* Title and Meta */}
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
+                {frontmatter.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
+                {frontmatter.excerpt}
+              </p>
+
+              {/* Meta Information */}
+              <div className="flex flex-wrap justify-center gap-6 bg-white/10 backdrop-blur-md rounded-full px-8 py-4 mb-8">
+                <div className="flex items-center space-x-2 text-gray-200">
+                  <Calendar size={18} className="text-[#C5A267]" />
+                  <span className="font-medium">
+                    {new Date(frontmatter.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 text-gray-200">
+                  <Clock size={18} className="text-[#C5A267]" />
+                  <span className="font-medium">{frontmatter.readTime} min read</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Tag size={18} className="text-[#C5A267]" />
+                  <span className="bg-[#C5A267] text-white rounded-full px-4 py-1 text-sm font-semibold">
+                    {frontmatter.category}
+                  </span>
+                </div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="animate-bounce">
+                <div className="w-6 h-10 border-2 border-white/50 rounded-full mx-auto">
+                  <div className="w-1 h-3 bg-white rounded-full mx-auto mt-2 animate-pulse"></div>
+                </div>
+                <p className="text-white/70 text-sm mt-2">Scroll to read</p>
+              </div>
             </div>
           </div>
         </div>
       )}
-      <div className="relative z-10 pt-[75vh] md:pt-[70vh]">
-        <div className="max-w-xl mx-auto px-2 md:px-20">
-          <article
-            className="bg-white/90 backdrop-blur rounded-2xl shadow-md md:px-6 prose prose-[0.85rem] md:prose-sm max-w-xl mx-auto overflow-hidden mt-4 sm:px-4 mb-12"
-            style={{
-              fontFamily:
-                "'Montserrat', 'DM Sans', 'Inter', 'Space Grotesk', sans-serif",
-              lineHeight: 1.6,
-              letterSpacing: "0.01em",
-            }}
-          >
-            <div className="px-2 py-8 md:px-0">
-              <ReactMarkdown components={renderers} rehypePlugins={[rehypeRaw]}>
+
+      {/* Article Content */}
+      <div className="relative z-10 -mt-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">      
+          <article className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50">
+            <div className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 lg:py-16">
+              <ReactMarkdown 
+                components={renderers} 
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkBreaks]}
+                skipHtml={false}
+              >
                 {content}
               </ReactMarkdown>
+            </div>
+            
+            {/* Article Footer */}
+            <div className="bg-gradient-to-r from-[#C5A267]/5 to-[#b49554]/5 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-8 border-t border-gray-200/50">
+              <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2 text-gray-600">
+                    <Heart size={16} className="text-red-500" />
+                    <span className="text-sm">Thank you for reading!</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <ShareButton 
+                    title={frontmatter.title} 
+                    url={`https://dnddesigncenter.com/blog/${slug}`} 
+                  />
+                  <Link 
+                    to="/blog"
+                    className="text-[#C5A267] hover:text-[#b49554] font-medium transition-colors duration-200"
+                  >
+                    ← More Articles
+                  </Link>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       </div>
-      <BlogCTA triggerFooterContact={triggerFooterContact} />
+
+      {/* CTA Section */}
+      <div className="mt-16">
+        <BlogCTA triggerFooterContact={triggerFooterContact} />
+      </div>
     </div>
   );
 };

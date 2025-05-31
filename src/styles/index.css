@@ -36,6 +36,15 @@
     font-family: 'Playfair Display', serif;
   }
 
+  /* Blog content styles */
+  article p {
+    margin-bottom: 2rem;
+  }
+
+  article p + p {
+    margin-top: 1.5rem;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

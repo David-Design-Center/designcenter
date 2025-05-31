@@ -56,6 +56,5 @@ export default {
     },
   },
   presets: [relumeTailwind],
-  plugins: [aspectRatio],
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [aspectRatio, require('@tailwindcss/typography')],
 };

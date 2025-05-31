@@ -76,6 +76,7 @@
     "react-snap": "^1.23.0",
     "react-swipeable": "^7.0.1",
     "rehype-raw": "^7.0.0",
+    "remark-breaks": "4.0.0",
     "tailwind-merge": "^1.14.0",
     "tsparticles": "^2.12.0",
     "uuid": "^11.1.0"
@@ -84,7 +85,7 @@
     "@eslint/js": "^9.9.1",
     "@netlify/plugin-gatsby": "3.8.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/typography": "0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/airtable": "^0.10.5",
