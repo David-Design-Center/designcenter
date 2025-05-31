@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, Tag, Share2, Eye, Heart, Coffee, ArrowUp } from "lucide-react";
+import { Calendar, Clock, Tag, Share2, Heart, ArrowUp } from "lucide-react";
 import BlogCTA from "./BlogCTA";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
@@ -171,9 +171,6 @@ const BlogPostPage = () => {
   }
   
   const { data: frontmatter, content } = entry;
-
-  // Calculate word count for reading stats
-  const wordCount = content.split(/\s+/).length;
 
   // Add state for overlay opacity
   const [overlayOpacity, setOverlayOpacity] = useState(1);
