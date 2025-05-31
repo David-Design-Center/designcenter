@@ -1,6 +1,6 @@
 ---
 title: "The Ultimate Guide to Kitchen Remodeling in New York"
-excerpt: "Includes trends &  estimates"
+excerpt: "Includes trends & estimates"
 category: "Tips"
 date: "2025-06-01"
 readTime: 10
