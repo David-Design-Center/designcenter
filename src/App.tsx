@@ -8,17 +8,20 @@ import Home from './pages/Home';
 import Loading from './components/ui/Loading';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 
-const Sustainability = lazy(() => import('./pages/Sustainability'));
-const HowWeWork = lazy(() => import('./pages/HowWeWork'));
-const ProductsCollection = lazy(() => import('./pages/ProductsCollection'));
-const Collaboration = lazy(() => import('./pages/collaboration'));
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogPostPage = lazy(() => import('./components/blog/BlogPostPage'));
-const Designers = lazy(() => import('./pages/Designers'));
+// Direct imports for all important pages (better for SEO/crawling)
+import Sustainability from './pages/Sustainability';
+import HowWeWork from './pages/HowWeWork';
+import ProductsCollection from './pages/ProductsCollection';
+import Collaboration from './pages/collaboration';
+import Blog from './pages/Blog';
+import BlogPostPage from './components/blog/BlogPostPage';
+import Designers from './pages/Designers';
+import CraftedCalm from './pages/CraftedCalm';
+import ItalianKitchenCabinets from './pages/ItalianKitchenCabinets';
+
+// Keep lazy loading only for legal pages (Privacy & Terms)
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
-const CraftedCalm = lazy(() => import('./pages/CraftedCalm'));
-const ItalianKitchenCabinets = lazy(() => import('./pages/ItalianKitchenCabinets'));
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -125,23 +128,31 @@ function App() {
               isFooterExpanded={isFooterExpanded}
             />
             <ErrorBoundary>
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/sustainability" element={<Sustainability />} />
-                  <Route path="/how-we-work" element={<HowWeWork />} />
-                  <Route path="/productscollection" element={<ProductsCollection />} />
-                  <Route path="/collaboration" element={<Collaboration />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                  <Route path="/designers" element={<Designers />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/terms" element={<Terms />} />
-                  <Route path="/crafted-calm" element={<CraftedCalm />} />
-                  <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} /> {/* Add this route */}
-                  <Route path="*" element={<Navigate to="/" />} />
-                </Routes>
-              </Suspense>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/sustainability" element={<Sustainability />} />
+                <Route path="/how-we-work" element={<HowWeWork />} />
+                <Route path="/productscollection" element={<ProductsCollection />} />
+                <Route path="/collaboration" element={<Collaboration />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/designers" element={<Designers />} />
+                <Route path="/crafted-calm" element={<CraftedCalm />} />
+                <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
+                
+                <Route path="/privacy" element={
+                  <Suspense fallback={<Loading />}>
+                    <Privacy />
+                  </Suspense>
+                } />
+                <Route path="/terms" element={
+                  <Suspense fallback={<Loading />}>
+                    <Terms />
+                  </Suspense>
+                } />
+                
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
             </ErrorBoundary>
             <Footer onExpandChange={setIsFooterExpanded} />
           </Router>
