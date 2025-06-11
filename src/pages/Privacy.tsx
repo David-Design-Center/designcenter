@@ -1,7 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Privacy: React.FC = () => (
   <div className="max-w-3xl mx-auto py-16 px-4">
+    <Helmet>
+      <title>Privacy Policy | D&D Design Center</title>
+      <meta name="robots" content="noindex, nofollow" />
+      <meta name="description" content="Privacy Policy for D&D Design Center website and internal applications." />
+    </Helmet>
     <h1 className="text-4xl font-serif mb-6">Privacy Policy</h1>
     <h2 className="text-2xl font-semibold mt-8 mb-2">Website Privacy Policy</h2>
     <p className="mb-4">We value your privacy. D&D Design Center does not share, sell, or rent your personal information to third parties. Information collected through our website is used solely to provide and improve our services, respond to inquiries, and process orders. We use industry-standard security measures to protect your data. By using our website, you consent to our privacy practices. For questions, contact info@dnddesigncenter.com.</p>

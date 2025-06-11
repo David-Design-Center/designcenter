@@ -1,7 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Terms: React.FC = () => (
   <div className="max-w-3xl mx-auto py-16 px-4">
+    <Helmet>
+      <title>Terms of Service | D&D Design Center</title>
+      <meta name="robots" content="noindex, nofollow" />
+      <meta name="description" content="Terms of Service for D&D Design Center website and internal applications." />
+    </Helmet>
     <h1 className="text-4xl font-serif mb-6">Terms of Service</h1>
     <h2 className="text-2xl font-semibold mt-8 mb-2">Website Terms of Service</h2>
     <p className="mb-4">By accessing and using the D&D Design Center website, you agree to comply with all applicable laws and regulations. All content is provided for informational purposes only. We reserve the right to update or modify these terms at any time. Unauthorized use of this website may result in legal action. For questions, contact info@dnddesigncenter.com.</p>
