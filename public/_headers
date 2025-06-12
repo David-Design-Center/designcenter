@@ -7,7 +7,34 @@
 /vanities
   X-Robots-Tag: noindex
 
+/vanities?page=*
+  X-Robots-Tag: noindex
+
 /living-room
+  X-Robots-Tag: noindex
+
+/living-room?page=*
+  X-Robots-Tag: noindex
+
+/faucets
+  X-Robots-Tag: noindex
+
+/all-lighting
+  X-Robots-Tag: noindex
+
+/traditional
+  X-Robots-Tag: noindex
+
+/bed-room
+  X-Robots-Tag: noindex
+
+/italian-closets-new-york
+  X-Robots-Tag: noindex
+
+/italianbath
+  X-Robots-Tag: noindex
+
+/hinged-door-closet?page=*
   X-Robots-Tag: noindex
 
 /index.php?route=product/category&path=67
