@@ -149,17 +149,10 @@ const HomeHeroTop = () => {
                 className="contact-now-hero-btn w-full sm:w-auto px-10 py-3 bg-[#C5A267] text-white text-base font-regular shadow hover:bg-[#B49157] transition-colors duration-200 min-h-[44px]"
                 style={{ opacity: 0, transform: 'translateY(30px) scale(1)', filter: 'blur(5px)' }}
                 onClick={() => {
-                  const footer = document.getElementById('footer');
-                  if (footer) {
-                    footer.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => {
-                      const btn = document.querySelector('[data-footer-contact]') as HTMLButtonElement;
-                      if (btn) btn.click();
-                    }, 800);
-                  }
+                  window.dispatchEvent(new CustomEvent('openContactForm'));
                 }}
               >
-                Complimentary Consultation
+                Ask For Quote & Consulation
               </button>
               <span className="text-xs invisible h-0">
                 &nbsp;
@@ -174,7 +167,7 @@ const HomeHeroTop = () => {
                 style={{ opacity: 0, transform: 'translateY(30px) scale(1)', filter: 'blur(5px)' }}
               >
                 <span role="img" aria-label="palette" className="mr-2"></span>
-                Find Your Interior Style
+                Try New Design Quiz
               </a>
               <span
                 className="find-style-subtitle text-xs text-white/70 font-regular text-center mt-2"

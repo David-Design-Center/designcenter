@@ -71,9 +71,16 @@
     <priority>0.7</priority>
   </url>
 
-    <url>
+  <url>
     <loc>https://dnddesigncenter.com/blog/affordable-kitchen-remodel-guide</loc>
     <lastmod>2025-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+    <url>
+    <loc>https://dnddesigncenter.com/blog/custom-closets-for-home-office</loc>
+    <lastmod>2025-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

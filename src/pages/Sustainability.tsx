@@ -4,12 +4,13 @@ import SustainabilityShowcase from '../components/sustainability/SustainabilityS
 import SustainabilityStats from '../components/sustainability/SustainabilityStats';
 import SustainabilityPath from '../components/sustainability/SustainabilityPath';
 import SustainabilityCTA from '../components/sustainability/SustainabilityCTA';
-import { useFooterContact } from '../hooks/useFooterContact';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 
 const Sustainability = () => {
-  // Use the hook
-  const { triggerFooterContact } = useFooterContact();
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
+  const triggerFooterContact = () => openContactForm();
 
   return (
     <div className="min-h-screen bg-white">
@@ -29,6 +30,9 @@ const Sustainability = () => {
       <SustainabilityCTA
         triggerFooterContact={triggerFooterContact}
       />
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

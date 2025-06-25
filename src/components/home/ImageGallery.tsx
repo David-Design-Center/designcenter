@@ -206,24 +206,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ category, style, onClose })
 
   // *** FOOTER SCROLL LOGIC ***
   const triggerFooterContact = (): void => {
-    const footerElement = document.querySelector('#footer');
-    if (footerElement instanceof HTMLElement) {
-      // Calculate the total scroll height and scroll to the bottom
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: 'smooth'
-      });
-
-      // After a short delay, trigger the footer's contact button
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector('[data-footer-contact]') as HTMLButtonElement | null;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
   if (error) {

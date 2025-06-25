@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, Tag, Share2, Heart, ArrowUp } from "lucide-react";
+import { Calendar, Clock, Tag, Share2, Heart } from "lucide-react";
 import BlogCTA from "./BlogCTA";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
@@ -67,37 +67,7 @@ const ReadingProgress = () => {
   );
 };
 
-// Scroll to Top Button
-const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
-    };
-
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  return (
-    <button
-      onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 p-3 bg-[#C5A267] text-white rounded-full shadow-lg transition-all duration-300 z-40 hover:bg-[#b49554] hover:scale-110 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-      }`}
-    >
-      <ArrowUp size={20} />
-    </button>
-  );
-};
 
 // Share Button Component
 const ShareButton = ({ title, url }: { title: string; url: string }) => {
@@ -193,23 +163,7 @@ const BlogPostPage = () => {
   }, []);
 
   const triggerFooterContact = () => {
-    const footerElement = document.querySelector("#footer");
-    if (footerElement instanceof HTMLElement) {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: "smooth",
-      });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector(
-          "[data-footer-contact]"
-        ) as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
   const renderers = {
@@ -270,20 +224,17 @@ const BlogPostPage = () => {
     },
 
     img: ({ src, alt }: any) => (
-      <div className="my-12 mx-auto w-full max-w-[65vw] md:max-w-[50vw]">
-        <div className="relative w-full h-auto">
-          <img
-            src={src}
-            alt={alt || ''}
-            loading="lazy"
-            className="w-full h-auto object-contain shadow-lg hover:shadow-xl transition-shadow duration-300"
-          />
-        </div>
-      </div>
+      <img
+        src={src}
+        alt={alt || ''}
+        loading="lazy"
+        className="my-12 mx-auto w-full max-w-[65vw] md:max-w-[50vw] h-auto object-contain shadow-lg hover:shadow-xl transition-shadow duration-300 block"
+      />
     ),
 
     h1: (props: any) => {
-      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
+      const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
         <h1 id={headingId} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 mt-0 text-gray-900 font-sans leading-tight max-w-none">
           {props.children}
@@ -291,7 +242,8 @@ const BlogPostPage = () => {
       );
     },
     h2: (props: any) => {
-      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
+      const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
         <h2 id={headingId} className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 mt-16 text-gray-900 font-serif leading-tight max-w-none">
           <div className="flex items-center">
@@ -302,7 +254,8 @@ const BlogPostPage = () => {
       );
     },
     h3: (props: any) => {
-      const headingId = `heading-${props.children.toString().toLowerCase().replace(/\s+/g, '-')}`;
+      const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
+      const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
         <h3 id={headingId} className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6 mt-12 text-gray-800 font-sans leading-tight max-w-none">
           {props.children}
@@ -353,13 +306,32 @@ const BlogPostPage = () => {
         {props.children}
       </em>
     ),
+
+    p: (props: any) => {
+      // Check if the paragraph contains only an image
+      const hasOnlyImage = props.children && 
+        Array.isArray(props.children) && 
+        props.children.length === 1 && 
+        props.children[0]?.type === 'img';
+      
+      // If it's just an image, render it without wrapping in <p>
+      if (hasOnlyImage) {
+        return props.children;
+      }
+      
+      // Regular paragraph
+      return (
+        <div className="text-base md:text-lg leading-relaxed mb-6 text-gray-700 font-light">
+          {props.children}
+        </div>
+      );
+    },
   };
   
 
   return (
     <div className="relative min-h-screen font-normal bg-gradient-to-br from-gray-50 to-white">
       <ReadingProgress />
-      <ScrollToTop />
       
       <Helmet>
         <title>{frontmatter.title} | D&D Design Center</title>

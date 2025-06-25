@@ -2,13 +2,14 @@ import { Helmet } from 'react-helmet';
 import BlogHero from '../components/blog/BlogHero';
 import BlogGrid from '../components/blog/BlogGrid';
 import BlogCTA from '../components/blog/BlogCTA';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 
 const Blog = () => {
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
+  
   function triggerFooterContact(): void {
-    const contactSection = document.getElementById('footer-contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    openContactForm();
   }
 
   return (
@@ -27,6 +28,9 @@ const Blog = () => {
         <BlogGrid />
         <BlogCTA triggerFooterContact={triggerFooterContact} />
       </main>
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

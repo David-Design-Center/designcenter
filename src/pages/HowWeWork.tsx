@@ -5,12 +5,14 @@ import HowWeWorkStages from '../components/howwework/HowWeWorkStages';
 import HowWeWorkCallToAction from '../components/howwework/HowWeWorkCallToAction';
 import { FeatureStepsDemo } from '../components/howwework/FeatureStepsDemo';
 import { AnimatePresence } from 'framer-motion';
-import { useFooterContact } from '../hooks/useFooterContact';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import { useEffect, useState } from 'react';
 
 const HowWeWork = () => {
-  const { triggerFooterContact } = useFooterContact();
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
+  const triggerFooterContact = () => openContactForm();
   type Testimonial = {
     author: {
       name: string;
@@ -62,6 +64,9 @@ const HowWeWork = () => {
       <HowWeWorkCallToAction
         triggerFooterContact={triggerFooterContact}
       />
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

@@ -7,6 +7,9 @@ import Footer from './components/ui/Footer';
 import Home from './pages/Home';
 import Loading from './components/ui/Loading';
 import ErrorBoundary from './components/ui/ErrorBoundary';
+import ContactFormPopup from './components/ui/ContactFormPopup';
+import FloatingContactButton from './components/ui/FloatingContactButton';
+import { useContactForm } from './hooks/useContactForm';
 
 // Direct imports for all important pages (better for SEO/crawling)
 import Sustainability from './pages/Sustainability';
@@ -27,12 +30,21 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isFooterExpanded, setIsFooterExpanded] = useState(false);
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    // Listen for custom contact form open events
+    const handleOpenContactForm = () => openContactForm();
+    window.addEventListener('openContactForm', handleOpenContactForm);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('openContactForm', handleOpenContactForm);
+    };
+  }, [openContactForm]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -79,7 +91,7 @@ function App() {
         "availableLanguage": ["English", "Russian"]
       },
       "sameAs": [
-        "https://www.instagram.com/dnddesigncenter/",
+        "https://www.instagram.com/dnddesigncenter.nyc/",
         "https://www.facebook.com/dnddesigncenter"
       ]
     });
@@ -91,16 +103,7 @@ function App() {
   }, []);
 
   const triggerFooterContact = () => {
-    const footerElement = document.querySelector('#footer');
-    if (footerElement instanceof HTMLElement) {
-      footerElement.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector('[data-footer-contact]') as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    openContactForm();
   };
 
   return (
@@ -125,6 +128,7 @@ function App() {
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
               triggerFooterContact={triggerFooterContact}
+              openContactForm={openContactForm}
               isFooterExpanded={isFooterExpanded}
             />
             <ErrorBoundary>
@@ -155,6 +159,12 @@ function App() {
               </Routes>
             </ErrorBoundary>
             <Footer onExpandChange={setIsFooterExpanded} />
+            
+            {/* Floating Contact Button */}
+            <FloatingContactButton onClick={openContactForm} />
+            
+            {/* Contact Form Popup */}
+            <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
           </Router>
         </div>
       </div>

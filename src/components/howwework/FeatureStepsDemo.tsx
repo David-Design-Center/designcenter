@@ -25,16 +25,7 @@ const features = [
 ]
 
 const triggerFooterContact = () => {
-  const footerElement = document.querySelector('#footer');
-  if (footerElement instanceof HTMLElement) {
-    window.scrollTo({ top: document.documentElement.scrollHeight - window.innerHeight, behavior: 'smooth' });
-    setTimeout(() => {
-      const footerContactBtn = document.querySelector('[data-footer-contact]');
-      if (footerContactBtn instanceof HTMLButtonElement) {
-        footerContactBtn.click();
-      }
-    }, 800);
-  }
+  window.dispatchEvent(new CustomEvent('openContactForm'));
 };
 
 export function FeatureStepsDemo () {

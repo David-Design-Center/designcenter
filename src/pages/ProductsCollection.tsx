@@ -8,7 +8,8 @@ import { useSwipeable } from 'react-swipeable';
 import { ProductCollectionSteps } from '../components/productcollection/ProductCollectionSteps';
 import { HeroScrollDemoProduct } from '../components/ui/HeroScrollDemoProduct';
 import ProductCollectionCTA from '../components/productcollection/ProductCollectionCTA';
-import { useFooterContact } from '../hooks/useFooterContact';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import { Feature197 } from '../components/ui/accordion-feature-section';
 import { accordionFeatureSeoMetadata } from '../data/accordionFeatureSeoMetadata';
@@ -78,7 +79,8 @@ const ProductsCollection = () => {
   });
 
   // Use the hook for consistent footer contact behavior
-  const { triggerFooterContact } = useFooterContact();
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
+  const triggerFooterContact = () => openContactForm();
 
   return (
     <div className="min-h-screen overflow-x-hidden" {...swipeHandlers}>
@@ -130,6 +132,9 @@ const ProductsCollection = () => {
       <ProductCollectionCTA 
         triggerFooterContact={triggerFooterContact} 
       />
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

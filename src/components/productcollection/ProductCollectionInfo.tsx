@@ -46,26 +46,7 @@ export const ProductCollectionCTA: React.FC = () => {
   }, [inView]);
 
   const triggerFooterContact = () => {
-    console.log('Button clicked'); // Debug log
-    const footerElement = document.querySelector('#footer');
-    console.log('Footer element:', footerElement); // Debug log
-    
-    if (footerElement instanceof HTMLElement) {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: 'smooth',
-      });
-  
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector('[data-footer-contact]');
-        console.log('Footer contact button:', footerContactBtn); // Debug log
-        if (footerContactBtn instanceof HTMLButtonElement) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
   return (

@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import DesignersHero from '../components/designers/DesignersHero';
 import DesignerCard from '../components/designers/DesignerCard';
 import DesignersCTA from '../components/designers/DesignersCTA';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 
 interface Designer {
   name: string;
@@ -14,6 +16,7 @@ interface Designer {
 const Designers: React.FC = () => {
   const [designers, setDesigners] = useState<Designer[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
 
   useEffect(() => {
     const loadDesigners = async () => {
@@ -34,23 +37,7 @@ const Designers: React.FC = () => {
   }, []);
 
   const triggerFooterContact = () => {
-    const footerElement = document.querySelector('#footer');
-    if (footerElement instanceof HTMLElement) {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: 'smooth',
-      });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector(
-          '[data-footer-contact]'
-        ) as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    openContactForm();
   };
 
   return (
@@ -86,6 +73,9 @@ const Designers: React.FC = () => {
       </section>
 
       <DesignersCTA onContactTeam={triggerFooterContact} />
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

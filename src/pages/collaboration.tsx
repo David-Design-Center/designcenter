@@ -5,13 +5,14 @@ import VisionnaireCTA from '../components/collaboration/VisionnaireCTA';
 import VisionnaireThankYou from '../components/collaboration/VisionnaireThankYou';
 import { HeroScrollDemo } from '../components/ui/HeroScrollDemo';
 import { GridMotionDemo } from '../components/collaboration/GridMotionDemo';
-import { useFooterContact } from '../hooks/useFooterContact';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import VisionnaireBrands from '../components/collaboration/VisionnaireBrands';
 
 const Collaboration = () => {
-  // Use the hook
-  const { triggerFooterContact } = useFooterContact();
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
+  const triggerFooterContact = () => openContactForm();
 
   return (
     <div className="relative min-h-screen bg-white">
@@ -50,6 +51,9 @@ const Collaboration = () => {
         <HeroScrollDemo />
         <VisionnaireCTA triggerFooterContact={triggerFooterContact} />
       </main>
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

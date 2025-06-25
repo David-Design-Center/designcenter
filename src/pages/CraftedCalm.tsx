@@ -6,6 +6,8 @@ import { ArrowRight, Lightbulb, Star, Eye } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import galleryData from '../data/product-galleries/index';
 import QuizContainer from '../components/quiz/QuizContainer';
+import ContactFormPopup from '../components/ui/ContactFormPopup';
+import { useContactForm } from '../hooks/useContactForm';
 import '../components/quiz/QuizStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,6 +29,7 @@ const quizImages = galleryData
   }));
 
 const CraftedCalm = () => {
+  const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -123,23 +126,7 @@ const CraftedCalm = () => {
 
   // Trigger footer contact form
   const triggerFooterContact = () => {
-    const footerElement = document.querySelector('#footer');
-    if (footerElement instanceof HTMLElement) {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: 'smooth',
-      });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector(
-          '[data-footer-contact]'
-        ) as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    openContactForm();
   };
 
   return (
@@ -251,6 +238,9 @@ const CraftedCalm = () => {
       >
         <QuizContainer quizImages={quizImages} triggerFooterContact={triggerFooterContact} />
       </section>
+      
+      {/* Contact Form Popup */}
+      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

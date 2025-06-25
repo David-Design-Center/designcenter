@@ -56,19 +56,7 @@ const KitchenGallery = () => {
           </p>
           <button 
             onClick={() => {
-              const footerElement = document.querySelector('#footer');
-              if (footerElement instanceof HTMLElement) {
-                window.scrollTo({
-                  top: document.documentElement.scrollHeight,
-                  behavior: 'smooth'
-                });
-                setTimeout(() => {
-                  const footerContactBtn = document.querySelector('[data-footer-contact]') as HTMLButtonElement;
-                  if (footerContactBtn) {
-                    footerContactBtn.click();
-                  }
-                }, 800);
-              }
+              window.dispatchEvent(new CustomEvent('openContactForm'));
             }}
             className="bg-[#D6A85B] hover:bg-[#B48040] text-white px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl font-medium transition-colors duration-300 shadow-lg"
           >

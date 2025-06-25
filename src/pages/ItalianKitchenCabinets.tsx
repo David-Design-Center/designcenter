@@ -73,19 +73,7 @@ const ItalianKitchenCabinets = () => {
 
   // Function to handle consultation form submission
   const handleConsultation = () => {
-    const footerElement = document.querySelector('#footer');
-    if (footerElement instanceof HTMLElement) {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth'
-      });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector('[data-footer-contact]') as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
   // Animate kitchen showcase images

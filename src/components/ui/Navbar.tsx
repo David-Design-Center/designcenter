@@ -7,6 +7,7 @@ interface NavbarProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
   triggerFooterContact: () => void;
+  openContactForm?: () => void; // Add this new prop
   isFooterExpanded?: boolean; // Add this new prop
 }
 
@@ -80,6 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({
   isMenuOpen,
   setIsMenuOpen,
   triggerFooterContact,
+  openContactForm,
   isFooterExpanded = false, // Default to false
 }) => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
@@ -283,6 +285,8 @@ const Navbar: React.FC<NavbarProps> = ({
                       handleClose();
                       if (item.title === 'CONTACT') {
                         triggerFooterContact();
+                      } else if (item.title === 'GET CONSULTATION' && openContactForm) {
+                        openContactForm();
                       }
                     };
 

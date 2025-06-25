@@ -11,119 +11,10 @@ import {
 import { Link } from 'react-router-dom';
 import { useScrollManager } from '../../hooks/useScrollManager';
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
 interface FooterProps {
   id?: string;
   onExpandChange?: (expanded: boolean) => void;  // Add this new prop
 }
-
-// Extracted reusable components
-const ContactForm = ({ 
-  formData, 
-  setFormData, 
-  formStatus, 
-  handleSubmit, 
-  isMobile 
-}: { 
-  formData: FormData, 
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>, 
-  formStatus: 'idle' | 'success' | 'error', 
-  handleSubmit: (e: React.FormEvent) => Promise<void>,
-  isMobile: boolean
-}) => (
-  <div className="space-y-4">
-    <h3 className="text-lg font-medium text-gray-900">
-      Get in Touch
-    </h3>
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="name" className="sr-only">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              name: e.target.value,
-            }))
-          }
-          className={`w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267] transition-shadow duration-200 ${isMobile ? 'text-base' : 'text-sm'}`}
-          required
-          aria-required="true"
-        />
-      </div>
-      <div>
-        <label htmlFor="email" className="sr-only">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              email: e.target.value,
-            }))
-          }
-          className={`w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267] transition-shadow duration-200 ${isMobile ? 'text-base' : 'text-sm'}`}
-          required
-          aria-required="true"
-        />
-      </div>
-      <div>
-        <label htmlFor="message" className="sr-only">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Message"
-          value={formData.message}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              message: e.target.value,
-            }))
-          }
-          rows={isMobile ? 3 : 4}
-          className={`w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267] transition-shadow duration-200 resize-none ${isMobile ? 'text-base' : 'text-sm'}`}
-          required
-          aria-required="true"
-        />
-      </div>
-      <button
-        type="submit"
-        disabled={formStatus === 'success'}
-        className={`w-full py-3 px-4 rounded-lg text-white ${isMobile ? 'text-base' : 'text-sm'} font-medium transition-all duration-200 min-h-[44px] ${
-          formStatus === 'success'
-            ? 'bg-green-500'
-            : formStatus === 'error'
-            ? 'bg-red-500'
-            : 'bg-[#C5A267] hover:bg-[#B49157]'
-        }`}
-      >
-        {formStatus === 'success'
-          ? 'Message Sent!'
-          : formStatus === 'error'
-          ? 'Try Again'
-          : 'Send Message'}
-      </button>
-    </form>
-  </div>
-);
 
 const ContactInfo = ({ isMobile }: { isMobile: boolean }) => (
   <div className="space-y-3">
@@ -276,12 +167,6 @@ const MapComponent = ({ isMobile, isExpanded }: { isMobile: boolean, isExpanded:
 const Footer = forwardRef<HTMLElement, FooterProps>(({ onExpandChange }, ref) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const expandedContentRef = useRef<HTMLDivElement | null>(null);
   const lastScrollY = useRef(0);
   const scrollTimeout = useRef<number>();
@@ -408,38 +293,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ onExpandChange }, ref) =>
     onExpandChange?.(isExpanded);
   }, [isExpanded, onExpandChange]);
 
-  // Form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(
-        'https://hook.us2.make.com/c4yxbfemmbazew2y219wu0m11wtp9unn',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      setFormStatus('success');
-
-      setTimeout(() => {
-        setFormData({ name: '', email: '', message: '' });
-        setFormStatus('idle');
-        setIsExpanded(false);
-      }, 2000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormStatus('error');
-    }
-  };
+  // No form submission handler needed since we're using the popup
 
   return (
     <footer
@@ -529,14 +383,24 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ onExpandChange }, ref) =>
         >
           {isMobile ? (
             <div className="grid grid-cols-1 gap-6">
-              {/* Contact Form */}
-              <ContactForm 
-                formData={formData} 
-                setFormData={setFormData} 
-                formStatus={formStatus} 
-                handleSubmit={handleSubmit} 
-                isMobile={isMobile}
-              />
+              {/* Contact Form Button - popup trigger */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Get in Touch
+                </h3>
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('openContactForm'));
+                  }}
+                  className={`w-full py-3 px-4 rounded-lg text-white text-base font-medium transition-all duration-200 min-h-[44px] bg-[#C5A267] hover:bg-[#B49157] flex items-center justify-center space-x-2`}
+                >
+                  <span>Get Free Quote & Consultation</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+                <p className="text-sm text-gray-500 text-center">
+                  Complete the form and our team will contact you shortly
+                </p>
+              </div>
 
               {/* Contact Information */}
               <ContactInfo isMobile={isMobile} />
@@ -549,14 +413,24 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ onExpandChange }, ref) =>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {/* Contact Form */}
-              <ContactForm 
-                formData={formData} 
-                setFormData={setFormData} 
-                formStatus={formStatus} 
-                handleSubmit={handleSubmit} 
-                isMobile={isMobile}
-              />
+              {/* Contact Form Button - popup trigger */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Get in Touch
+                </h3>
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('openContactForm'));
+                  }}
+                  className={`w-full py-3 px-4 rounded-lg text-white text-sm font-medium transition-all duration-200 min-h-[44px] bg-[#C5A267] hover:bg-[#B49157] flex items-center justify-center space-x-2`}
+                >
+                  <span>Get Free Quote & Consultation</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+                <p className="text-sm text-gray-500 text-center">
+                  Complete the form and our team will contact you shortly
+                </p>
+              </div>
 
               {/* Navigation + Contact Info */}
               <div className="space-y-6">

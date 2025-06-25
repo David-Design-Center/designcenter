@@ -82,23 +82,7 @@ const Feature197 = ({ features = defaultFeatures }: Feature197Props) => {
   const [activeImage, setActiveImage] = useState(features[0].image);
 
   const triggerFooterContact = () => {
-    const footerElement = document.querySelector("#footer");
-    if (footerElement instanceof HTMLElement) {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const windowHeight = window.innerHeight;
-      window.scrollTo({
-        top: scrollHeight - windowHeight,
-        behavior: "smooth",
-      });
-      setTimeout(() => {
-        const footerContactBtn = document.querySelector(
-          "[data-footer-contact]"
-        ) as HTMLButtonElement;
-        if (footerContactBtn) {
-          footerContactBtn.click();
-        }
-      }, 800);
-    }
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
   // Helper function to format description text with paragraphs and bold styling
