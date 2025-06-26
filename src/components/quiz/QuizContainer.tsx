@@ -11,14 +11,14 @@ import NameCaptureStep from './NameCaptureStep';
 import EmailCaptureStep from './EmailCaptureStep';
 import ProcessingStep from './ProcessingStep';
 import ResultsStep from './ResultsStep';
+import ContactFormStep from './ContactFormStep';
 import { allRoomImages } from '../../data/quizRoomImages'; // Import our new room images
 
 interface QuizContainerProps {
-  quizImages: QuizImage[];
   triggerFooterContact: () => void;
 }
 
-const QuizContainer: React.FC<QuizContainerProps> = ({ quizImages, triggerFooterContact }) => {
+const QuizContainer: React.FC<QuizContainerProps> = ({ triggerFooterContact }) => {
   // State for quiz
   const [quizStep, setQuizStep] = useState(0); // 0 = not started, 1-7 = steps
   const [availableImages, setAvailableImages] = useState<QuizImage[]>([]);
@@ -95,89 +95,7 @@ const QuizContainer: React.FC<QuizContainerProps> = ({ quizImages, triggerFooter
     }
   }, [inView]);
   
-  // Fallback results calculator (unused now that webhook handles results)
-  // This is kept for reference but the webhook response processing in EmailCaptureStep is now the source of truth
-  const _calculateResultsLegacy = () => {
-    console.warn("Legacy results calculation called - this should not be used anymore");
-    setTimeout(() => {
-      const results = processQuizData(quizData);
-      setQuizData(prev => ({
-        ...prev,
-        results
-      }));
-      setQuizStep(7); // Show results page
-    }, 2500);
-  };
-
   // Process the quiz data to determine style preferences
-  const processQuizData = (data: QuizData) => {
-    // Count styles from selected images
-    const styleCounts: Record<string, number> = {};
-    
-    data.selectedImages.forEach(img => {
-      // Extract style information from image
-      let style = '';
-      
-      if (img.style) {
-        style = img.style; // Use explicit style if available
-      } else if (img.room === 'Kitchen' && img.title.includes('Modern')) {
-        style = 'Modern';
-      } else if (img.room === 'Kitchen' && img.title.includes('Traditional')) {
-        style = 'Traditional';
-      } else if (img.room === 'Kitchen' && img.title.includes('Art_Deco')) {
-        style = 'Art Deco';
-      } else if (img.room === 'Furniture' && img.title.includes('Living')) {
-        style = 'Contemporary';
-      } else if (img.room === 'Furniture' && img.title.includes('Dining')) {
-        style = 'Elegant';
-      } else if (img.room === 'Furniture' && img.title.includes('Bedroom')) {
-        style = 'Luxurious';
-      } else if (img.room === 'Bath') {
-        style = 'Spa-Inspired';
-      } else if (img.room === 'Office') {
-        style = 'Professional';
-      } else if (img.room === 'Outdoor') {
-        style = 'Natural';
-      } else {
-        // Default style based on room
-        style = img.room === 'Kitchen' ? 'Modern' : 
-                img.room === 'Furniture' ? 'Contemporary' : 
-                'Eclectic';
-      }
-      
-      // Increment the style count
-      styleCounts[style] = (styleCounts[style] || 0) + 1;
-    });
-    
-    // Determine main style and substyles
-    const sortedStyles = Object.entries(styleCounts)
-      .sort((a, b) => b[1] - a[1]);
-    
-    const mainStyle = sortedStyles.length > 0 ? sortedStyles[0][0] : 'Contemporary';
-    
-    // Get 2-3 substyles (excluding main style)
-    const subStyles = sortedStyles
-      .slice(1, Math.min(4, sortedStyles.length))
-      .map(entry => entry[0]);
-    
-    // Find recommendations based on style preferences
-    const recommendedImages = quizImages
-      .filter(img => {
-        // Match by style or similar room type to priority
-        if (img.style === mainStyle) return true;
-        if (img.room === data.priorityRoom) return true;
-        if (subStyles.some(style => img.style === style)) return true;
-        return false;
-      })
-      .slice(0, 6); // Limit to 6 images
-    
-    return {
-      mainStyle,
-      subStyles,
-      recommendedImages
-    };
-  };
-
   // Update quiz data
   const updateQuizData = (newData: Partial<QuizData>) => {
     setQuizData(prevData => ({
@@ -271,8 +189,21 @@ const QuizContainer: React.FC<QuizContainerProps> = ({ quizImages, triggerFooter
           <ResultsStep
             quizData={quizData}
             updateQuizData={updateQuizData}
-            nextStep={resetQuiz}
+            nextStep={() => setQuizStep(8)} // Move to contact form step
             prevStep={() => {}}
+            triggerFooterContact={() => {
+              triggerFooterContact();
+              closeQuiz(); // Ensure the quiz closes when consultation is booked
+            }}
+          />
+        );
+      case 8:
+        return (
+          <ContactFormStep
+            quizData={quizData}
+            updateQuizData={updateQuizData}
+            nextStep={resetQuiz} // Reset quiz after form submission
+            prevStep={() => setQuizStep(7)} // Go back to results
             triggerFooterContact={() => {
               triggerFooterContact();
               closeQuiz(); // Ensure the quiz closes when consultation is booked

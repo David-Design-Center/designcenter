@@ -484,10 +484,7 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
-                onClick={() => {
-                  triggerFooterContact();
-                  restartQuiz(); // This will close the quiz by resetting it
-                }}
+                onClick={nextStep} // This will now go to the contact form step
                 className="px-8 py-4 bg-[#C5A267] text-white text-base rounded-md text-l hover:bg-[#B49157] transition-all duration-300 flex items-center gap-3 min-h-[54px] hover:shadow-xl transform hover:-translate-y-1"
               >
                 Let’s Design Your Signature Space

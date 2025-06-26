@@ -4,29 +4,12 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Lightbulb, Star, Eye } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
-import galleryData from '../data/product-galleries/index';
 import QuizContainer from '../components/quiz/QuizContainer';
 import ContactFormPopup from '../components/ui/ContactFormPopup';
 import { useContactForm } from '../hooks/useContactForm';
 import '../components/quiz/QuizStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
-
-// Filter out unwanted room types and prepare images for the quiz
-const quizImages = galleryData
-  .filter(item => 
-    item.room !== 'Light' && 
-    item.room !== 'Closet' &&
-    item.room !== 'Outdoor' && 
-    item.room !== 'Office'
-  )
-  .map(item => ({ 
-    id: item.id, 
-    title: item.title, 
-    url: item.image, 
-    room: item.room, 
-    style: item.style || '' 
-  }));
 
 const CraftedCalm = () => {
   const { isContactFormOpen, openContactForm, closeContactForm } = useContactForm();
@@ -236,7 +219,7 @@ const CraftedCalm = () => {
         id="quiz-section"
         className="relative z-20 bg-white"
       >
-        <QuizContainer quizImages={quizImages} triggerFooterContact={triggerFooterContact} />
+        <QuizContainer triggerFooterContact={triggerFooterContact} />
       </section>
       
       {/* Contact Form Popup */}
