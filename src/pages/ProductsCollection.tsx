@@ -92,33 +92,93 @@ const ProductsCollection = () => {
         </div>
       )}
       <Helmet>
-        <title>Custom Luxury Furniture Collection | D&D Design Center</title>
-        <meta name="description" content="Explore our exclusive collection of luxury custom furniture at D&D Design Center." />
+        {/* ── Primary SEO ── */}
+        <title>Luxury Custom Furniture NYC – Hand-Made Collection | D&D</title>
+        <meta name="description"
+              content="Browse our curated, hand-crafted Italian furniture collection in Brooklyn. Free design consult—white-glove delivery across NYC." />
         <link rel="canonical" href="https://dnddesigncenter.com/productscollection" />
+        <meta name="robots"
+              content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        {/* ── OG / Twitter ── */}
+        <meta property="og:title"
+              content="Luxury Custom Furniture NYC – Explore the Collection" />
+        <meta property="og:description"
+              content="See 30+ Italian-made pieces in our Brooklyn showroom. Book a private preview." />
+        <meta property="og:image"
+              content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Traditional/Kitchen_Traditional_6.avif" />
+        <meta property="og:image:width"  content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url"   content="https://dnddesigncenter.com/productscollection" />
+        <meta property="og:type"  content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* ── Consolidated structured data ── */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "VideoObject",
-            "name": "New York City Furniture Design",
-            "description": "Experience our handcrafted luxury furniture collections, designed with elegance and precision in the heart of New York City.",
-            "thumbnailUrl": "https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif",
-            "uploadDate": "2025-04-01",
-            "contentUrl": "https://res.cloudinary.com/designcenter/video/upload/New_York_City_Furniture_Design.mp4",
-            "embedUrl": "https://res.cloudinary.com/designcenter/video/upload/New_York_City_Furniture_Design.mp4",
-            "publisher": {
-              "@type": "Organization",
-              "name": "D&D Design Center",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://res.cloudinary.com/designcenter/image/upload/v1741965462/DnD_Logo_Transparent.svg"
+        {JSON.stringify({
+          "@context":"https://schema.org",
+          "@graph":[
+            {
+              "@type":"VideoObject",
+              "@id":"#promoVideo",
+              "name":"New York City Furniture Design",
+              "description":"Experience our hand-crafted luxury furniture collection, designed in the heart of NYC.",
+              "thumbnailUrl":"https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif",
+              "uploadDate":"2025-04-01",
+              "duration":"PT0M45S",
+              "contentUrl":"https://res.cloudinary.com/designcenter/video/upload/New_York_City_Furniture_Design.mp4",
+              "embedUrl":"https://res.cloudinary.com/designcenter/video/upload/New_York_City_Furniture_Design.mp4",
+              "publisher":{
+                "@type":"Organization",
+                "name":"D&D Design Center",
+                "logo":{"@type":"ImageObject","url":"https://res.cloudinary.com/designcenter/image/upload/v1741965462/DnD_Logo_Transparent.svg"}
               }
-            }
-          })}
+            },
+            {
+              "@type":"ItemList",
+              "@id":"#collectionList",
+              "name":"Luxury Custom Furniture Collection",
+              "itemListElement":[
+                {
+                  "@type":"ListItem",
+                  "position":1,
+                  "item":{
+                    "@type":"Product",
+                    "name":"Italian Kitchen Cabinets Collection",
+                    "image":"https://res.cloudinary.com/designcenter/image/upload/v1744046400/Product_2/Kitchen/Art_Deco/Kitchen_Art_Deco_11.avif",
+                    "url":"https://dnddesigncenter.com/productscollection",
+                    "description":"Handcrafted Italian cabinets with premium materials and timeless design"
+                  }
+                },
+                {
+                  "@type":"ListItem",
+                  "position":2,
+                  "item":{
+                    "@type":"Product",
+                    "name":"Custom Leather Bedroom Furniture",
+                    "image":"https://res.cloudinary.com/designcenter/image/upload/v1744036618/Product_2/Furniture/Bedroom/Bedroom_5.avif",
+                    "url":"https://dnddesigncenter.com/productscollection",
+                    "description":"Elegant Italian beds and nightstands crafted for NYC homes"
+                  }
+                },
+                {
+                  "@type":"ListItem",
+                  "position":3,
+                  "item":{
+                    "@type":"Product",
+                    "name":"Luxury Walk-in Closets",
+                    "image":"https://res.cloudinary.com/designcenter/image/upload/v1744033241/Product_2/Closet/Closet_13.avif",
+                    "url":"https://dnddesigncenter.com/productscollection",
+                    "description":"Bespoke Italian walk-in closets with custom finishes"
+                  }
+                }
+              ]
+            },
+            /* FAQ block passed in from accordionFeatureSeoMetadata */
+            accordionFeatureSeoMetadata
+          ]
+        })}
         </script>
-          {/* JSON-LD FAQPage schema for accordion questions */}
-          <script type="application/ld+json">
-            {JSON.stringify(accordionFeatureSeoMetadata)}
-          </script>
       </Helmet>
       <ProductCollectionHero />
       <ProductGalleryContent />

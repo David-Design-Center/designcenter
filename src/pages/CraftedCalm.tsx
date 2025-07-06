@@ -115,9 +115,36 @@ const CraftedCalm = () => {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-        <title>Come Home to Crafted Calm | D&D Design Center</title>
-        <meta name="description" content="Step into a sanctuary designed for your life—effortlessly. Book your private preview with D&D Design Center today." />
+        {/* ----- Primary SEO tags ----- */}
+        <title>Interior Design Style Quiz | Italian Luxury in 60 Seconds</title>
+        <meta name="description"
+              content="Free 60-sec quiz reveals your perfect Italian interior style and instantly makes a custom mood-board. Try it now - no sign-up until results." />
         <link rel="canonical" href="https://dnddesigncenter.com/crafted-calm" />
+        <meta name="robots"
+              content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        {/* ----- Open Graph / Twitter for shareability ----- */}
+        <meta property="og:title"
+              content="Italian Interior Design Style Quiz – Instant Results" />
+        <meta property="og:description"
+              content="Modern Milan or Classic Tuscan? Take our free 60-sec quiz and get a personalised mood-board from D&D's Italian designers." />
+        <meta property="og:image"
+              content="https://download.cattelanitalia.com/multimedia/ld/7a204c94-54c5-480e-8a75-6f7c010cdd2c.jpg" />
+        <meta property="og:url"
+              content="https://dnddesigncenter.com/crafted-calm" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title"
+              content="Interior Design Style Quiz | Italian Luxury in 60 Seconds" />
+        <meta name="twitter:description"
+              content="Find your style and get a custom mood-board - free, in under a minute." />
+        <meta name="twitter:image"
+              content="https://download.cattelanitalia.com/multimedia/ld/7a204c94-54c5-480e-8a75-6f7c010cdd2c.jpg" />
+
+        {/* ----- Optional: favicon stays the same ----- */}
+        <link rel="icon"
+              href="https://res.cloudinary.com/designcenter/image/upload/Favicon_DnD.avif" />
       </Helmet>
 
       {/* Hero Section */}

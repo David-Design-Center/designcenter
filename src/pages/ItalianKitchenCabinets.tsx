@@ -99,115 +99,90 @@ const ItalianKitchenCabinets = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Custom Italian Kitchen Cabinets NYC | D&D Design Center Brooklyn</title>
-        <meta 
-          name="description" 
-          content="Discover handcrafted Italian kitchen cabinets designed for NYC homes. Modern & classic designs at our Brooklyn showroom. Free consultation available." 
-        />
-        <meta name="keywords" content="italian kitchen cabinets nyc, luxury italian kitchen, modern italian kitchen, custom kitchen cabinets brooklyn, italian kitchen showroom nyc" />
+        {/* ── Primary SEO ── */}
+        <title>Italian Kitchen Cabinets NYC – Free 3-D Design | D&D</title>
+        <meta name="description"
+              content="Hand-built in Italy, installed in NY within 8 weeks. Book a free 30-min showroom consult and get your 3-D plan in 7 days." />
         <link rel="canonical" href="https://dnddesigncenter.com/italian-kitchen-cabinets" />
-        <meta property="og:title" content="Custom Italian Kitchen Cabinets NYC | D&D Design Center" />
-        <meta property="og:description" content="Luxury Italian kitchen cabinets custom-designed for NYC apartments, brownstones, and townhomes. Visit our Brooklyn showroom." />
-        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif" />
-        <meta property="og:url" content="https://dnddesigncenter.com/italian-kitchen-cabinets" />
-        
-        {/* Schema Markup for Local Business */}
+        <meta name="robots"
+              content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        {/* ── OG / Twitter ── */}
+        <meta property="og:title"
+              content="Italian Kitchen Cabinets NYC – Free 3-D Design in 7 Days" />
+        <meta property="og:description"
+              content="See 20 finishes in our Brooklyn showroom. Book your complimentary consult today." />
+        <meta property="og:image"
+              content="https://cdn11.bigcommerce.com/s-8npu8mt3gx/images/stencil/original/products/649/30261/Aster_Atelier_thumbnail1612x1072__03721.1715692884.jpg?c=2" />
+        <meta property="og:image:width"  content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url"   content="https://dnddesigncenter.com/italian-kitchen-cabinets" />
+        <meta property="og:type"  content="product" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* ── Consolidated structured data ── */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "D&D Design Center",
-            "image": "https://res.cloudinary.com/designcenter/image/upload/DnD_Logo_Transparent.svg",
-            "@id": "https://dnddesigncenter.com",
-            "url": "https://dnddesigncenter.com",
-            "telephone": "+1 718-934-7100",
-            "priceRange": "$$$",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "2615 East 17th Street",
-              "addressLocality": "Brooklyn",
-              "addressRegion": "NY",
-              "postalCode": "11235",
-              "addressCountry": "US"
+        {JSON.stringify({
+          "@context":"https://schema.org",
+          "@graph":[
+            {
+              "@type":"LocalBusiness",
+              "@id":"https://dnddesigncenter.com#business",
+              "name":"D&D Design Center",
+              "image":"https://res.cloudinary.com/designcenter/image/upload/DnD_Logo_Transparent.svg",
+              "telephone":"+1 718-934-7100",
+              "priceRange":"$$$",
+              "address":{
+                "@type":"PostalAddress",
+                "streetAddress":"2615 East 17th Street",
+                "addressLocality":"Brooklyn",
+                "addressRegion":"NY",
+                "postalCode":"11235",
+                "addressCountry":"US"
+              },
+              "geo":{"@type":"GeoCoordinates","latitude":40.586662,"longitude":-73.953265},
+              "openingHoursSpecification":[
+                {"@type":"OpeningHoursSpecification","dayOfWeek":[
+                  "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"19:00"}
+              ],
+              "sameAs":[
+                "https://www.facebook.com/dnddesigncenter",
+                "https://www.instagram.com/dnddesigncenter.nyc"]
             },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 40.586662,
-              "longitude": -73.953265
-            },
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                  "Sunday"
-                ],
-                "opens": "10:00",
-                "closes": "19:00"
+            {
+              "@type":"Service",
+              "@id":"#kitchenService",
+              "serviceType":"Custom Italian Kitchen Cabinet Installation",
+              "provider":{"@id":"https://dnddesigncenter.com#business"},
+              "areaServed":{"@type":"City","name":"New York"},
+              "description":"Design, supply and install hand-crafted Italian kitchen cabinetry for NYC apartments, brownstones and townhomes.",
+              "offers":{
+                "@type":"Offer",
+                "priceCurrency":"USD",
+                "priceSpecification":{
+                  "@type":"PriceSpecification",
+                  "minPrice":5000,
+                  "maxPrice":50000,
+                  "priceCurrency":"USD"
+                },
+                "availability":"https://schema.org/InStock"
               }
-            ],
-            "sameAs": [
-              "https://www.facebook.com/dnddesigncenter",
-              "https://www.instagram.com/dnddesigncenter"
-            ]
-          })}
-        </script>
-        
-        {/* Schema Markup for Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Italian Kitchen Cabinet Installation",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "D&D Design Center",
-              "url": "https://dnddesigncenter.com"
             },
-            "areaServed": {
-              "@type": "City",
-              "name": "New York City"
-            },
-            "description": "Custom Italian kitchen cabinets designed and installed for NYC homes, featuring premium materials and expert craftsmanship.",
-            "offers": {
-              "@type": "Offer",
-              "price": "5000.00-50000.00",
-              "priceCurrency": "USD",
-              "availability": "https://schema.org/InStock"
+            {
+              "@type":"Product",
+              "@id":"#kitchenProduct",
+              "name":"Custom Italian Kitchen Cabinets",
+              "image":[
+                "https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif",
+                "https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_7.avif"
+              ],
+              "description":"Hand-crafted Italian kitchen cabinets tailored to NYC homes.",
+              "brand":{"@type":"Brand","name":"D&D Design Center"},
+              "offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":5000,"highPrice":50000,"offerCount":5},
+              "aggregateRating":{"@type":"AggregateRating","ratingValue":4.9,"reviewCount":30}
             }
-          })}
-        </script>
-        
-        {/* Schema Markup for Product */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Custom Italian Kitchen Cabinets",
-            "image": "https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif",
-            "description": "Handcrafted Italian kitchen cabinets custom-designed for NYC homes, featuring premium materials and expert craftsmanship.",
-            "brand": {
-              "@type": "Brand",
-              "name": "D&D Design Center"
-            },
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": "USD",
-              "lowPrice": "5000",
-              "highPrice": "50000",
-              "offerCount": "5"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.9",
-              "reviewCount": "30"
-            }
-          })}
+          ]
+        })}
         </script>
       </Helmet>
       

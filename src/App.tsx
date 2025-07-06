@@ -109,14 +109,17 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Luxury Custom Furniture Brooklyn, NY | D&D Design Center</title>
-        <meta name="description" content="Custom Italian furniture, kitchens, closets & vanities in NYC. Masterfully handmade interiors for American homes. Re-model your space with Italian artistry today." />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="D&D Design Center" />
-        <meta property="og:description" content="Luxury interiors with bespoke design solutions." />
-        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/D_D_New_York_Showroom.avif" />
-        <meta property="og:url" content="https://dnddesigncenter.com" />
+        <title>Italian Kitchens & Custom Furniture Brooklyn | Free Consult</title>
+        <meta name="description" content="Hand-built in Italy • Brooklyn showroom. Book your free 30-min design consult and receive a 3D sketch in 7 days." />
+        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+        <meta property="og:title" content="Italian Kitchen Cabinets NYC – Free 3D Design in 7 Days" />
+        <meta property="og:description" content="See 20 finishes in our Brooklyn showroom and get a 3D render-no obligation." />
+        <meta property="og:image" content="https://cdn11.bigcommerce.com/s-8npu8mt3gx/images/stencil/original/products/649/30261/Aster_Atelier_thumbnail1612x1072__03721.1715692884.jpg?c=2" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://dnddesigncenter.com/italian-kitchen-cabinets" />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" href="https://res.cloudinary.com/designcenter/image/upload/Favicon_DnD.avif" />
       </Helmet>
       <div id="smooth-wrapper">
