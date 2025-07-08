@@ -21,6 +21,7 @@ import BlogPostPage from './components/blog/BlogPostPage';
 import Designers from './pages/Designers';
 import CraftedCalm from './pages/CraftedCalm';
 import ItalianKitchenCabinets from './pages/ItalianKitchenCabinets';
+import BookRedirect from './components/ui/BookRedirect';
 
 // Keep lazy loading only for legal pages (Privacy & Terms)
 const Privacy = lazy(() => import('./pages/Privacy'));
@@ -146,6 +147,7 @@ function App() {
                 <Route path="/designers" element={<Designers />} />
                 <Route path="/crafted-calm" element={<CraftedCalm />} />
                 <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
+                <Route path="/book" element={<BookRedirect openContactForm={openContactForm} />} />
                 
                 <Route path="/privacy" element={
                   <Suspense fallback={<Loading />}>
