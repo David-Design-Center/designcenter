@@ -145,7 +145,7 @@ function App() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPostPage />} />
                 <Route path="/designers" element={<Designers />} />
-                <Route path="/crafted-calm" element={<CraftedCalm />} />
+                <Route path="/crafted-calm" element={<CraftedCalm triggerFooterContact={openContactForm} />} />
                 <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
                 <Route path="/book" element={<BookRedirect openContactForm={openContactForm} />} />
                 

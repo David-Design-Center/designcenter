@@ -16,11 +16,12 @@ import { allRoomImages } from '../../data/quizRoomImages'; // Import our new roo
 
 interface QuizContainerProps {
   triggerFooterContact: () => void;
+  autoStart?: boolean;
 }
 
-const QuizContainer: React.FC<QuizContainerProps> = ({ triggerFooterContact }) => {
+const QuizContainer: React.FC<QuizContainerProps> = ({ triggerFooterContact, autoStart = false }) => {
   // State for quiz
-  const [quizStep, setQuizStep] = useState(0); // 0 = not started, 1-7 = steps
+  const [quizStep, setQuizStep] = useState(autoStart ? 1 : 0); // 0 = not started, 1-7 = steps
   const [availableImages, setAvailableImages] = useState<QuizImage[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const quizModalRef = useRef<HTMLDivElement>(null); // Renamed from quizWrapperRef for clarity
