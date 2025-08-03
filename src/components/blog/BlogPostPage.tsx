@@ -32,9 +32,9 @@ const Divider = () => (
 );
 
 const PullQuote = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative my-16">
+  <div className="relative my-16 text-center">
     <div className="absolute -left-4 -top-2 text-6xl md:text-7xl text-[#C5A267]/20 font-serif">"</div>
-    <blockquote className="bg-gradient-to-br from-[#C5A267]/5 to-[#C5A267]/10 border-l-4 border-[#C5A267] italic px-8 md:px-12 py-8 md:py-10 rounded-r-2xl shadow-lg font-serif text-xl md:text-2xl lg:text-3xl text-gray-700 relative overflow-hidden leading-loose">
+    <blockquote className="bg-gradient-to-br from-[#C5A267]/5 to-[#C5A267]/10 border-l-4 border-[#C5A267] italic px-8 md:px-12 py-8 md:py-10 rounded-r-2xl shadow-lg font-serif text-xl md:text-2xl lg:text-3xl text-gray-700 relative overflow-hidden leading-loose text-center">
       <div className="absolute top-0 right-0 w-20 h-20 bg-[#C5A267]/5 rounded-full -translate-y-10 translate-x-10"></div>
       <div className="relative z-10">{children}</div>
     </blockquote>
@@ -174,18 +174,18 @@ const BlogPostPage = () => {
                               (props.node?.position?.start?.line <= 3);
       
       // Ensure proper spacing between paragraphs with consistent margins
-      const baseClasses = "leading-relaxed text-lg md:text-xl font-light max-w-none text-gray-700";
+      const baseClasses = "leading-relaxed text-base md:text-lg font-light max-w-none text-gray-700";
       
       if (isFirstParagraph) {
         return (
-          <p className={`${baseClasses} first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-[#C5A267] first-letter:leading-none text-gray-800 mb-10`}>
+          <p className={`${baseClasses} first-letter:text-5xl first-letter:font-serif first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[#C5A267] first-letter:leading-none text-gray-800 mb-8`}>
             {props.children}
           </p>
         );
       }
       
       return (
-        <p className={`${baseClasses} mb-8 mt-6`}>
+        <p className={`${baseClasses} mb-6 mt-4`}>
           {props.children}
         </p>
       );
@@ -197,6 +197,15 @@ const BlogPostPage = () => {
     a: ({ href, children }: any) => {
       const isFooterLink = href === "#footer" || href === "/footer";
       const isExternal = href && !href.startsWith("/") && !href.startsWith("#");
+      const childrenText = children ? (Array.isArray(children) ? children.join('') : children.toString()) : '';
+      
+      // Check if this should be styled as a button based on the link text
+      const isButtonLink = childrenText.includes('Book') || 
+                          childrenText.includes('Schedule') || 
+                          childrenText.includes('Consultation') ||
+                          childrenText.includes('Visit') ||
+                          href?.includes('book');
+      
       if (isFooterLink) {
         return (
           <a
@@ -205,12 +214,29 @@ const BlogPostPage = () => {
               e.preventDefault();
               triggerFooterContact();
             }}
-            className="text-[#C5A267] underline hover:text-[#b49554] cursor-pointer font-medium transition-colors duration-200"
+            className={isButtonLink ? 
+              "inline-block bg-[#C5A267] hover:bg-[#b49554] text-white font-semibold py-3 px-6 transition-colors duration-300 no-underline cursor-pointer" :
+              "text-[#C5A267] underline hover:text-[#b49554] cursor-pointer font-medium transition-colors duration-200"
+            }
           >
             {children}
           </a>
         );
       }
+      
+      if (isButtonLink) {
+        return (
+          <a
+            href={href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            className="inline-block bg-[#C5A267] hover:bg-[#b49554] text-white font-semibold py-3 px-6 transition-colors duration-300 no-underline"
+          >
+            {children}
+          </a>
+        );
+      }
+      
       return (
         <a
           href={href}
@@ -236,7 +262,7 @@ const BlogPostPage = () => {
       const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
       const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
-        <h1 id={headingId} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 mt-0 text-gray-900 font-sans leading-tight max-w-none">
+        <h1 id={headingId} className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 mt-0 text-gray-900 font-sans leading-tight max-w-none">
           {props.children}
         </h1>
       );
@@ -245,9 +271,9 @@ const BlogPostPage = () => {
       const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
       const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
-        <h2 id={headingId} className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 mt-16 text-gray-900 font-serif leading-tight max-w-none">
+        <h2 id={headingId} className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 mt-12 text-gray-900 font-serif leading-tight max-w-none">
           <div className="flex items-center">
-            <div className="w-1 h-8 md:h-10 bg-[#C5A267] mr-4 md:mr-6 rounded-full"></div>
+            <div className="w-1 h-6 md:h-8 bg-[#C5A267] mr-3 md:mr-4 rounded-full"></div>
             {props.children}
           </div>
         </h2>
@@ -257,43 +283,60 @@ const BlogPostPage = () => {
       const childrenText = props.children ? (Array.isArray(props.children) ? props.children.join('') : props.children.toString()) : '';
       const headingId = `heading-${childrenText.toLowerCase().replace(/\s+/g, '-')}`;
       return (
-        <h3 id={headingId} className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6 mt-12 text-gray-800 font-sans leading-tight max-w-none">
+        <h3 id={headingId} className="text-xl md:text-2xl lg:text-3xl font-medium mb-4 mt-8 text-gray-800 font-sans leading-tight max-w-none">
           {props.children}
         </h3>
       );
     },
     h4: (props: any) => (
-      <h4 className="text-xl md:text-2xl font-medium mt-10 mb-6 text-gray-700 font-sans leading-tight">
+      <h4 className="text-lg md:text-xl font-medium mt-6 mb-4 text-gray-700 font-sans leading-tight">
         {props.children}
       </h4>
     ),
     h5: (props: any) => (
-      <h5 className="text-lg md:text-xl font-medium mt-8 mb-4 text-gray-600 font-sans leading-tight">
+      <h5 className="text-base md:text-lg font-medium mt-6 mb-3 text-gray-600 font-sans leading-tight">
         {props.children}
       </h5>
     ),
     h6: (props: any) => (
-      <h6 className="text-base md:text-lg font-semibold mt-8 mb-4 text-gray-500 uppercase tracking-wide font-sans">
+      <h6 className="text-sm md:text-base font-semibold mt-6 mb-3 text-gray-500 uppercase tracking-wide font-sans">
         {props.children}
       </h6>
     ),
 
     ul: (props: any) => (
-      <ul className="space-y-4 mb-10 pl-0 max-w-none">
+      <ul className="space-y-3 mb-8 pl-0 max-w-none">
         {props.children}
       </ul>
     ),
     ol: (props: any) => (
-      <ol className="space-y-4 mb-10 pl-0 max-w-none">
+      <ol className="space-y-3 mb-8 pl-0 max-w-none">
         {props.children}
       </ol>
     ),
-    li: (props: any) => (
-      <li className="flex items-start text-lg md:text-xl">
-        <div className="w-2 h-2 bg-[#C5A267] rounded-full mt-4 mr-4 flex-shrink-0"></div>
-        <span className="text-gray-700 leading-loose">{props.children}</span>
-      </li>
-    ),
+    li: (props: any) => {
+      // Check if we're inside a collection card to avoid double bullets
+      const isInCollectionCard = props.node && 
+        props.node.position && 
+        typeof window !== 'undefined' && 
+        document.querySelector('.collection-card');
+      
+      if (isInCollectionCard) {
+        return (
+          <li style={{ listStyle: 'none', display: 'flex', alignItems: 'flex-start', marginBottom: '0.25rem' }}>
+            <div className="w-2 h-2 bg-[#C5A267] rounded-full mt-2 mr-2 flex-shrink-0"></div>
+            <span className="text-gray-700 leading-relaxed text-sm">{props.children}</span>
+          </li>
+        );
+      }
+      
+      return (
+        <li className="flex items-start text-base md:text-lg">
+          <div className="w-2 h-2 bg-[#C5A267] rounded-full mt-3 mr-3 flex-shrink-0"></div>
+          <span className="text-gray-700 leading-relaxed">{props.children}</span>
+        </li>
+      );
+    },
 
     strong: (props: any) => (
       <strong className="font-semibold text-gray-900 bg-[#C5A267]/10 px-2 py-1 rounded">
@@ -322,6 +365,84 @@ const BlogPostPage = () => {
       // Regular paragraph
       return (
         <div className="text-base md:text-lg leading-relaxed mb-6 text-gray-700 font-light">
+          {props.children}
+        </div>
+      );
+    },
+
+    // Table styling
+    table: (props: any) => (
+      <div className="blog-table-container">
+        <table className="blog-table">
+          {props.children}
+        </table>
+      </div>
+    ),
+    
+    thead: (props: any) => (
+      <thead>
+        {props.children}
+      </thead>
+    ),
+    
+    tbody: (props: any) => (
+      <tbody>
+        {props.children}
+      </tbody>
+    ),
+    
+    tr: (props: any) => (
+      <tr>
+        {props.children}
+      </tr>
+    ),
+    
+    th: (props: any) => (
+      <th>
+        {props.children}
+      </th>
+    ),
+    
+    td: (props: any) => (
+      <td>
+        {props.children}
+      </td>
+    ),
+
+    // Custom div renderer for special containers
+    div: (props: any) => {
+      const className = props.className;
+      
+      // Handle closet collections grid
+      if (className === 'closet-collections') {
+        return (
+          <div className="closet-collections">
+            {props.children}
+          </div>
+        );
+      }
+      
+      // Handle individual collection cards
+      if (className === 'collection-card') {
+        return (
+          <div className="collection-card">
+            {props.children}
+          </div>
+        );
+      }
+      
+      // Handle two-columns layout
+      if (className === 'two-columns') {
+        return (
+          <div className="two-columns">
+            {props.children}
+          </div>
+        );
+      }
+      
+      // Default div
+      return (
+        <div className={className}>
           {props.children}
         </div>
       );
@@ -485,9 +606,9 @@ const BlogPostPage = () => {
 
       {/* Article Content */}
       <div className="relative z-10 -mt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">      
+        <div className="max-w-3xl mx-auto px-12 sm:px-16 lg:px-20 xl:px-28">      
           <article className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50">
-            <div className="px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 lg:py-16">
+            <div className="px-12 sm:px-16 md:px-20 lg:px-24 xl:px-32 py-10 lg:py-14">
               <ReactMarkdown 
                 components={renderers} 
                 rehypePlugins={[rehypeRaw]}
@@ -499,7 +620,7 @@ const BlogPostPage = () => {
             </div>
             
             {/* Article Footer */}
-            <div className="bg-gradient-to-r from-[#C5A267]/5 to-[#b49554]/5 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-8 border-t border-gray-200/50">
+            <div className="bg-gradient-to-r from-[#C5A267]/5 to-[#b49554]/5 px-12 sm:px-16 md:px-20 lg:px-24 xl:px-32 py-6 border-t border-gray-200/50">
               <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2 text-gray-600">

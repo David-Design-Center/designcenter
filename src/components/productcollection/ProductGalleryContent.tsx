@@ -91,6 +91,19 @@ const ProductGalleryContent: React.FC = () => {
     'Closet'
   ];
 
+  // Handle URL parameters for direct category linking
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    if (categoryParam && rooms.map(r => r.toLowerCase()).includes(categoryParam.toLowerCase())) {
+      const roomName = rooms.find(r => r.toLowerCase() === categoryParam.toLowerCase());
+      if (roomName) {
+        setSelectedRoom(roomName);
+        setActiveTab('categories');
+      }
+    }
+  }, []);
+
   const kitchenStyles = ['Modern', 'Traditional', 'Art_Deco'];
   const furnitureTypes = ['Living', 'Dining', 'Bedroom'];
 

@@ -31,7 +31,7 @@
       "/",
       "/blog",
       "/blog/what-interior-designers-do",
-      "/blog/why-hire-a-designer", 
+      "/blog/why-hire-a-designer",
       "/blog/affordable-kitchen-remodel-guide",
       "/blog/custom-closets-for-home-office",
       "/collaboration",
@@ -84,6 +84,7 @@
     "react-swipeable": "^7.0.1",
     "rehype-raw": "^7.0.0",
     "remark-breaks": "4.0.0",
+    "remark-gfm": "4.0.1",
     "tailwind-merge": "^1.14.0",
     "tsparticles": "^2.12.0",
     "uuid": "^11.1.0"
