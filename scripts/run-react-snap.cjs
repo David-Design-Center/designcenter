@@ -44,10 +44,16 @@ reactSnap.run({
   skipThirdPartyRequests: true,
   timeout: 120000, // Increased timeout to 2 minutes
   include: allIncludes,
-  puppeteer: {
-    cache: false,
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-  },
+  // Let Puppeteer use its bundled Chromium by default. If you need to
+  // override the executable (for local debugging), set the
+  // CHROME_EXECUTABLE environment variable before running the build.
+  puppeteer: (() => {
+    const cfg = { cache: false };
+    if (process.env.CHROME_EXECUTABLE && process.env.CHROME_EXECUTABLE.length) {
+      cfg.executablePath = process.env.CHROME_EXECUTABLE;
+    }
+    return cfg;
+  })(),
   // Add specific headers to simulate a real browser
   headers: {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',

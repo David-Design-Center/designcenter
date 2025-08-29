@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build": "node scripts/generate-posts-json.cjs && vite build",
-    "postbuild": "node scripts/run-react-snap.cjs && node scripts/inject-blog-content.js"
+    "postbuild": "node scripts/run-react-snap.cjs && node scripts/inject-blog-content.js",
+    "add-blog": "node scripts/add-blog-post.js"
   },
   "reactSnap": {
     "source": "dist",

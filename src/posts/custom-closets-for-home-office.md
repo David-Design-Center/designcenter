@@ -5,13 +5,13 @@ category: "Design"
 date: "2025-06-24"
 readTime: 6
 image:
-  url: "https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/EIDOS_wardrobe_gallery_05.jpg"
+  url: "https://res.cloudinary.com/designcenter/image/upload/v1756487772/imgi_56_2017-VERY-WOOD-ARMADI-pag-38-39_cz2jok.avif"
   alt: "Here you'll find closets for different budgets and styles."
 ---
 
 ## **Ergonomic Custom Closet Designs for the Ultimate Home Office**
 
-**![Opulent walnut-and-bronze walk-in with integrated LED rails](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/EIDOS_wardrobe_gallery_09.jpg)**
+**![Opulent walnut-and-bronze walk-in with integrated LED rails](https://res.cloudinary.com/designcenter/image/upload/v1756487774/imgi_58_glass-battente-2_iy4qwo.avif)**
 
 Your home office should feel like a penthouse corner suite—immaculately organized, effortlessly inspiring, unmistakably yours.  
  At **D\&D Design Center**, we turn chaotic storage into Italian-crafted order, tailoring ergonomic custom closets for New York's most discerning work-from-home professionals. Slide open a velvet-lined drawer where every cable and camera lens has a niche; glide shut a walnut door that silences clutter as elegantly as it hides it. The result? **Less visual noise, sharper focus, and the quiet confidence that comes from knowing everything has its place.**
@@ -24,7 +24,7 @@ In the guide below we'll decode real-world pricing (yes, we'll talk numbers), sh
 
 ### **1\. Key Features of an Ergonomic Closet**
 
-**![Soft-close glass fronts with adjustable shelves lit edge-to-edge](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/EIDOS_wardrobe_gallery_10.jpg)**
+**![Soft-close glass fronts with adjustable shelves lit edge-to-edge](https://res.cloudinary.com/designcenter/image/upload/v1756487773/imgi_57_2017-VERY-WOOD-ARMADI-pag-44-45_ujckz3.avif)**
 
 1. **Fully tailored interiors** - Adjustable shelves, pull-out trays, and tech compartments built around *your* workflow, not a generic template.
 
@@ -36,7 +36,7 @@ In the guide below we'll decode real-world pricing (yes, we'll talk numbers), sh
 
 5. **Luxury materials that last** - FSC-certified veneers, Italian leather pulls, and hand-brushed brass hardware marry sustainability with couture indulgence.
 
-![Full-height mirrored doors expand light and depth in a compact NYC office](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/EIDOS_wardrobe_gallery_11.jpg)
+![Full-height mirrored doors expand light and depth in a compact NYC office](https://res.cloudinary.com/designcenter/image/upload/v1756487772/imgi_56_2017-VERY-WOOD-ARMADI-pag-38-39_cz2jok.avif)
 
 At D&D Design Center, we partner with Italy's most prestigious craftsmen, including [Visionnaire](https://www.visionnaire-home.com/) for bespoke storage solutions that seamlessly blend form and function. Our sustainable approach ensures your investment is as responsible as it is beautiful. Learn more about [our commitment to sustainability](/sustainability) and how we source materials that protect both your home and the planet.
 
@@ -44,7 +44,7 @@ At D&D Design Center, we partner with Italy's most prestigious craftsmen, includ
 
 ### **2\. What Does a Custom Closet Cost in NYC?**
 
-**![Walnut and champagne-bronze built-in with motorized hanging rail](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/Visionnaire_Eidos_01.jpg)**
+**![Walnut and champagne-bronze built-in with motorized hanging rail](https://res.cloudinary.com/designcenter/image/upload/v1756487770/imgi_55_2017-VERY-WOOD-ARMADI-pag-34-35_oa8soq.avif)**
 
 **Entry Luxury ($7K - $15K)**
 Premium melamine interiors, matte-black hardware, basic LED strips
@@ -63,7 +63,7 @@ Hand-stained walnut, motorized lifts, leather upholstery, smart-home integration
 
 ### **3\. Do Custom Closets Add Home Value?**
 
-**![Genesis walk-in closet with island-style workstation & illuminated shelving](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/genesis_walk-in_closet_01.jpg)**
+**![Genesis walk-in closet with island-style workstation & illuminated shelving](https://res.cloudinary.com/designcenter/image/upload/v1756487769/imgi_54_ARMADI_2019_pag30-31_onwfpu.avif)**
 
 Appraisers note that New York apartments with designer storage often **sell 8-10 % faster** and command premiums up to **$200 per square foot**, thanks to the blend of functionality and luxury appeal. Beyond ROI, a custom closet signals meticulous upkeep and elevates perceived square footage—two factors buyers prize in the city's competitive market.
 
@@ -73,7 +73,7 @@ Appraisers note that New York apartments with designer storage often **sell 8-10
 
 ### **4\. Our Seamless Timeline & Process**
 
-**![Render-to-reality: artisan installing Italian-made panels on site](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/genesis_walk-in_closet_06.jpg)**
+**![Render-to-reality: artisan installing Italian-made panels on site](https://res.cloudinary.com/designcenter/image/upload/v1756487769/imgi_53_ARMADI_2019_pag24_nooyqa.avif)**
 
 1. **Vision Session (Week 0\)** - Complimentary consultation, space audit, and inspiration exchange.
 
@@ -85,7 +85,7 @@ Appraisers note that New York apartments with designer storage often **sell 8-10
 
 5. **Final Walk-Through & Warranty Handover** - We review every hinge and lighting scene together; lifetime workmanship and hardware warranties follow.
 
-![Finished gallery-style closet island that doubles as a standing desk](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/genesis_walk-in_closet_07.jpg)
+![Finished gallery-style closet island that doubles as a standing desk](https://res.cloudinary.com/designcenter/image/upload/v1756487767/imgi_52_ARMADI_2019_pag20-21_lhgdmr.avif)
 
 Our meticulous process reflects our partnerships with elite Italian manufacturers like [Visionnaire](https://www.visionnaire-home.com/), [Longhi](https://www.longhi.it/en-us), and [Prestige](https://www.prestigemobili.com/en/), ensuring every detail meets the highest standards of luxury and craftsmanship. Learn more about [how we work](/how-we-work) and our collaborative approach to bringing your vision to life.
 
@@ -139,7 +139,7 @@ Precise millwork, premium materials, skilled labor, and long warranties drive th
 
 For daily design inspiration and behind-the-scenes glimpses of our latest projects, [follow us on Instagram @dnddesigncenter.nyc](https://www.instagram.com/dnddesigncenter.nyc/). See how we're transforming homes across New York with Italian craftsmanship and timeless design.
 
-### **![Detail shot: brass inlay pull against matte-lacquer drawer front](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/P1044602.jpg)**
+### **![Detail shot: brass inlay pull against matte-lacquer drawer front](https://res.cloudinary.com/designcenter/image/upload/v1756487719/imgi_49_ARMADI_2019_pag18_cpy7iq.avif)**
 
 ---
 
@@ -149,7 +149,7 @@ Ready to trade desktop chaos for an executive-level haven? **Book your complimen
 
 **[Schedule your free consultation](https://dnddesigncenter.setmore.com/)** or explore our [exclusive collaborations with luxury Italian brands](/collaboration) to discover what's possible when Italian artistry meets New York sophistication.
 
-![Genesis walk-in with glass-topped island showcasing accessories](https://catalogue.visionnaire-home.com/sites/default/files/products/gallery/genesis_walk-in_closet_12.jpg)
+![Genesis walk-in with glass-topped island showcasing accessories](https://res.cloudinary.com/designcenter/image/upload/v1756487767/imgi_52_ARMADI_2019_pag20-21_lhgdmr.avif)
 
 ---
 

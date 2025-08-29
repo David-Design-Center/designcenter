@@ -22,6 +22,7 @@ import Designers from './pages/Designers';
 import CraftedCalm from './pages/CraftedCalm';
 import ItalianKitchenCabinets from './pages/ItalianKitchenCabinets';
 import BookRedirect from './components/ui/BookRedirect';
+import Lighting from './pages/Lighting';
 
 // Keep lazy loading only for legal pages (Privacy & Terms)
 const Privacy = lazy(() => import('./pages/Privacy'));

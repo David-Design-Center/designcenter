@@ -139,7 +139,7 @@ Our professional installation team handles every aspect of the installation proc
 
 When investing in custom closets for modern living, choosing the right partner makes all the difference. D&D Design Center brings together Italian craftsmanship, Russian-American design sensibilities, and unparalleled customer service to deliver exceptional storage solutions for discerning clients.
 
-![Premium materials and craftsmanship](https://images.unsplash.com/photo-I18236444721-4a8dba415c15?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwxMTB8fHdhcmRyb3BlfGVufDB8fHx8MTc1Mzg3NjI3NHww&ixlib=rb-4.1.0&q=80&w=1080)
+![Premium materials and craftsmanship]()
 
 ### Our Commitment to Excellence
 
