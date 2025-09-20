@@ -3,7 +3,7 @@ import HomeHeroTop from "../components/home/HomeHeroTop";
 import HomeCollections from "../components/home/HomeCollections";
 import HomeProjectsCards from "../components/home/HomeProjectsCards";
 import HomeHowWeWork from "../components/home/HomeHowWeWork";
-import HomeHistorySection from "../components/home/HomeHistorySection";
+import HomeHistorySection from "../components/home/FAQ";
 import HomeHeroBottom from "../components/home/HomeHeroBottom";
 import VisionnaireSection from "../components/home/VisionnaireSection";
 import SustainabilitySection from "../components/home/SustainabilitySection";
@@ -51,11 +51,11 @@ function Home() {
         </Helmet>
       <main className="pb-16">
         <HomeHeroTop />
-        <TextGenerateEffect/>
         <HomeProjectsCards />
-        <Feature197 />
+        <TextGenerateEffect/>
         <HomeCollections />
         <HomeHowWeWork />
+        <Feature197 />
         <SustainabilitySection />
         <VisionnaireSection />
         <HomeHistorySection />

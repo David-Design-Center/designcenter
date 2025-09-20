@@ -1,26 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-// Custom House Plus icon component
-const HousePlusIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="30" 
-    height="30" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M12.662 21H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v2.475"/>
-    <path d="M14.959 12.717A1 1 0 0 0 14 12h-4a1 1 0 0 0-1 1v8"/>
-    <path d="M15 18h6"/>
-    <path d="M18 15v6"/>
-  </svg>
-);
+import { Phone } from 'lucide-react';
 
 interface FloatingContactButtonProps {
   onClick: () => void;
@@ -30,7 +10,7 @@ const FloatingContactButton: React.FC<FloatingContactButtonProps> = ({ onClick }
   return (
     <motion.button
       onClick={onClick}
-      className="fixed bottom-24 right-8 z-40 bg-[#C5A267] hover:bg-[#B49157] text-white p-4 rounded-full shadow-lg transition-all duration-300 group"
+      className="hidden lg:block fixed bottom-24 right-8 z-40 bg-[#C5A267] hover:bg-[#B49157] text-white p-3 rounded-full shadow-lg transition-all duration-300 group"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       initial={{ scale: 0 }}
@@ -43,7 +23,7 @@ const FloatingContactButton: React.FC<FloatingContactButtonProps> = ({ onClick }
       }}
       aria-label="Start design consultation"
     >
-      <HousePlusIcon className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+      <Phone className="w-6 h-6 group-hover:rotate-12 transition-transform" />
       
       {/* Pulse animation */}
       <div className="absolute inset-0 rounded-full bg-[#C5A267] animate-ping opacity-20" />

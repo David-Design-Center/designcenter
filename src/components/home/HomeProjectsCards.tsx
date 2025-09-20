@@ -13,7 +13,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HomeProjectsCards = () => {
   // State management
-  const [activeId, setActiveId] = useState<number>(1);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [showDescription, setShowDescription] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<DisplayItem | null>(null);
   const [displayLevel, setDisplayLevel] = useState<"main" | "sub">("main");
   const [currentParentId, setCurrentParentId] = useState<number | null>(null);
@@ -22,6 +24,9 @@ const HomeProjectsCards = () => {
   const [visibleCards, setVisibleCards] = useState<number>(4);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [containerHeight, setContainerHeight] = useState<string>("auto");
+
+  // Timer ref for hover delay
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Refs for animations
   const cardsContainerRef = useRef<HTMLDivElement>(null);
@@ -95,6 +100,41 @@ const HomeProjectsCards = () => {
     }
   }, [displayLevel]);
 
+  // Handle hover with delay for description
+  const handleMouseEnter = (itemId: number) => {
+    setHoveredId(itemId);
+    
+    // Clear any existing timer
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+    }
+    
+    // Set timer for description appearance
+    hoverTimerRef.current = setTimeout(() => {
+      setShowDescription(itemId);
+    }, 500); // 0.5 second delay
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredId(null);
+    setShowDescription(null);
+    
+    // Clear timer if user leaves before delay
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) {
+        clearTimeout(hoverTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleOptionClick = (item: DisplayItem) => {
     if (isTransitioning) return;
 
@@ -108,46 +148,40 @@ const HomeProjectsCards = () => {
       item.hasSubcategories &&
       item.subcategories
     ) {
-      if (activeId === item.id) {
-        if (container) {
-          setIsTransitioning(true);
-          // Fade out the container completely.
-          gsap.to(container, {
-            opacity: 0,
-            duration: 1.4,
-            ease: "power2.inOut",
-            onComplete: () => {
-              // Update state only after the fade-out is complete.
-              setCurrentParentId(item.id);
-              if (item.subcategories) {
-                setDisplayItems(item.subcategories);
-                setDisplayLevel("sub");
-                setActiveId(item.subcategories[0].id);
-              }
-              // Ensure container remains hidden.
-              gsap.set(container, { opacity: 0 });
-              // Fade the container back in.
-              gsap.to(container, {
-                opacity: 1,
-                duration: 1.4,
-                ease: "power2.out",
-                onComplete: () => {
-                  setIsTransitioning(false);
-                  setContainerHeight("auto");
-                },
-              });
-            },
-          });
-        }
-      } else {
-        setActiveId(item.id);
+      // Directly navigate to subcategories without requiring active selection first
+      if (container) {
+        setIsTransitioning(true);
+        // Fade out the container completely.
+        gsap.to(container, {
+          opacity: 0,
+          duration: 1.4,
+          ease: "power2.inOut",
+          onComplete: () => {
+            // Update state only after the fade-out is complete.
+            setCurrentParentId(item.id);
+            if (item.subcategories) {
+              setDisplayItems(item.subcategories);
+              setDisplayLevel("sub");
+              setActiveId(null);
+            }
+            // Ensure container remains hidden.
+            gsap.set(container, { opacity: 0 });
+            // Fade the container back in.
+            gsap.to(container, {
+              opacity: 1,
+              duration: 1.4,
+              ease: "power2.out",
+              onComplete: () => {
+                setIsTransitioning(false);
+                setContainerHeight("auto");
+              },
+            });
+          },
+        });
       }
     } else {
-      if (activeId === item.id) {
-        setSelectedItem(item);
-      } else {
-        setActiveId(item.id);
-      }
+      // Directly open the gallery without requiring active selection first
+      setSelectedItem(item);
     }
   };
 
@@ -166,7 +200,7 @@ const HomeProjectsCards = () => {
           setDisplayItems(mainCategories);
           setDisplayLevel("main");
           setCurrentParentId(null);
-          setActiveId(1);
+          setActiveId(null);
           gsap.set(container, { opacity: 0 });
           gsap.to(container, {
             opacity: 1,
@@ -253,7 +287,7 @@ const HomeProjectsCards = () => {
         ?.title.toUpperCase() === "FURNITURE"
       ? "Pick a Room"
       : "Pick a Style"
-    : "Click on the cards to get a quick glance"}
+    : "Click on the cards to view"}
 </h2>
 </div>
 
@@ -277,20 +311,22 @@ const HomeProjectsCards = () => {
       key={item.id}
       ref={(el) => (cardRefs.current[index] = el)}
       onClick={() => handleOptionClick(item)}
+      onMouseEnter={() => handleMouseEnter(item.id)}
+      onMouseLeave={handleMouseLeave}
       className={`
         group relative
         h-[300px] md:h-[450px]
         overflow-hidden 
         cursor-pointer 
         ease-out 
-        duration-1000
+        duration-500
         will-change-transform 
         transform 
         hover:scale-[1.02]
         ${
           displayLevel === "sub"
             ? "w-full"
-            : activeId === item.id
+            : (hoveredId === item.id || activeId === item.id)
             ? "md:flex-[2.5]"
             : "md:flex-[0.5]"
         }
@@ -315,10 +351,10 @@ const HomeProjectsCards = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <div
-          className="w-full h-full bg-cover bg-center transition-transform duration-500"
+          className="w-full h-full bg-cover bg-center transition-transform duration-300"
           style={{
             backgroundImage: `url(${item.image})`,
-            transform: activeId === item.id ? "scale(1)" : "scale(1.2)",
+            transform: (hoveredId === item.id || activeId === item.id) ? "scale(1)" : "scale(1.2)",
           }}
         />
       </div>
@@ -346,7 +382,7 @@ const HomeProjectsCards = () => {
 
       {/* Content gradient */}
 <div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col justify-end bg-gradient-to-l from-transparent via-black/10 to-black/80">
-  {activeId !== item.id ? (
+  {(hoveredId !== item.id && activeId !== item.id) ? (
     <div className="absolute inset-0 flex items-center justify-center p-0.5">
       <h3
         className="text-white text-center font-serif leading-tight line-clamp-2"
@@ -357,25 +393,60 @@ const HomeProjectsCards = () => {
     </div>
   ) : (
     <>
-      <div>
-        <h3
-          className="text-white/90 font-bold mb-2"
-          style={{ fontSize: 'clamp(1.25rem, 6vw, 2rem)' }}
+      <div className="relative">
+        {/* Title with delayed fade and slide animation from left */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            (showDescription === item.id || activeId === item.id)
+              ? 'max-h-20 opacity-100'
+              : 'max-h-0 opacity-0'
+          }`}
         >
-          {item.title}
-        </h3>
-        <p
-          className="text-white/80 leading-relaxed"
-          style={{ fontSize: 'clamp(0.875rem, 3.5vw, 1.25rem)' }}
+          <h3
+            className={`text-white/90 font-bold mb-2 transition-all duration-400 ease-out transform ${
+              (showDescription === item.id || activeId === item.id)
+                ? 'translate-x-0 opacity-100'
+                : '-translate-x-4 opacity-0'
+            }`}
+            style={{ 
+              fontSize: 'clamp(1.25rem, 6vw, 2rem)',
+              transitionDelay: (showDescription === item.id || activeId === item.id) ? '50ms' : '0ms'
+            }}
+          >
+            {item.title}
+          </h3>
+        </div>
+        
+        {/* Description with delayed fade and slide animation */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            (showDescription === item.id || activeId === item.id)
+              ? 'max-h-40 opacity-100'
+              : 'max-h-0 opacity-0'
+          }`}
         >
-          {item.description}
-        </p>
+          <p
+            className={`text-white/80 leading-relaxed transition-all duration-400 ease-out transform ${
+              (showDescription === item.id || activeId === item.id)
+                ? 'translate-x-0 opacity-100'
+                : '-translate-x-4 opacity-0'
+            }`}
+            style={{ 
+              fontSize: 'clamp(0.875rem, 3.5vw, 1.25rem)',
+              transitionDelay: (showDescription === item.id || activeId === item.id) ? '100ms' : '0ms'
+            }}
+          >
+            {item.description}
+          </p>
+        </div>
       </div>
 
-      {/* Haptic circle indicator */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20">
-        <div className="w-full h-full rounded-full bg-white/80 pointer-events-none z-10 opacity-30 animate-pulse-slow transition-opacity duration-300" />
-      </div>
+      {/* Haptic circle indicator - only show on activeId, not hover */}
+      {activeId === item.id && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20">
+          <div className="w-full h-full rounded-full bg-white/80 pointer-events-none z-10 opacity-30 animate-pulse-slow transition-opacity duration-300" />
+        </div>
+      )}
     </>
   )}
 </div>
@@ -407,7 +478,7 @@ const HomeProjectsCards = () => {
             transform-gpu 
             transition-all 
             duration-300
-            ${activeId === item.id ? "rotate-180" : ""}
+            ${(hoveredId === item.id || activeId === item.id) ? "rotate-180" : ""}
           `}
           aria-label="Expand for more details"
         />
@@ -434,18 +505,18 @@ const HomeProjectsCards = () => {
 
 
       {/* Footer buttons */}
-      <div className="mt-6 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 px-4">
+      <div className="mt-6 flex flex-row items-center justify-center gap-2 sm:gap-4 px-4">
         {displayLevel === "sub" && (
           <button
             ref={backButtonRef}
             onClick={handleBackClick}
             className="
-        w-full sm:w-48 h-[44px]
-        flex items-center justify-center gap-2
-        px-4 py-3
+        flex-1 sm:w-48 h-[44px]
+        flex items-center justify-center gap-1 sm:gap-2
+        px-2 sm:px-4 py-3
         bg-[#B49157]
         text-white
-        text-sm
+        text-xs sm:text-sm
         uppercase
         tracking-wider
         hover:bg-[#A38047]
@@ -454,19 +525,20 @@ const HomeProjectsCards = () => {
         min-h-[44px]
       "
           >
-            <ChevronLeft className="w-5 h-5" />
-            <span>CATEGORIES</span>
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">CATEGORIES</span>
+            <span className="sm:hidden">BACK</span>
           </button>
         )}
 
-        <Link to="/productscollection" className="w-full sm:w-48">
+        <Link to="/productscollection" className="flex-1 sm:w-48">
           <button
             className="
-        w-full sm:w-48 h-[44px]
-        px-4 py-3
+        w-full h-[44px]
+        px-2 sm:px-4 py-3
         bg-[#B49157]
         text-white
-        text-sm
+        text-xs sm:text-sm
         uppercase
         tracking-wider
         hover:bg-[#A38047]
@@ -475,18 +547,19 @@ const HomeProjectsCards = () => {
         min-h-[44px]
       "
           >
-            View all
+            <span className="hidden sm:inline">View all</span>
+            <span className="sm:hidden">View All</span>
           </button>
         </Link>
 
         <button
           onClick={triggerFooterContact}
           className="
-      w-full sm:w-48 h-[44px]
-      px-4 py-3
+      flex-1 sm:w-48 h-[44px]
+      px-2 sm:px-4 py-3
       bg-[#B49157]
       text-white
-      text-sm
+      text-xs sm:text-sm
       uppercase
       tracking-wider
       hover:bg-[#A38047]
@@ -495,7 +568,8 @@ const HomeProjectsCards = () => {
       min-h-[44px]
     "
         >
-          Contact us
+          <span className="hidden sm:inline">Contact us</span>
+          <span className="sm:hidden">Contact</span>
         </button>
       </div>
 
