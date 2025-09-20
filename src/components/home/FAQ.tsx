@@ -94,8 +94,29 @@ const FAQ: React.FC = () => {
     window.dispatchEvent(new CustomEvent('openContactForm'));
   };
 
+  // Generate JSON-LD structured data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer.replace(/\n/g, ' ').replace(/•/g, '')
+      }
+    }))
+  };
+
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <>
+      {/* JSON-LD Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
+      <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto max-w-4xl px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -105,6 +126,17 @@ const FAQ: React.FC = () => {
           <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
             Find answers to common questions about our luxury Italian interior design services in New York.
           </p>
+        </div>
+
+        {/* SEO-friendly hidden content for search engines */}
+        <div className="sr-only" aria-hidden="true">
+          <h2>Frequently Asked Questions About Italian Interior Design in New York</h2>
+          {faqData.map((faq) => (
+            <div key={`seo-${faq.id}`}>
+              <h3>{faq.question}</h3>
+              <div>{faq.answer}</div>
+            </div>
+          ))}
         </div>
 
         {/* FAQ Accordion */}
@@ -146,6 +178,7 @@ const FAQ: React.FC = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
