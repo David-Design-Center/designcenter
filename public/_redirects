@@ -6,6 +6,9 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 # 3. (Optional) Force URL normalization for certain routes
 /ProductsCollection   /productscollection   301!
 
+# 3a. Explicitly remove trailing slash for products collection
+/productscollection/  /productscollection   301!
+
 # 4. Redirect old product URLs to /productscollection
 /index.php?route=product/product&product_id=76&page=2    /productscollection    301
 /index.php?route=product/category&path=67                /productscollection    301
@@ -40,6 +43,13 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 /italian-closets-new-york                               /productscollection    301
 /hinged-door-closet?page=1                               /productscollection    301
 /hinged-door-closet?page=2                               /productscollection    301
+
+
+# 4b. Additional legacy URLs (GSC examples)
+/portfolio-:id                                          /productscollection    301
+/tiles                                                  /productscollection    301
+/portfolio-:id/*                                        /productscollection    301
+/tiles/*                                                /productscollection    301
 
 
 # 5. Catch-all for your SPA

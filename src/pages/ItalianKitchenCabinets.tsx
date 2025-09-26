@@ -100,9 +100,9 @@ const ItalianKitchenCabinets = () => {
     <div className="bg-white">
       <Helmet>
         {/* ── Primary SEO ── */}
-        <title>Italian Kitchen Cabinets NYC – Free 3-D Design | D&D</title>
-        <meta name="description"
-              content="Hand-built in Italy, installed in NY within 8 weeks. Book a free 30-min showroom consult and get your 3-D plan in 7 days." />
+    <title>Italian Kitchen Cabinets NYC – Luxury Designs, 3D in 7 Days | D&D</title>
+    <meta name="description"
+      content="Handcrafted in Italy. Installed in NY in ~8 weeks. See 20+ finishes in our Brooklyn showroom. Free 30‑min consult and a 3D plan in 7 days." />
         <link rel="canonical" href="https://dnddesigncenter.com/italian-kitchen-cabinets" />
         <meta name="robots"
               content="index,follow,max-snippet:200,max-image-preview:large" />
@@ -183,6 +183,40 @@ const ItalianKitchenCabinets = () => {
             }
           ]
         })}
+        </script>
+
+        {/* ── FAQ Schema for rich results ── */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much do Italian kitchen cabinets cost in NYC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most projects range from $15k–$50k depending on size, finishes, and accessories. We provide a transparent line‑item quote after your design consult."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How fast can you design and install?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "3D design in ~7 days. Typical installation ~8 weeks after approvals, depending on scope and supplier lead times."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you offer free consultations?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Book a complimentary 30‑minute showroom consultation to review finishes, layouts, and budget ranges."
+                }
+              }
+            ]
+          })}
         </script>
       </Helmet>
       
@@ -751,6 +785,14 @@ const ItalianKitchenCabinets = () => {
       </section>
       
       {/* Final CTA */}
+      {/* Geo-targeting content block for SEO */}
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h3 className="text-xl font-semibold mb-3">Italian Kitchens in NYC, New Jersey & Florida</h3>
+        <p className="text-gray-700">
+          From brownstones in Brooklyn to homes across New Jersey and South Florida, we tailor Italian cabinetry to fit your space and lifestyle.
+          Visit our Brooklyn showroom or book a virtual consult. We regularly serve NYC, Hoboken/Jersey City, Miami & Palm Beach.
+        </p>
+      </section>
       <section className="py-16 sm:py-20 bg-[#1A1A1A] text-white text-center">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 max-w-3xl">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif mb-6 sm:mb-8">

@@ -13,6 +13,7 @@ import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import { Feature197 } from '../components/ui/accordion-feature-section';
 import { accordionFeatureSeoMetadata } from '../data/accordionFeatureSeoMetadata';
+import BrandsShowcase from '../components/productcollection/BrandsShowcase';
 
 const ProductsCollection = () => {
   // State for UI
@@ -93,18 +94,18 @@ const ProductsCollection = () => {
       )}
       <Helmet>
         {/* ── Primary SEO ── */}
-        <title>Luxury Custom Furniture NYC – Hand-Made Collection | D&D</title>
-        <meta name="description"
-              content="Browse our curated, hand-crafted Italian furniture collection in Brooklyn. Free design consult—white-glove delivery across NYC." />
+    <title>Luxury Custom Kitchens & Furniture – NYC Showroom | D&D</title>
+    <meta name="description"
+      content="Explore our curated Italian collection: kitchens, closets, lighting & more. Brooklyn showroom. Complimentary design consultation available." />
         <link rel="canonical" href="https://dnddesigncenter.com/productscollection" />
         <meta name="robots"
               content="index,follow,max-snippet:200,max-image-preview:large" />
 
         {/* ── OG / Twitter ── */}
         <meta property="og:title"
-              content="Luxury Custom Furniture NYC – Explore the Collection" />
+              content="Luxury Custom Kitchens & Interiors NYC – Explore the Collection" />
         <meta property="og:description"
-              content="See 30+ Italian-made pieces in our Brooklyn showroom. Book a private preview." />
+              content="Discover the elegance of contemporary, custom Italian furnishings crafted for modern interiors." />
         <meta property="og:image"
               content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Traditional/Kitchen_Traditional_6.avif" />
         <meta property="og:image:width"  content="1200" />
@@ -122,7 +123,7 @@ const ProductsCollection = () => {
               "@type":"VideoObject",
               "@id":"#promoVideo",
               "name":"New York City Furniture Design",
-              "description":"Experience our hand-crafted luxury furniture collection, designed in the heart of NYC.",
+              "description":"Experience our hand-crafted luxury furniture collection, designed in the heart of Italy.",
               "thumbnailUrl":"https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif",
               "uploadDate":"2025-04-01",
               "duration":"PT0M45S",
@@ -137,7 +138,7 @@ const ProductsCollection = () => {
             {
               "@type":"ItemList",
               "@id":"#collectionList",
-              "name":"Luxury Custom Furniture Collection",
+              "name":"Luxury Custom Kitchen & Interior Collection",
               "itemListElement":[
                 {
                   "@type":"ListItem",
@@ -181,10 +182,19 @@ const ProductsCollection = () => {
         </script>
       </Helmet>
       <ProductCollectionHero />
+      <BrandsShowcase />
       <ProductGalleryContent />
       <Feature197 />
       <ProductCollectionVisionnaire />
       <ProductCollectionSteps />
+      {/* Geo-targeting content block for SEO */}
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h3 className="text-xl font-semibold mb-3">Italian Kitchens in NYC, New Jersey & Florida</h3>
+        <p className="text-gray-700">
+          From Brooklyn across New Jersey and South Florida, we help clients choose Italian kitchens, closets and lighting that fit their space and lifestyle.
+          Visit our Brooklyn showroom or book a virtual consult. We regularly serve NYC, Hoboken/Jersey City, Miami & Palm Beach.
+        </p>
+      </section>
       <div className="w-full">
         <HeroScrollDemoProduct />
       </div>

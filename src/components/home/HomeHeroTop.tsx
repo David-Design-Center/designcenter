@@ -95,7 +95,7 @@ const HomeHeroTop = () => {
             </div>
             <div className="flex flex-col items-center w-full sm:w-auto">
               <a
-                href="https://dnddesigncenter.com/productscollection"
+                href="/productscollection"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="find-style-btn w-full sm:w-auto px-6 sm:px-10 py-3 text-sm sm:text-base font-regular border border-[#C5A267] text-white bg-transparent transition-colors duration-200 hover:bg-[#C5A267] flex items-center justify-center min-h-[44px]"

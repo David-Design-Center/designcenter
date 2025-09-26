@@ -153,3 +153,10 @@
 
 /hinged-door-closet?page=2
   X-Robots-Tag: noindex
+
+/admin
+  X-Robots-Tag: noindex
+
+# Optional: only if you decide this page shouldn’t rank
+/crafted-calm
+  X-Robots-Tag: noindex

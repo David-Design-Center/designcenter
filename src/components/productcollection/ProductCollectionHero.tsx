@@ -83,7 +83,7 @@ const ProductCollectionHero = () => {
               </span>
               <div aria-hidden="true" className="flex flex-col justify-center space-y-1 sm:space-y-2">
                 <span className="block">Luxury Italian</span>
-                <span className="block">Product Collection</span>
+                <span className="block">Kitchens & Interiors</span>
               </div>
             </h1>
             <p
@@ -91,8 +91,7 @@ const ProductCollectionHero = () => {
               className="text-white/90 text-sm sm:text-base md:text-xl lg:text-2xl font-light text-shadow"
               style={{ willChange: "transform, opacity, filter" }}
             >
-              Discover the elegance of contemporary, custom Italian furnishings —
-              <br className="block sm:hidden" />crafted for modern interiors.
+              Discover the elegance of contemporary, custom Italian furnishings crafted for modern interiors.
             </p>
             </div>
           </div>

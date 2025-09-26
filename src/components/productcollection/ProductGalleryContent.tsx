@@ -313,7 +313,7 @@ const ProductGalleryContent: React.FC = () => {
   }
 
   return (
-    <div id="product-gallery" className="py-12 md:py-20 bg-white">
+    <div id="product-gallery" className="bg-white">
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Category Selection */}
         <div className="mb-12 md:mb-24">
@@ -322,7 +322,8 @@ const ProductGalleryContent: React.FC = () => {
               EXPLORE OUR PRODUCTS
             </h2>
             <p className="text-gray-600 text-xl font-thin max-w-xl mx-auto">
-            Our collection includes handcrafted Italian furniture products for bedrooms, kitchens, living rooms, and beyond <br/>— each piece curated with timeless elegance in mind.</p>
+            Our collection includes handcrafted Italian furniture products for bedrooms, kitchens, living rooms, and beyond.
+            </p>
           </div>
 
           {/* Mobile Tab Selector */}

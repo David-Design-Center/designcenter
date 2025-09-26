@@ -17,7 +17,7 @@ We welcome you into a world where **lighting** elevates how a room feels and fun
 
 ![](https://res.cloudinary.com/designcenter/image/upload/v1756482692/lamp_yxtew7.avif)
 
-You can view more lights on our [website](https://dnddesigncenter.com/productscollection/), showcasing a variety of options and collections that highlight our commitment to quality and design. Explore the latest trends and find the perfect pieces to enhance your space.
+You can view more lights on our [website](https://dnddesigncenter.com/productscollection), showcasing a variety of options and collections that highlight our commitment to quality and design. Explore the latest trends and find the perfect pieces to enhance your space.
 
 Call (718) 934-7100 or email **info@dnddesigncenter.com** to begin a friendly consultation. Visit us at 2615 East 17th Street, Brooklyn, New York 11235, where discovery feels effortless and beautifully guided.
 
@@ -55,7 +55,7 @@ Explore new arrivals that showcase modern pieces designed to last. These product
 
 ### Inspiring Collection
 
-See complete rooms in our [products collection](https://dnddesigncenter.com/productscollection/) 2025. The vignettes show how proportion, finish, and placement create cohesive results.
+See complete rooms in our [products collection](https://dnddesigncenter.com/productscollection) 2025. The vignettes show how proportion, finish, and placement create cohesive results.
 
 *   Step into our Brooklyn showroom to shop modern products curated for quality and character.
 *   Compare fixtures side by side and see light on surfaces to make confident choices.
