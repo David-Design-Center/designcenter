@@ -39,7 +39,7 @@ export const mainCategories: Category[] = [
         title: "MODERN",
         subtitle: "Contemporary Kitchen",
         description: "Clean lines, high-end appliances, and minimalist design create a modern culinary experience.",
-        image: "https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif",
+        image: "https://res.cloudinary.com/designcenter/image/upload/v1761038101/D4_ltedpk.avif",
         parentId: 1,
       },
       {

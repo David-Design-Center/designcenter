@@ -63,7 +63,7 @@ return (
         {/* Wrap paragraphs in a columns container */}
         <div className="md:columns-2 md:gap-6 space-y-12 px-0 sm:px-20">
           <p className="text-base sm:text-lg md:text-xl text-gray-800 font-light text-justify">
-            At D&D Design Center, we believe that true luxury is born from exceptional craftsmanship, visionary design, and a relentless pursuit of perfection. Our exclusive partnerships with global leaders in luxury Italian furniture and interior design, are a testaments to this philosophy—a fusion of bespoke artistry and contemporary innovation that redefines high-end living in New York and beyond.
+            At D&D Design Center, we believe that true luxury is born from exceptional craftsmanship, visionary design, and a relentless pursuit of perfection. Our exclusive partnerships with global leaders in luxury Italian furniture and interior design, are a testaments to this philosophy-a fusion of bespoke artistry and contemporary innovation that redefines high-end living in New York and beyond.
           </p>
           <p className="text-base sm:text-lg md:text-xl text-gray-800 font-light text-justify">
             Together, we have curated an exclusive collection that transcends conventional interior design, blending Italian elegance with modern sophistication. Each meticulously crafted piece embodies refined aesthetics, superior materials, and seamless functionality, creating an unparalleled luxury experience for the most discerning homeowners.
@@ -72,7 +72,7 @@ return (
             These collaborations are more than a business venture; they're a shared commitment to setting new benchmarks in luxury interior design. By bringing together world-class artisans, premium materials, and bespoke design solutions, we offer a distinctive approach that transforms New York’s most prestigious residences into architectural masterpieces.
           </p>
           <p className="text-base sm:text-lg md:text-xl text-gray-800 font-light text-justify">
-            At the core of our partnership lies a mutual passion for timeless, sophisticated interiors—designs that reflect heritage, innovation, and impeccable taste. We are honored to embark on this journey with these brands, shaping the future of luxury home design in New York, one masterpiece at a time.
+            At the core of our partnership lies a mutual passion for timeless, sophisticated interiors-designs that reflect heritage, innovation, and impeccable taste. We are honored to embark on this journey with these brands, shaping the future of luxury home design in New York, one masterpiece at a time.
           </p>
         </div>
       </div>

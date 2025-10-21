@@ -77,7 +77,7 @@ const HomeCollections = () => {
                 </AnimatedSection>
 
                 <AnimatedSection delay={200}>
-                  <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                  <p className="text-gray-600 text-base md:text-lg leading-relaxed font-thin">
                     Discover our exclusive curated collections, designed for those who
                     appreciate sophisticated aesthetics, superior craftsmanship, and lasting
                     quality.

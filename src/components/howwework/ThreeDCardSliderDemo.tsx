@@ -62,7 +62,7 @@ export const ThreeDCardSliderDemo: React.FC = () => {
     <section id="how-we-work" className="py-16 sm:py-20 md:py-24 px-4 bg-[linear-gradient(to_bottom,white_70%,#1A1A1A_60%)] min-h-[80vh] sm:min-h-screen flex items-center justify-center">
       <div className="max-w-6xl mx-auto w-full">
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif text-black text-center mb-6 sm:mb-8">
-          HOW WE WORK
+          HOW WE DESIGN
         </h2>
         <p className="text-black/70 text-center max-w-xl mx-auto mb-8 text-base sm:text-lg">
           From initial consultation to final delivery, we ensure a seamless experience.

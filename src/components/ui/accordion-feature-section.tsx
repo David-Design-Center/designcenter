@@ -31,13 +31,13 @@ const defaultFeatures: FeatureItem[] = [
       id: 2,
       title: "Living Room",
       image: "https://res.cloudinary.com/designcenter/image/upload/Luxury%20Living%20Room%20Design%20%E2%80%93%20Custom%20Sofas%20and%20Decor%20NYC.avif",
-      description: "We start by understanding how you live and entertain—whether you host frequent gatherings or prefer serene, intimate spaces. After establishing your design vision, we curate a bespoke layout that balances comfort and artistry, specifying custom Italian sofas, built-in cabinetry, and lighting tailored to your lifestyle. We create detailed floor plans and mood boards, source every piece directly from our trusted suppliers, and supervise each phase of delivery and installation to ensure your living room embodies both luxurious relaxation and timeless design integrity."
+      description: "We start by understanding how you live and entertain-whether you host frequent gatherings or prefer serene, intimate spaces. After establishing your design vision, we curate a bespoke layout that balances comfort and artistry, specifying custom Italian sofas, built-in cabinetry, and lighting tailored to your lifestyle. We create detailed floor plans and mood boards, source every piece directly from our trusted suppliers, and supervise each phase of delivery and installation to ensure your living room embodies both luxurious relaxation and timeless design integrity."
     },
     {
       id: 3,
       title: "Dining Room",
       image: "https://res.cloudinary.com/designcenter/image/upload/Luxury%20Dining%20Room%20Furniture%20%E2%80%93%20Custom%20Tables%20and%20Seating.avif",
-      description: "We first explore how you envision dining experiences in your home—whether formal, casual, or a seamless extension of your living area. Our team designs a tailored dining environment around your needs, recommending custom Italian tables, handcrafted seating, and lighting that sets the perfect ambiance. We oversee every element, from proportion and material selection to installation and styling, ensuring your dining room becomes a sophisticated space for memorable gatherings and daily enjoyment."
+      description: "We first explore how you envision dining experiences in your home-whether formal, casual, or a seamless extension of your living area. Our team designs a tailored dining environment around your needs, recommending custom Italian tables, handcrafted seating, and lighting that sets the perfect ambiance. We oversee every element, from proportion and material selection to installation and styling, ensuring your dining room becomes a sophisticated space for memorable gatherings and daily enjoyment."
     },
     {
       id: 4,
@@ -49,7 +49,7 @@ const defaultFeatures: FeatureItem[] = [
       id: 6,
       title: "Bathroom",
       image: "https://res.cloudinary.com/designcenter/image/upload/Luxury%20Bathroom%20Design%20%E2%80%93%20Bespoke%20Vanities%20and%20Interiors.avif",
-      description: "We start by identifying how you want your bathroom to feel—spa-like, sleek, dramatic, or timeless. After gathering inspiration and spatial measurements, we design a bespoke bathroom plan using custom vanities, Italian stone surfaces, premium fixtures, and tailored storage solutions. Throughout production, we maintain rigorous quality checks and timeline management, coordinating with our artisans to ensure flawless finishes. Installation is overseen directly by our project managers, guaranteeing a result that turns daily rituals into indulgent experiences."
+      description: "We start by identifying how you want your bathroom to feel-spa-like, sleek, dramatic, or timeless. After gathering inspiration and spatial measurements, we design a bespoke bathroom plan using custom vanities, Italian stone surfaces, premium fixtures, and tailored storage solutions. Throughout production, we maintain rigorous quality checks and timeline management, coordinating with our artisans to ensure flawless finishes. Installation is overseen directly by our project managers, guaranteeing a result that turns daily rituals into indulgent experiences."
     },
     {
       id: 8,
@@ -61,7 +61,7 @@ const defaultFeatures: FeatureItem[] = [
       id: 9,
       title: "Closet",
       image: "https://res.cloudinary.com/designcenter/image/upload/Closet_Designed_For_Modern_Homes.avif",
-      description: "We start by mapping your wardrobe habits—whether you need expansive walk-in solutions or elegantly hidden storage. Our designers create customized layouts using modular Italian systems, emphasizing aesthetic clarity and functional organization. Materials are carefully selected for durability and beauty, with options for integrated lighting and luxurious hardware. We manage the entire fabrication and installation process, delivering closets that feel as curated and personal as a designer boutique."
+      description: "We start by mapping your wardrobe habits-whether you need expansive walk-in solutions or elegantly hidden storage. Our designers create customized layouts using modular Italian systems, emphasizing aesthetic clarity and functional organization. Materials are carefully selected for durability and beauty, with options for integrated lighting and luxurious hardware. We manage the entire fabrication and installation process, delivering closets that feel as curated and personal as a designer boutique."
     },
     {
       id: 5,
@@ -73,7 +73,7 @@ const defaultFeatures: FeatureItem[] = [
       id: 7,
       title: "Outdoor",
       image: "https://res.cloudinary.com/designcenter/image/upload/Luxury%20Outdoor%20Furniture%20%E2%80%93%20Custom%20Patio%20and%20Terrace%20Designs.avif",
-      description: "We begin by assessing your outdoor lifestyle—whether it’s hosting rooftop dinners or creating a private terrace retreat. Our team designs layouts that maximize space and visual connection to your interiors, specifying Italian outdoor furniture, weather-resistant materials, and customized planters. From furniture sourcing to architectural layout adjustments, we oversee every detail, delivering outdoor living spaces that feel like a natural extension of your luxurious indoor world."
+      description: "We begin by assessing your outdoor lifestyle-whether it’s hosting rooftop dinners or creating a private terrace retreat. Our team designs layouts that maximize space and visual connection to your interiors, specifying Italian outdoor furniture, weather-resistant materials, and customized planters. From furniture sourcing to architectural layout adjustments, we oversee every detail, delivering outdoor living spaces that feel like a natural extension of your luxurious indoor world."
     },
   ];  
   

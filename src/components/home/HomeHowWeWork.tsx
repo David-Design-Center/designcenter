@@ -46,7 +46,7 @@ const HomeHowWeWork = () => {
       ref={elementRef}
       id="italian-craftsmanship"
       className="py-12 md:py-20 bg-gray-100"
-      aria-label="How We Work Section"
+      aria-label="How We Design Section"
     >
       {isVisible && (
         <ErrorBoundary>
@@ -67,7 +67,7 @@ const HomeHowWeWork = () => {
                   </AnimatedSection>
 
                   <AnimatedSection delay={200}>
-                    <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+                    <p className="text-gray-600 text-base md:text-lg leading-relaxed font-thin">
                       At D&D Design Center, we blend craftsmanship with
                       innovation to bring your vision to life. From personalized
                       consultations to precision execution.
@@ -79,7 +79,7 @@ const HomeHowWeWork = () => {
                       to="/how-we-work"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#C5A267] text-white font-medium rounded-sm hover:bg-[#D6B378] transition-colors duration-300 group min-h-[44px]"
                     >
-                      HOW WE WORK
+                      HOW WE DESIGN
                       <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                   </AnimatedSection>

@@ -17,7 +17,7 @@ Transform your home with bespoke custom closets for modern living designed to bl
 
 ## Why Custom Closets Are Essential for Modern Living
 
-In today's fast-paced world, an organized home is no longer a luxury—it's a necessity. Custom closets provide tailored storage solutions that eliminate clutter, maximize space, and create harmony in your daily routine. For families in New York, New Jersey, and Florida, where living space comes at a premium, custom closet systems offer an invaluable way to optimize every square foot of your home.
+In today's fast-paced world, an organized home is no longer a luxury-it's a necessity. Custom closets provide tailored storage solutions that eliminate clutter, maximize space, and create harmony in your daily routine. For families in New York, New Jersey, and Florida, where living space comes at a premium, custom closet systems offer an invaluable way to optimize every square foot of your home.
 
 <div className="two-columns">
 
@@ -38,7 +38,7 @@ Off-the-shelf closet systems rarely address the unique storage needs of modern f
 
 ### The Custom Closet Advantage
 
-Custom closets for modern living are designed around your specific needs, creating organization systems that work with your lifestyle rather than against it. Our clients report saving up to 30 minutes each morning with properly organized closets. Beyond the practical benefits, custom closets increase home value—studies show that custom storage solutions can provide up to 100% return on investment when selling your home.
+Custom closets for modern living are designed around your specific needs, creating organization systems that work with your lifestyle rather than against it. Our clients report saving up to 30 minutes each morning with properly organized closets. Beyond the practical benefits, custom closets increase home value-studies show that custom storage solutions can provide up to 100% return on investment when selling your home.
 
 <div style="aspect-ratio: 16/9; width: 100%; overflow: hidden; border-radius: 0.5rem; margin-bottom: 1rem;">
   <img src="https://storage.googleapis.com/48877118-7272-4a4d-b302-0465d8aa4548/82a39242-0101-4672-9473-4b58cfed4a4f/c39aa33d-17ec-4039-b52e-e4b584792ef7.jpg" alt="After image showing elegant custom closet" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;" />

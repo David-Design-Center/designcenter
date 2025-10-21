@@ -59,10 +59,10 @@ const ProductCollectionVisionnaire: React.FC = () => {
               </h2>
               <p className="mb-6 md:mb-8 text-gray-700 leading-relaxed text-justify">
                 At D&D Design Center, we proudly partner with Italy’s most
-                celebrated brands—
+                celebrated brands-
                 <strong className="text-gray-900">Visionnaire</strong>,{" "}
                 <strong>Longhi</strong>, <strong>Prestige</strong>, and{" "}
-                <strong>Aster</strong>—to bring you exclusive collections that
+                <strong>Aster</strong>-to bring you exclusive collections that
                 define contemporary elegance and heritage craftsmanship.
               </p>
 
@@ -71,8 +71,8 @@ const ProductCollectionVisionnaire: React.FC = () => {
                 avant-garde design, Longhi’s refined modernism, Prestige’s bold
                 artistic statement, and Aster’s functional sophistication for
                 the luxury kitchen. These collections are hand-selected to
-                transform every corner of your home—from living rooms to
-                kitchens—into a curated expression of Italian excellence.
+                transform every corner of your home-from living rooms to
+                kitchens-into a curated expression of Italian excellence.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-2">
@@ -82,7 +82,7 @@ const ProductCollectionVisionnaire: React.FC = () => {
                   </h5>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed text-justify">
                     Discover rare pieces and tailored collections from
-                    Visionnaire, Longhi, Prestige, and Aster—all under one roof
+                    Visionnaire, Longhi, Prestige, and Aster-all under one roof
                     at our NYC showroom.
                   </p>
                 </div>

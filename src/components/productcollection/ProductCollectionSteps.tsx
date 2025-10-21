@@ -4,7 +4,7 @@ const features = [
   { 
     step: 'Step 1', 
     title: 'Discover Your Luxury Interior Style',
-    content: 'Our experts refine your vision—whether contemporary, timeless, or uniquely bespoke. We craft a design plan tailored to your lifestyle with a seamless consultation.',
+    content: 'Our experts refine your vision-whether contemporary, timeless, or uniquely bespoke. We craft a design plan tailored to your lifestyle with a seamless consultation.',
     image: 'https://res.cloudinary.com/designcenter/image/upload/Your_Vision_Made_Design.avif',
     alt: "Luxury interior design consultation with expert designers at D&D Design Center.",
   },

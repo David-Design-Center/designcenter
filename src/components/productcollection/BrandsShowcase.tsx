@@ -13,9 +13,25 @@ type Brand = {
   description: string;
   showcaseImage?: string;
   displayOrder?: number;
-};  
+};
 
-const BrandsShowcase = () => {
+interface BrandsShowcaseProps {
+  showTitle?: boolean;
+  bgColor?: string;
+  textColor?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+  invertLogo?: boolean;
+}
+
+const BrandsShowcase = ({ 
+  showTitle = true,
+  bgColor = 'bg-white',
+  textColor = 'text-black',
+  gradientFrom = 'from-white',
+  gradientTo = 'to-transparent',
+  invertLogo = false
+}: BrandsShowcaseProps) => {
   const [, setIsMobile] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
   const headerRef = useRef(null);
@@ -130,20 +146,22 @@ const BrandsShowcase = () => {
   }, [isPaused, brandPartners]);
 
   return (
-    <section className="py-6 sm:py-4 md:py-10 bg-white" ref={ref}>
+    <section className={`py-6 sm:py-4 md:py-10 ${bgColor}`} ref={ref}>
       <div className="max-w-5xl mx-auto px-4 sm:px-5">
         <div ref={brandCarouselRef} className="mt-12 mb-10">
-          <h3 className="text-xl sm:text-2xl font-serif text-black text-center">
-            OUR LUXURY PARTNERS
-          </h3>
-          <div className="relative overflow-hidden py-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-16 before:z-10 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:bottom-0 after:w-16 after:z-10 after:bg-gradient-to-l after:from-white after:to-transparent">
+          {showTitle && (
+            <h3 className={`text-xl sm:text-2xl font-serif ${textColor} text-center`}>
+              OUR LUXURY PARTNERS
+            </h3>
+          )}
+          <div className={`relative overflow-hidden py-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-16 before:z-10 before:bg-gradient-to-r before:${gradientFrom} after:absolute after:right-0 after:top-0 after:bottom-0 after:w-16 after:z-10 after:bg-gradient-to-l after:${gradientTo}`}>
             <div ref={carouselRef} className="flex items-center gap-8">
               {extendedBrandPartners.map((brand, index) => (
                 <div
                   key={`${brand.slug}-${index}`}
                   className="flex flex-col items-center gap-3 flex-shrink-0"
                 >
-                  <div className="h-36 sm:h-40 md:h-48 w-40 sm:w-52 md:w-64 relative flex items-center justify-center p-2">
+                  <div className={`h-36 sm:h-40 md:h-48 w-40 sm:w-52 md:w-64 relative flex items-center justify-center p-2 ${invertLogo ? 'invert' : ''}`}>
                     <img
                       src={brand.logo}
                       alt={`${brand.name} logo`}

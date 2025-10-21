@@ -269,7 +269,7 @@ const VisionnaireIntroWithLoopingWords = () => {
   ref={paragraphRef}
   className="text-base sm:text-lg text-gray-800 leading-relaxed font-light text-justify"
 >
-  We believe that true design excellence begins with creative collaborations. Our exclusive partnerships are more than product pairings — they are curated experiences born from shared values and artistic synergy.
+  We believe that true design excellence begins with creative collaborations. Our exclusive partnerships are more than product pairings - they are curated experiences born from shared values and artistic synergy.
 
   <br /><br />
 

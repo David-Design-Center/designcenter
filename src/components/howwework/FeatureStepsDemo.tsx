@@ -4,7 +4,7 @@ const features = [
   {
     step: 'Step 1',
     title: 'Imagine Your Ideal Space',
-    content: 'Begin with a relaxed, personalized consultation. We listen, guide, and shape your vision—turning ideas into a refined design concept.',
+    content: 'Begin with a relaxed, personalized consultation. We listen, guide, and shape your vision-turning ideas into a refined design concept.',
     image: 'https://res.cloudinary.com/designcenter/image/upload/Your_Vision_Made_Design.avif',
     alt: "Luxury interior design consultation with expert designers at D&D Design Center.",
   },
@@ -18,7 +18,7 @@ const features = [
   {
     step: 'Step 3',
     title: 'Live the Luxury, Effortlessly',
-    content: 'From white-glove delivery to expert installation, we handle every detail. All that’s left is to enjoy your transformed space—made entirely for you.',
+    content: 'From white-glove delivery to expert installation, we handle every detail. All that’s left is to enjoy your transformed space-made entirely for you.',
     image: 'https://res.cloudinary.com/designcenter/image/upload/Completed_Luxury_Bedroom_Set.avif',
     alt: "Luxury bedroom interior with elegant furnishings and bespoke decor.",
   },

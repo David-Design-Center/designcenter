@@ -162,7 +162,7 @@ const CaseStudies: React.FC = () => {
             In the heart of New York City, our design ethos merges cutting-edge innovation with timeless elegance.
             Each transformation we undertake reflects our deep commitment to quality, sustainability, and a visionary approach
             that redefines urban luxury. Trust in our expertise to turn every space into a masterpiece that not only inspires but
-            also endures—making New York City the epicenter of refined, sustainable design.
+            also endures-making New York City the epicenter of refined, sustainable design.
           </p>
         </div>
       </div>

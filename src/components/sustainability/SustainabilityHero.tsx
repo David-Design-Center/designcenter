@@ -93,7 +93,7 @@ const SustainabilityHero = () => {
   className="text-white/90 text-sm sm:text-base md:text-xl lg:text-2xl font-light text-shadow"
   style={{ willChange: "transform, opacity, filter" }}
 >
-  Designing a more beautiful planet —<br className="block sm:hidden" />
+  Designing a more beautiful planet -<br className="block sm:hidden" />
   with eco-friendly interiors made from sustainably sourced materials.
 </p>
 

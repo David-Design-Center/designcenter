@@ -13,7 +13,7 @@ image:
 
 **![Opulent walnut-and-bronze walk-in with integrated LED rails](https://res.cloudinary.com/designcenter/image/upload/v1756487774/imgi_58_glass-battente-2_iy4qwo.avif)**
 
-Your home office should feel like a penthouse corner suite—immaculately organized, effortlessly inspiring, unmistakably yours.  
+Your home office should feel like a penthouse corner suite-immaculately organized, effortlessly inspiring, unmistakably yours.  
  At **D\&D Design Center**, we turn chaotic storage into Italian-crafted order, tailoring ergonomic custom closets for New York's most discerning work-from-home professionals. Slide open a velvet-lined drawer where every cable and camera lens has a niche; glide shut a walnut door that silences clutter as elegantly as it hides it. The result? **Less visual noise, sharper focus, and the quiet confidence that comes from knowing everything has its place.**
 
 In the guide below we'll decode real-world pricing (yes, we'll talk numbers), show how custom closets boost property value, and reveal the ergonomic science that protects both posture and productivity.
@@ -65,7 +65,7 @@ Hand-stained walnut, motorized lifts, leather upholstery, smart-home integration
 
 **![Genesis walk-in closet with island-style workstation & illuminated shelving](https://res.cloudinary.com/designcenter/image/upload/v1756487769/imgi_54_ARMADI_2019_pag30-31_onwfpu.avif)**
 
-Appraisers note that New York apartments with designer storage often **sell 8-10 % faster** and command premiums up to **$200 per square foot**, thanks to the blend of functionality and luxury appeal. Beyond ROI, a custom closet signals meticulous upkeep and elevates perceived square footage—two factors buyers prize in the city's competitive market.
+Appraisers note that New York apartments with designer storage often **sell 8-10 % faster** and command premiums up to **$200 per square foot**, thanks to the blend of functionality and luxury appeal. Beyond ROI, a custom closet signals meticulous upkeep and elevates perceived square footage-two factors buyers prize in the city's competitive market.
 
 **Ready to transform your space?** [Schedule your complimentary consultation](https://dnddesigncenter.setmore.com/) today to discover how a custom closet can enhance both your daily routine and your property value.
 
@@ -81,7 +81,7 @@ Appraisers note that New York apartments with designer storage often **sell 8-10
 
 3. **Italian Fabrication (Week 3-10)** - Components crafted to millimeter precision; we'll share progress shots for peace of mind.
 
-4. **White-Glove Installation (Week 11-12)** - Our craftsmen arrive, install, and polish—often in two days—while protecting floors, art, and daily routine.
+4. **White-Glove Installation (Week 11-12)** - Our craftsmen arrive, install, and polish-often in two days-while protecting floors, art, and daily routine.
 
 5. **Final Walk-Through & Warranty Handover** - We review every hinge and lighting scene together; lifetime workmanship and hardware warranties follow.
 
@@ -103,7 +103,7 @@ Budget 5-10% of your home-office renovation cost or the tier above that meets da
 National average $2k-$10k; NYC typically 1.5-3× higher.
 
 **Do custom closets add value to a home?**
-Yes—NYC listings with designer storage sell up to 8-10% faster and can fetch ~$200/sq ft premium.
+Yes-NYC listings with designer storage sell up to 8-10% faster and can fetch ~$200/sq ft premium.
 
 **Are custom closets worth it?**
 Most owners recoup 50-80% at resale and gain daily time savings.

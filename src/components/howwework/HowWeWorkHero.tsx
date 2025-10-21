@@ -77,7 +77,7 @@ const HowWeWorkHero = () => {
               ref={titleRef}
               className="mb-5 text-5xl sm:text-6xl md:text-8xl lg:text-10xl transform-gpu uppercase text-white/90 title-wrap"
             >
-              <span className="block">How We Work</span>
+              <span className="block">How We Design</span>
               <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl normal-case font-light mt-3">
                BESPOKE DESIGN PROCESS <br/>FOR ITALIAN INTERIORS IN NYC</span>
             </h1>
@@ -86,7 +86,7 @@ const HowWeWorkHero = () => {
               className="text-white/90 text-sm sm:text-base md:text-xl lg:text-2xl font-light text-shadow"
               style={{ willChange: "transform, opacity, filter" }}
             >
-              Full-service design process —<br className="block sm:hidden" />
+              Full-service design process -<br className="block sm:hidden" />
               from concept to installation.
             </p>
             </div>

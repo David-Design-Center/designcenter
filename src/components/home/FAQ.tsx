@@ -124,7 +124,7 @@ const FAQ: React.FC = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
-            Find answers to common questions about our luxury Italian interior design services in New York.
+            Find answers to common questions about our luxury Italian interior design services.
           </p>
         </div>
 
@@ -145,15 +145,15 @@ const FAQ: React.FC = () => {
             <AccordionItem 
               key={faq.id} 
               value={faq.id}
-              className="border border-gray-200 rounded-lg px-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="border border-gray-200 rounded-lg px-4 sm:px-6 shadow-sm hover:shadow-md transition-shadow duration-200"
             >
-              <AccordionTrigger className="text-left hover:no-underline py-6">
-                <h3 className="text-lg md:text-xl font-medium text-[#1A1A1A] pr-4">
+              <AccordionTrigger className="text-left hover:no-underline py-4 sm:py-6">
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-[#1A1A1A] pr-4 line-clamp-2 sm:line-clamp-1">
                   {faq.question}
                 </h3>
               </AccordionTrigger>
-              <AccordionContent className="pb-6 pt-2">
-                <div className="text-gray-700 text-base leading-relaxed space-y-2">
+              <AccordionContent className="pb-4 sm:pb-6 pt-2">
+                <div className="text-gray-700 text-sm sm:text-base leading-relaxed space-y-2">
                   {formatAnswer(faq.answer)}
                 </div>
               </AccordionContent>

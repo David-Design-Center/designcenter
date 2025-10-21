@@ -449,7 +449,7 @@ const ResultsStep: React.FC<ResultsStepProps> = ({
                       <span className="text-3xl text-white">"</span>
                       <span className="text-white font-serif text-lg italic">Next step to get on a call was the smartest choice I made</span>
                     </div>
-                    <div className="text-right text-white/70 text-sm">— Donald B.</div>
+                    <div className="text-right text-white/70 text-sm">- Donald B.</div>
                   </div>
                 </>
               )}

@@ -39,7 +39,7 @@ const PersonalizedReportSection: React.FC<PersonalizedReportSectionProps> = ({ o
             </div>
             
             <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-              Use this report to shop smarter, curate your mood boards, and start styling—no guesswork needed.
+              Use this report to shop smarter, curate your mood boards, and start styling-no guesswork needed.
             </p>
             
             <button 

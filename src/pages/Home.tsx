@@ -14,10 +14,10 @@ function Home() {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-          <title>Italian Luxury Kitchens & Interiors – NYC, NJ & Florida | D&D Design Center</title>
+          <title>Luxury Italian Interiors by D&D Design Center</title>
           <meta
             name="description"
-            content="Bespoke Italian kitchens, closets, baths & interiors. Brooklyn showroom. Free 30-min consult. Serving NYC, New Jersey, Miami & Palm Beach."
+            content="Bespoke Italian kitchens, closets, baths & interiors. 6000 square feet Brooklyn showroom. Free 30-min consult."
           />
           <link rel="canonical" href="https://dnddesigncenter.com/" />
 
@@ -79,26 +79,12 @@ function Home() {
       <main className="pb-16">
         <HomeHeroTop />
         <HomeProjectsCards />
+        <SustainabilitySection />
+        <VisionnaireSection />
         <TextGenerateEffect/>
         <HomeCollections />
         <HomeHowWeWork />
         <Feature197 />
-        <SustainabilitySection />
-        {/* Internal linking block to strengthen topical relevance */}
-        <section className="mx-auto max-w-5xl px-6 py-8">
-          <h3 className="text-xl font-semibold mb-3">Design with Purpose</h3>
-          <p className="text-gray-700">
-            We build <a className="text-amber-700 underline" href="/sustainability">sustainable luxury kitchens</a>
-            and interiors with materials that last. See how our{' '}
-            <a className="text-amber-700 underline" href="/collaboration">Italian brand collaborations</a>
-            {' '}bring craftsmanship to every space.
-          </p>
-          <p className="mt-3 text-gray-700">
-            Explore our <a className="text-amber-700 underline" href="/productscollection">hand‑made product collection</a>
-            {' '}for kitchens, closets, lighting and more.
-          </p>
-        </section>
-        <VisionnaireSection />
         <FAQ />
         <HomeHeroBottom />
       </main>

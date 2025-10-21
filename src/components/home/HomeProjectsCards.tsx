@@ -276,7 +276,7 @@ const HomeProjectsCards = () => {
     >
       <div className="max-w-7xl mx-auto px-4 mb-2">
         <h2 className="text-4xl sm:text-6xl md:text-8xl font-serif text-center">
-          PRODUCT COLLECTION
+          BROWSE OUR PRODUCT COLLECTION
         </h2>
       </div>
       <div className="max-w-1xl mx-auto px-2">
@@ -296,10 +296,10 @@ const HomeProjectsCards = () => {
   className={`
     ${
       displayLevel === "sub"
-        ? "grid grid-cols-1 sm:grid-cols-2 custom-md:grid-cols-3 gap-4 p-6 custom-md:p-8"
+        ? "grid grid-cols-3 sm:grid-cols-3 gap-4 p-6 custom-md:p-8 overflow-x-auto sm:overflow-x-visible"
         : "grid grid-cols-2 custom-md:flex custom-md:flex-wrap gap-4 p-6 custom-md:p-8"
     }
-    w-full max-w-5xl mx-auto mt-2 relative
+    w-full max-w-7xl mx-auto mt-2 relative
   `}
   style={{
     minHeight: containerHeight,
@@ -505,21 +505,20 @@ const HomeProjectsCards = () => {
 
 
       {/* Footer buttons */}
-      <div className="mt-6 flex flex-row items-center justify-center gap-2 sm:gap-4 px-4">
+      <div className="mt-6 flex flex-row items-center justify-center gap-1 sm:gap-2 px-4 flex-wrap">
         {displayLevel === "sub" && (
           <button
             ref={backButtonRef}
             onClick={handleBackClick}
             className="
-        flex-1 sm:w-48 h-[44px]
+        h-[44px]
         flex items-center justify-center gap-1 sm:gap-2
         px-2 sm:px-4 py-3
-        bg-[#B49157]
-        text-white
+        text-black
         text-xs sm:text-sm
         uppercase
         tracking-wider
-        hover:bg-[#A38047]
+        hover:bg-[#B49157]
         transition-colors
         duration-200
         min-h-[44px]
@@ -531,17 +530,16 @@ const HomeProjectsCards = () => {
           </button>
         )}
 
-        <Link to="/productscollection" className="flex-1 sm:w-48">
+        <Link to="/productscollection">
           <button
             className="
-        w-full h-[44px]
+        h-[44px]
         px-2 sm:px-4 py-3
-        bg-[#B49157]
-        text-white
+        text-black
         text-xs sm:text-sm
         uppercase
         tracking-wider
-        hover:bg-[#A38047]
+        hover:bg-[#B49157]
         transition-colors
         duration-200
         min-h-[44px]
@@ -555,14 +553,13 @@ const HomeProjectsCards = () => {
         <button
           onClick={triggerFooterContact}
           className="
-      flex-1 sm:w-48 h-[44px]
+      h-[44px]
       px-2 sm:px-4 py-3
-      bg-[#B49157]
-      text-white
+      text-black
       text-xs sm:text-sm
       uppercase
       tracking-wider
-      hover:bg-[#A38047]
+      hover:bg-[#B49157]
       transition-colors
       duration-200
       min-h-[44px]

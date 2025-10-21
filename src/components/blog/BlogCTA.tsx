@@ -89,7 +89,7 @@ const BlogCTA: React.FC<CallToActionProps> = ({}) => {
           ref={headlineRef}
           className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4"
         >
-          D&D Design Center<br />Luxury Custom Furniture Across America
+          D&D Design Center<br />Luxury Custom Design Across America
         </h2>
         
         {/* Hidden description for screen readers */}

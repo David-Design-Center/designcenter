@@ -10,7 +10,6 @@ const ParagraphSection: React.FC = () => {
         >
             {/* Marble texture background */}
             <div className="absolute inset-0 opacity-100 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558346648-9757f2fa4474?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center opacity-30" />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/100 to-white/50" />
             </div>
             
@@ -24,10 +23,10 @@ const ParagraphSection: React.FC = () => {
                     
                     <h2 className="text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight tracking-wide" 
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        <span className="uppercase font-light block mb-3">New York City's Premier Furniture Design Center</span>
+                        <span className="uppercase font-light block mb-3">Home is an investment</span>
                         <span className="normal-case text-lg sm:text-xl md:text-2xl text-[#9E7F43] font-light block mt-3" 
                               style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                            Timeless Italian Craftsmanship for the Modern Home
+                            Brooklyn's Premier Design Center
                         </span>
                     </h2>
                 </div>
@@ -36,10 +35,8 @@ const ParagraphSection: React.FC = () => {
                 <div className="pr-4 md:pr-10">
                     <div className="relative">
                         <p className="text-gray-700 text-base md:text-lg leading-relaxed font-light">
-                            At D&D Design Center, we curate a world of bespoke kitchens, cabinetry, and custom furnishings. 
-                            All handcrafted in Italy, within an inspiring design center in the heart of Manhattan. 
-                            Here, discerning homeowners discover more than furniture. 
-                            They uncover a canvas for personal storytelling.
+                            "At D&D Design Center, we curate a world of bespoke kitchens, cabinetry, and custom furnishings—all handcrafted in Italy. 
+                            Experience our full collection at our <a href="https://www.google.com/maps/dir/?api=1&destination=2615+E+17th+St,+Brooklyn,+NY+11235,+United+States" target="_blank" rel="noopener noreferrer" className="text-[#C5A267] hover:text-[#9E7F43] transition-colors duration-200 underline font-thin">6,000 sq ft showroom in Brooklyn</a> where luxury design comes to life."
                         </p>
                         <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-radial from-[#C5A267]/10 to-transparent opacity-50"></div>
                     </div>

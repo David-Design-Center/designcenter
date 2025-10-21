@@ -52,7 +52,7 @@ const NavigationLinks = ({ isMobile, setIsExpanded }: { isMobile: boolean, setIs
     { to: "/productscollection", label: "Product Collection", external: false },
     { to: "/collaboration", label: "Collaboration", external: false },
     { to: "/sustainability", label: "Sustainability", external: false },
-    { to: "/how-we-work", label: "How We Work", external: false },
+    { to: "/how-we-work", label: "How We Design", external: false },
     { to: "/blog", label: "Blog", external: false },
     { to: "/admin/index.html", label: "Admin", external: true }
   ];

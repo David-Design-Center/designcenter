@@ -4,6 +4,17 @@ import ScrollArrow from "../ui/ScrollArrow";
 const HomeHeroTop = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Track events with Google Analytics
+  const trackEvent = (eventName: string, eventLabel: string) => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', eventName, {
+        'event_category': 'hero_engagement',
+        'event_label': eventLabel,
+        'value': 1
+      });
+    }
+  };
+
   useEffect(() => {
     const video = videoRef.current;
 
@@ -52,6 +63,10 @@ const HomeHeroTop = () => {
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"
         />{" "}
+        {/* Bottom fade to black */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none"
+        />{" "}
       </div>
       {/* Centered content container */}
       <div className="absolute inset-0 flex items-end sm:items-center justify-center">
@@ -62,19 +77,22 @@ const HomeHeroTop = () => {
               className="mb-3 text-7xl sm:text-6xl md:text-8xl lg:text-10xl transform-gpu uppercase text-white/90 leading-tight"
               style={{ perspective: "800px" }}
             >
-              <span className="title-word block">Luxury <span className="inline">Italian</span></span>
+              <span className="title-word block">D&D Design Center</span>
               <span
                 className="block text-2xl sm:text-3xl md:text-4xl lg:text-6xl mt-2 crafted-shine text-shadow break-words text-balance"
               >
-                Crafted Interiors for Modern Living
+                Luxury Interiors for Modern Living
               </span>
             </h1>
-            <p
-              className="text-white/90 text-m sm:text-base md:text-xl lg:text-2xl font-light text-shadow"
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=2615+E+17th+St,+Brooklyn,+NY+11235,+United+States"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/90 text-m sm:text-base md:text-xl lg:text-2xl font-light text-shadow hover:text-[#B49157] transition-colors duration-200 underline"
+              onClick={() => trackEvent('click', 'google_maps_showroom')}
             >
-              Handcrafted Italian luxury interiors designed for timeless elegance
-              and contemporary lifestyles.
-            </p>
+              Visit our NYC Showroom 📍
+            </a>
           </div>
           
           {/* CTA Buttons */}
@@ -82,12 +100,13 @@ const HomeHeroTop = () => {
             <div className="flex flex-col items-center w-full sm:w-auto">
               <button
                 type="button"
-                className="contact-now-hero-btn w-full sm:w-auto px-6 sm:px-10 py-3 bg-[#C5A267] text-white text-sm sm:text-base font-regular shadow hover:bg-[#B49157] transition-colors duration-200 min-h-[44px]"
+                className="contact-now-hero-btn w-full sm:w-auto px-6 sm:px-10 py-3 text-white text-sm sm:text-base font-regular shadow border border-[#B49157] hover:bg-[#A38047] transition-colors duration-200 min-h-[44px]"
                 onClick={() => {
+                  trackEvent('click', 'contact_us_button');
                   window.dispatchEvent(new CustomEvent('openContactForm'));
                 }}
               >
-                Contact Us
+                CONTACT US
               </button>
               <span className="text-xs invisible h-0">
                 &nbsp;
@@ -98,10 +117,11 @@ const HomeHeroTop = () => {
                 href="/productscollection"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="find-style-btn w-full sm:w-auto px-6 sm:px-10 py-3 text-sm sm:text-base font-regular border border-[#C5A267] text-white bg-transparent transition-colors duration-200 hover:bg-[#C5A267] flex items-center justify-center min-h-[44px]"
+                className="find-style-btn w-full sm:w-auto px-6 sm:px-10 py-3 text-sm sm:text-base font-regular border border-[#B49157] text-white bg-transparent transition-colors duration-200 hover:bg-[#C5A267] flex items-center justify-center min-h-[44px]"
+                onClick={() => trackEvent('click', 'view_products_button')}
               >
                 <span role="img" aria-label="palette" className="mr-0"></span>
-              View Products
+              VIEW PRODUCTS
               </a>
             </div>
           </div>
@@ -109,14 +129,28 @@ const HomeHeroTop = () => {
       </div>
       {/* Scroll Arrow - Hidden on mobile */}
       <div
-        className="hidden sm:block absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer scroll-arrow"
+        className="hidden sm:block absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
       >
         {" "}
         <ScrollArrow
           targetId="HomeProjectsCards"
-          className="w-10 h-10 md:w-12 md:h-12 text-white hover:text-[#C5A267] transition-colors duration-300"
+          className="w-10 h-10 md:w-12 md:h-12 text-white hover:text-[#B49157] transition-colors duration-300 stroke-[2.5]"
         />{" "}
       </div>{" "}
+      <style>{`
+        @keyframes bounce-smooth {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+        
+        .animate-bounce {
+          animation: bounce-smooth 2s infinite;
+        }
+      `}</style>
     </section>
   );
 };

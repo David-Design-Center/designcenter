@@ -130,7 +130,7 @@ const ImageSelectionStep: React.FC<StepProps> = ({
           <ul className="space-y-2 sm:space-y-3 text-white/90 text-sm sm:text-base">
             <li className="flex items-start gap-2">
               <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#C5A267] flex-shrink-0 mt-1"></div>
-              <p>Trust your instincts—first impressions matter in design</p>
+              <p>Trust your instincts-first impressions matter in design</p>
             </li>
             <li className="flex items-start gap-2">
               <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#C5A267] flex-shrink-0 mt-1"></div>

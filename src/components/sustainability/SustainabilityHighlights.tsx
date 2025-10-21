@@ -168,7 +168,7 @@ const SustainabilityHighlights: React.FC<CallToActionProps> = ({  }) => {
         Responsible Sourcing
       </h2>
       <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-light tracking-wide text-justify">
-      We partner with certified suppliers to deliver environmentally friendly products using responsibly harvested woods and ethical materials. Every handcrafted piece is rooted in sustainability—from source to installation.
+      We partner with certified suppliers to deliver environmentally friendly products using responsibly harvested woods and ethical materials. Every handcrafted piece is rooted in sustainability-from source to installation.
       </p>
     </div>
 
@@ -188,7 +188,7 @@ const SustainabilityHighlights: React.FC<CallToActionProps> = ({  }) => {
         Circular Design
       </h2>
       <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-light tracking-wide text-justify">
-      Our collections reflect a commitment to modern sustainable furniture. Each product is made to last—repurposable, recyclable, and rooted in low-impact production cycles.
+      Our collections reflect a commitment to modern sustainable furniture. Each product is made to last-repurposable, recyclable, and rooted in low-impact production cycles.
       </p>
     </div>
 {/* CTA Buttons */}
