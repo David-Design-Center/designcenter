@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import ScrollArrow from "../ui/ScrollArrow";
 
 // Helper function to track GA4 events
@@ -113,16 +114,14 @@ const HomeHeroTop = () => {
               </span>
             </div>
             <div className="flex flex-col items-center w-full sm:w-auto">
-              <a
-                href="/productscollection"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/productscollection"
                 className="find-style-btn w-full sm:w-auto px-6 sm:px-10 py-3 text-sm sm:text-base font-regular border border-[#B49157] text-white bg-transparent transition-colors duration-200 hover:bg-[#C5A267] flex items-center justify-center min-h-[44px]"
                 onClick={() => trackEvent('click', 'view_products_button')}
               >
                 <span role="img" aria-label="palette" className="mr-0"></span>
               VIEW PRODUCTS
-              </a>
+              </Link>
             </div>
           </div>
         </div>
