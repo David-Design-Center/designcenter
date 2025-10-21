@@ -1,19 +1,19 @@
 import { useEffect, useRef } from "react";
 import ScrollArrow from "../ui/ScrollArrow";
 
+// Helper function to track GA4 events
+const trackEvent = (eventName: string, eventLabel: string) => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, {
+      'event_category': 'hero_engagement',
+      'event_label': eventLabel,
+      'value': 1
+    });
+  }
+};
+
 const HomeHeroTop = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Track events with Google Analytics
-  const trackEvent = (eventName: string, eventLabel: string) => {
-    if (typeof gtag !== 'undefined') {
-      gtag('event', eventName, {
-        'event_category': 'hero_engagement',
-        'event_label': eventLabel,
-        'value': 1
-      });
-    }
-  };
 
   useEffect(() => {
     const video = videoRef.current;
