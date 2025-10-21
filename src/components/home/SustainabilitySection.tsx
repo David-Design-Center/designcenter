@@ -17,8 +17,11 @@ const SustainabilitySection = () => {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
+    // Only apply parallax on desktop
+    if (window.innerWidth < 768) return;
+    
     const ctx = gsap.context(() => {
-      // Parallax effect for the background
+      // Desktop: Position parallax effect (shift up/down)
       gsap.fromTo(
         sectionRef.current,
         { backgroundPositionY: '0%' },
@@ -88,8 +91,10 @@ const SustainabilitySection = () => {
       className="py-16 md:py-32 relative bg-cover bg-center text-white"
       style={{ 
         backgroundImage: 'url("https://res.cloudinary.com/designcenter/image/upload/v1761045417/Eco-Friendly%20Luxury%20Furniture%20-%20Sustainable%20Design%20Collection.avif")',
-        backgroundAttachment: 'fixed',
-        backgroundRepeat: 'no-repeat'
+        backgroundAttachment: window.innerWidth >= 768 ? 'fixed' : 'scroll',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       {/* ✅ SEO-Optimized Hidden Image for Indexing */}
