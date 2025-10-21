@@ -71,6 +71,14 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ category, style, onClose })
         return roomMatch && styleMatch;
       });
       if (filtered.length === 0) throw new Error("No images found for this category and style.");
+      
+      // Sort by number at end of title
+      filtered.sort((a, b) => {
+        const numA = parseInt(a.title.match(/\d+$/)?.[0] || 0);
+        const numB = parseInt(b.title.match(/\d+$/)?.[0] || 0);
+        return numA - numB;
+      });
+      
       // Map to Photo type
       const fetchedPhotos = filtered.map(item => ({
         id: item.id,
