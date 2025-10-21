@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import BottomSheetExpandedCard from './BottomSheetExpandedCard';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import React from 'react';
 import galleryData from '../../data/product-galleries/index';
 
@@ -21,56 +19,13 @@ interface Project {
 const ITEMS_PER_PAGE = 4;
 const ITEMS_PER_ROW = 2;
 
-const styleNames = [
-  'Eclipse',
-  'Nova',
-  'Zenith',
-  'Vertex',
-  'Prism',
-  'Quantum',
-  'Nebula',
-  'Aurora',
-  'Apex',
-  'Horizon',
-  'Celestial',
-  'Cosmos',
-  'Stellar',
-  'Galaxy',
-  'Orbit',
-  'Solstice',
-  'Equinox',
-  'Spectrum',
-  'Fusion',
-  'Radiance',
-  'Mirage',
-  'Vortex',
-  'Obsidian',
-  'Infinity',
-  'Eternity',
-  'Momentum',
-  'Pulse',
-  'Essence',
-  'Serenity',
-  'Ethereal',
-  'Luminous',
-  'Vista',
-  'Verve',
-  'Synthesis',
-  'Reverie',
-  'Enigma',
-  'Lumina',
-  'Catalyst',
-  'Reflection',
-  'Empyrean',
-];
-
 const ProductGalleryContent: React.FC = () => {
   // Data state
   const [projects, setProjects] = useState<Project[]>([]);
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<string>('Kitchen');
   const [selectedStyle, setSelectedStyle] = useState<string>('all');
-  const [expandedProjectId, setExpandedProjectId] = useState<string | null>(null);
+  const [fullscreenProject, setFullscreenProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'categories' | 'styles'>('categories');
@@ -162,12 +117,12 @@ const ProductGalleryContent: React.FC = () => {
         setLoading(true);
         // Map galleryData to Project type
         const fetchedProjects = (galleryData as any[]).map((item, index) => ({
-          id: item.id,
+          id: item.id || `${item.room}-${item.style}-${index}`,
           title: item.title || item.style || item.room || `Project ${index + 1}`,
           room: item.room,
           style: item.style || '',
           imageUrl: item.image,
-          styleName: styleNames[index % styleNames.length],
+          styleName: undefined, // Don't assign fake names
         }));
         setProjects(fetchedProjects);
         setVisibleProjects(fetchedProjects.slice(0, ITEMS_PER_PAGE));
@@ -190,7 +145,6 @@ const ProductGalleryContent: React.FC = () => {
       filtered = filtered.filter((p) => p.style === selectedStyle);
     }
     setVisibleProjects(filtered.slice(0, ITEMS_PER_PAGE));
-    setExpandedProjectId(null);
   }, [projects, selectedRoom, selectedStyle]);
 
   // 4) handleCardLoad -> Animate card once image is loaded
@@ -226,8 +180,88 @@ const ProductGalleryContent: React.FC = () => {
     setVisibleProjects(filtered.slice(0, currentLength + ITEMS_PER_PAGE));
   };
 
-  const handleProjectClick = (projectId: string) => {
-    setExpandedProjectId(projectId === expandedProjectId ? null : projectId);
+  const handleProjectClick = (project: Project) => {
+    setFullscreenProject(project);
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Navigate to next image in fullscreen
+  const handleNextImage = () => {
+    if (!fullscreenProject) return;
+    
+    const currentIndex = visibleProjects.findIndex(p => p.id === fullscreenProject.id);
+    if (currentIndex === -1) return;
+    
+    // If we're at the last image and there are more images to load, load them
+    if (currentIndex === visibleProjects.length - 1) {
+      const currentLength = visibleProjects.length;
+      let filtered = [...projects];
+      
+      if (selectedRoom !== 'all') {
+        filtered = filtered.filter((p) => p.room === selectedRoom);
+      }
+      if ((selectedRoom === 'Kitchen' || selectedRoom === 'Furniture') && selectedStyle !== 'all') {
+        filtered = filtered.filter((p) => p.style === selectedStyle);
+      }
+      
+      if (currentLength < filtered.length) {
+        setVisibleProjects(filtered.slice(0, currentLength + ITEMS_PER_PAGE));
+      }
+    }
+    
+    // Move to next image
+    if (currentIndex < visibleProjects.length - 1) {
+      setFullscreenProject(visibleProjects[currentIndex + 1]);
+    }
+  };
+
+  // Navigate to previous image in fullscreen
+  const handlePreviousImage = () => {
+    if (!fullscreenProject) return;
+    
+    const currentIndex = visibleProjects.findIndex(p => p.id === fullscreenProject.id);
+    if (currentIndex > 0) {
+      setFullscreenProject(visibleProjects[currentIndex - 1]);
+    }
+  };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!fullscreenProject) return;
+      
+      if (e.key === 'Escape') {
+        setFullscreenProject(null);
+        document.body.style.overflow = 'unset';
+      } else if (e.key === 'ArrowRight') {
+        handleNextImage();
+      } else if (e.key === 'ArrowLeft') {
+        handlePreviousImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenProject, visibleProjects]);
+
+  // Get next category
+  const getNextCategory = () => {
+    const currentIndex = rooms.findIndex(r => r === selectedRoom);
+    if (currentIndex < rooms.length - 1) {
+      return rooms[currentIndex + 1];
+    }
+    return null;
+  };
+
+  // Switch to next category
+  const handleSwitchCategory = () => {
+    const nextRoom = getNextCategory();
+    if (nextRoom) {
+      setSelectedRoom(nextRoom);
+      setSelectedStyle('all');
+      setFullscreenProject(null);
+      document.body.style.overflow = 'unset';
+    }
   };
 
   // Toggle between categories and styles tabs (mobile-friendly)
@@ -251,16 +285,16 @@ const ProductGalleryContent: React.FC = () => {
                 key={project.id}
                 ref={(el) => (cardRefs.current[cardIndex] = el)}
                 className="group relative overflow-hidden cursor-pointer bg-white shadow-sm hover:shadow-md transition-all duration-300"
-                onClick={() => handleProjectClick(project.id)}
+                onClick={() => handleProjectClick(project)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    handleProjectClick(project.id);
+                    handleProjectClick(project);
                   }
                 }}
-                aria-expanded={expandedProjectId === project.id}
+                aria-expanded={false}
               >
                 <div className="aspect-w-16 aspect-h-9 overflow-hidden">
                 <img
@@ -278,21 +312,11 @@ const ProductGalleryContent: React.FC = () => {
                 {/* Title, style, etc. */}
                 <div className="p-4 flex justify-between items-center">
                   <div>
-                    <h3 className="text-xl font-serif text-black mb-1">
-                      {project.styleName}
-                    </h3>
                     <span className="block text-sm uppercase tracking-wider text-gray-500">
                       {project.style
                         ? `${getDisplayName(project.room)} / ${project.style}`
                         : getDisplayName(project.room)}
                     </span>
-                  </div>
-                  <div className="text-[#B49157] transition-transform duration-300">
-                    {expandedProjectId === project.id ? (
-                      <ChevronUp className="w-5 h-5" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5" />
-                    )}
                   </div>
                 </div>
               </div>
@@ -423,12 +447,107 @@ const ProductGalleryContent: React.FC = () => {
             {/* Render the rows */}
             {renderProjectRows()}
 
-            {/* Bottom Sheet Card for expanded project */}
-            {expandedProjectId && (
-              <BottomSheetExpandedCard
-                project={projects.find((p) => p.id === expandedProjectId)!}
-                onClose={() => setExpandedProjectId(null)}
-              />
+            {/* Fullscreen Image Modal */}
+            {fullscreenProject && (
+              <div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4">
+                {/* Header with category info */}
+                <div className="absolute top-0 left-0 right-0 text-white p-6 text-center">
+                  <p className="text-sm uppercase tracking-widest text-gray-400 mb-2">
+                    {fullscreenProject.style
+                      ? `${getDisplayName(fullscreenProject.room)} / ${fullscreenProject.style}`
+                      : getDisplayName(fullscreenProject.room)}
+                  </p>
+                </div>
+
+                {/* Close button */}
+                <button
+                  onClick={() => {
+                    setFullscreenProject(null);
+                    document.body.style.overflow = 'unset';
+                  }}
+                  className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-10"
+                  aria-label="Close fullscreen image (Press ESC)"
+                  title="Close (ESC)"
+                >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+
+                {/* Main image */}
+                <img
+                  src={fullscreenProject.imageUrl}
+                  alt={fullscreenProject.title}
+                  className="max-w-full max-h-[80vh] object-contain"
+                />
+
+                {/* Navigation arrows and image counter */}
+                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between p-6">
+                  {/* Previous button */}
+                  <button
+                    onClick={handlePreviousImage}
+                    disabled={visibleProjects.findIndex(p => p.id === fullscreenProject.id) === 0}
+                    className="text-white hover:text-gray-300 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Previous image (Arrow Left)"
+                    title="Previous (← Arrow)"
+                  >
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Image counter and end message */}
+                  <div className="text-center text-white">
+                    {(() => {
+                      const currentIndex = visibleProjects.findIndex(p => p.id === fullscreenProject.id);
+                      let filtered = [...projects];
+                      
+                      if (selectedRoom !== 'all') {
+                        filtered = filtered.filter((p) => p.room === selectedRoom);
+                      }
+                      if ((selectedRoom === 'Kitchen' || selectedRoom === 'Furniture') && selectedStyle !== 'all') {
+                        filtered = filtered.filter((p) => p.style === selectedStyle);
+                      }
+
+                      const isLastImage = currentIndex === visibleProjects.length - 1;
+                      const hasMoreImages = visibleProjects.length < filtered.length;
+                      const nextCategory = getNextCategory();
+
+                      if (isLastImage && !hasMoreImages) {
+                        return (
+                          <div className="flex flex-col items-center gap-4">
+                            <p className="text-sm text-gray-400">
+                              {currentIndex + 1} / {visibleProjects.length}
+                            </p>
+                            <p className="text-lg font-light">No more photos in this category</p>
+                            {nextCategory && (
+                              <button
+                                onClick={handleSwitchCategory}
+                                className="mt-2 px-6 py-2 bg-[#C5A267] text-white text-sm font-medium rounded-sm hover:bg-[#B49157] transition-colors"
+                              >
+                                View {getDisplayName(nextCategory)} →
+                              </button>
+                            )}
+                          </div>
+                        );
+                      } else {
+                      }
+                    })()}
+                  </div>
+
+                  {/* Next button */}
+                  <button
+                    onClick={handleNextImage}
+                    className="text-white hover:text-gray-300 transition-colors"
+                    aria-label="Next image (Arrow Right)"
+                    title="Next (→ Arrow)"
+                  >
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             )}
 
             {/* Load More Button */}

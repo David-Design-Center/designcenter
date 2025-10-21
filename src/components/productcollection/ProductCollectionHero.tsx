@@ -91,7 +91,7 @@ const ProductCollectionHero = () => {
               className="text-white/90 text-sm sm:text-base md:text-xl lg:text-2xl font-light text-shadow"
               style={{ willChange: "transform, opacity, filter" }}
             >
-              Discover the elegance of contemporary, custom Italian furnishings crafted for modern interiors.
+              Discover the elegance of contemporary, <br /> custom Italian furnishings.
             </p>
             </div>
           </div>

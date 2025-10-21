@@ -187,14 +187,6 @@ const ProductsCollection = () => {
       <Feature197 />
       <ProductCollectionVisionnaire />
       <ProductCollectionSteps />
-      {/* Geo-targeting content block for SEO */}
-      <section className="mx-auto max-w-5xl px-6 py-10">
-        <h3 className="text-xl font-semibold mb-3">Italian Kitchens in NYC, New Jersey & Florida</h3>
-        <p className="text-gray-700">
-          From Brooklyn across New Jersey and South Florida, we help clients choose Italian kitchens, closets and lighting that fit their space and lifestyle.
-          Visit our Brooklyn showroom or book a virtual consult. We regularly serve NYC, Hoboken/Jersey City, Miami & Palm Beach.
-        </p>
-      </section>
       <div className="w-full">
         <HeroScrollDemoProduct />
       </div>
