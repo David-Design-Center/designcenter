@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface ContactFormData {
   name: string;
   email: string;
+  message: string;
 }
 
 interface ContactFormPopupProps {
@@ -15,6 +16,7 @@ interface ContactFormPopupProps {
 const initialFormData: ContactFormData = {
   name: '',
   email: '',
+  message: '',
 };
 
 // Helper function to track GA4 events
@@ -145,7 +147,8 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
   const isFormValid = () => {
     return formData.name.trim().length >= 2 && 
            formData.email.trim() && 
-           isEmailValid;
+           isEmailValid &&
+           formData.message.trim().length >= 10;
   };
 
   if (!isOpen) return null;
@@ -169,15 +172,15 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 max-h-[85vh] overflow-hidden"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-[#C5A267] to-[#D6B378] px-6 py-6 text-white">
+          <div className="relative bg-gradient-to-r from-[#C5A267] to-[#D6B378] px-4 sm:px-6 py-4 sm:py-6 text-white">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-serif">Schedule Free Consultation</h2>
-                <p className="text-white/90 mt-1">Get started with your design journey</p>
+                <h2 className="text-xl sm:text-2xl font-serif">Schedule Free Consultation</h2>
+                <p className="text-sm sm:text-base text-white/90 mt-1">Get started with your design journey</p>
               </div>
               <button
                 onClick={onClose}
@@ -190,8 +193,8 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
           </div>
 
           {/* Form Content */}
-          <div className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="p-4 sm:p-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Name Field */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -207,7 +210,7 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                       ? 'border-green-300 focus:ring-2 focus:ring-green-500 focus:border-green-500'
                       : 'border-gray-200 focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267]'
                   }`}
-                  placeholder="Enter your full name"
+                  placeholder=""
                   required
                   minLength={2}
                 />
@@ -236,7 +239,7 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                         ? 'border-green-300 focus:ring-2 focus:ring-green-500 focus:border-green-500'
                         : 'border-gray-200 focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267]'
                     }`}
-                    placeholder="your@email.com"
+                    placeholder=""
                     required
                   />
                   {isEmailValid && (
@@ -257,47 +260,33 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                 )}
               </div>
 
-              {/* Call Option */}
-              <div className="text-center py-4">
-                <div className="flex items-center justify-center space-x-2 text-gray-600 mb-3">
-                  <div className="h-px bg-gray-300 flex-1"></div>
-                  <span className="text-sm font-medium">OR</span>
-                  <div className="h-px bg-gray-300 flex-1"></div>
-                </div>
-                <p className="text-sm text-gray-600 mb-3">Prefer to talk directly?</p>
-                <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-6 space-y-2 sm:space-y-0">
-                  <a 
-                    href="tel:+17189347100" 
-                    className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
-                    onClick={() => trackGAEvent('phone_call_button')}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>(718) 934-7100</span>
-                  </a>
-                  <a 
-                    href="mailto:info@dnddesigncenter.com" 
-                    className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
-                    onClick={() => trackGAEvent('email_link_button')}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span>info@dnddesigncenter.com</span>
-                  </a>
-                </div>
+              {/* Message Field */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => handleInputChange('message', e.target.value)}
+                  rows={4}
+                  className={`w-full px-4 py-3 border rounded-lg transition-all resize-none ${
+                    formData.message.trim().length >= 10
+                      ? 'border-green-300 focus:ring-2 focus:ring-green-500 focus:border-green-500'
+                      : 'border-gray-200 focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267]'
+                  }`}
+                  placeholder="Tell us about your project..."
+                  required
+                  minLength={10}
+                />
+                {formData.message && formData.message.trim().length < 10 && (
+                  <p className="mt-1 text-sm text-gray-500">
+                    Please provide at least 10 characters
+                  </p>
+                )}
               </div>
 
-              {/* Privacy Notice */}
-              <div className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
-                <p>
-                  By submitting this form, you agree to be contacted by our team to schedule your consultation. 
-                  We respect your privacy and will never share your information with third parties.
-                </p>
-              </div>
-
-              {/* Submit Button */}
+                            {/* Submit Button */}
               <button
                 type="submit"
                 disabled={!isFormValid() || isSubmitting}
@@ -327,11 +316,51 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                   <span>Try Again</span>
                 ) : (
                   <>
-                    <span>Schedule Consultation</span>
+                    <span>Send to our team</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}
               </button>
+
+              {/* Call Option */}
+              <div className="text-center py-3 sm:py-4">
+                <div className="flex items-center justify-center space-x-2 text-gray-600 mb-2">
+                  <div className="h-px bg-gray-300 flex-1"></div>
+                  <span className="text-sm font-medium">OR</span>
+                  <div className="h-px bg-gray-300 flex-1"></div>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Prefer to talk directly?</p>
+                <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-6 space-y-2 sm:space-y-0">
+                  <a 
+                    href="tel:+17189347100" 
+                    className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
+                    onClick={() => trackGAEvent('phone_call_button')}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>(718) 934-7100</span>
+                  </a>
+                  <a 
+                    href="mailto:info@dnddesigncenter.com" 
+                    className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
+                    onClick={() => trackGAEvent('email_link_button')}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span>info@dnddesigncenter.com</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Privacy Notice */}
+              <div className="text-xs sm:text-sm text-gray-600 bg-gray-50 p-3 sm:p-4 rounded-lg">
+                <p>
+                  By submitting this form, you agree to be contacted by our team to schedule your consultation. 
+                  We respect your privacy and will never share your information with third parties.
+                </p>
+              </div>
             </form>
           </div>
         </motion.div>
