@@ -23,7 +23,7 @@ export const bocaRatonFaqData: FAQItem[] = [
   {
     id: "faq-2",
     question: "How long does a custom kitchen installation take in Boca Raton?",
-    answer: "D&D Design Center delivers fully custom Italian kitchens and closets for Boca Raton homeowners in approximately 90 days from design approval to installation. This timeline includes:\n\n• Initial consultation and space assessment\n• 3D design rendering and revisions\n• Italian manufacturing with quality control\n• Shipping and customs clearance\n• White-glove installation by our certified team\n\nWe manage every step in-house, eliminating the delays that come from coordinating multiple contractors. You have one accountable partner from start to finish."
+    answer: "D&D Design Center can deliver fully custom Italian kitchens and closets in as little as 90 days from design approval to installation. Typical projects take 3-6 months depending on complexity and scope.\n\nOur process includes:\n• Initial consultation and space assessment\n• 3D design rendering and revisions\n• Italian manufacturing with quality control\n• Shipping and customs clearance\n• White-glove installation by our certified team\n\nWe'll provide a precise timeline during our initial consultation. We manage every step in-house, eliminating the delays that come from coordinating multiple contractors. You have one accountable partner from start to finish."
   },
   {
     id: "faq-3",

@@ -34,12 +34,17 @@ const BocaRatonHeroBottom = () => {
       <div className="relative h-full min-h-[500px] flex flex-col items-center justify-center text-center px-4 py-16">
         {/* Main headline */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white mb-4">
-          Your Boca Raton Home Deserves<br />Better Than Showroom Kitchens
+          Schedule a Free Call<br />Boca Raton's Best Design Firm
         </h2>
         
         {/* Value proposition */}
-        <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-8 font-light">
-          We design and install fully custom Italian kitchens and closets for Boca Raton homeowners in 90 days, even if past renovations disappointed.
+        <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-4 font-light">
+          Looking for an interior designer in Boca Raton? Schedule a free design consultation. It's time to refresh your home's look. Start 2026 with a free 3D render.
+        </p>
+
+        {/* Timeline disclaimer */}
+        <p className="text-white/60 text-sm max-w-xl mb-8">
+          Luxury Boca Raton Design. No Pressure Consultation.
         </p>
 
         {/* Benefits bullets */}

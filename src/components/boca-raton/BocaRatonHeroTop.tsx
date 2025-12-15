@@ -87,11 +87,14 @@ const BocaRatonHeroTop = () => {
               </h1>
               
               <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-light mb-4">
-                Italian Kitchens Designed for Boca Raton Living
+                Specialist Interior Designer - Get Free 3D Design
               </p>
               
-              <p className="text-sm sm:text-base text-white/80 font-light mb-6 max-w-md">
-                We design and install fully custom Italian kitchens and closets for Boca Raton homeowners in 90 days, even if past renovations disappointed.
+              <p className="text-sm sm:text-base text-white/80 font-light mb-2 max-w-md">
+                Looking for an interior designer in Boca Raton? Schedule a design consultation. <br />No Pressure Consultation. Not a Sales Call.
+              </p>
+              <p className="text-xs text-white/50 font-light mb-6 max-w-md">
+                Typical timeline: 3-6 months depending on project.
               </p>
 
               {/* Benefit bullets */}
@@ -106,7 +109,7 @@ const BocaRatonHeroTop = () => {
                   <svg className="w-4 h-4 text-[#C5A267] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-white/90 text-sm">Eliminate renovation chaos with one partner</span>
+                  <span className="text-white/90 text-sm">Remove renovation chaos with one partner</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-[#C5A267] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -121,7 +124,7 @@ const BocaRatonHeroTop = () => {
                 <p className="text-white/80 italic text-xs sm:text-sm">
                   "Our renovation finally feels worth the investment."
                 </p>
-                <p className="text-[#C5A267] text-xs mt-1">— Boca Raton Homeowner</p>
+                <p className="text-[#C5A267] text-xs mt-1">Verified Boca Raton Homeowner</p>
               </div>
             </div>
 
