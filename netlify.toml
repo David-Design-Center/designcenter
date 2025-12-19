@@ -2,10 +2,8 @@
   command = "npm run build"
   publish = "dist"
 
-# Ensure URLs do not redirect to add a trailing slash.
-# This aligns with sitemap entries like /productscollection (no slash)
-# and reduces 'Page with redirect' in Google Search Console.
-trailingSlash = "never"
+# Note: trailingSlash = "never" was removed because it caused redirect loops
+# with SPA routes. Trailing slash removal is handled explicitly in _redirects.
 
 [build.environment]
   NODE_VERSION = "22"
