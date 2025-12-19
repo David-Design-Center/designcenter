@@ -6,8 +6,8 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 # 3. (Optional) Force URL normalization for certain routes
 /ProductsCollection   /productscollection   301!
 
-# 3a. Explicitly remove trailing slash for products collection
-/productscollection/  /productscollection   301!
+# 3a. Serve productscollection directly (prevents folder redirect loop from react-snap)
+/productscollection   /productscollection/index.html   200!
 
 # 4. Redirect old product URLs to /productscollection
 /index.php?route=product/product&product_id=76&page=2    /productscollection    301

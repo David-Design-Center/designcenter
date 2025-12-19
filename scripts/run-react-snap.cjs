@@ -110,7 +110,7 @@ reactSnap.run({
     return true;
   },
   // Enable debugging
-  enableLogging: true
+  enableLogging: false
 }).then(() => {
   console.log('React Snap completed successfully!');
 }).catch(error => {
