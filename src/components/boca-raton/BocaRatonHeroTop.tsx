@@ -33,15 +33,49 @@ const BocaRatonHeroTop = () => {
     };
   }, []);
 
-  // Load Calendly widget script
+  // Load Calendly widget script and track scheduling events
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
 
+    // Calendly event listener for conversion tracking
+    const handleCalendlyEvent = (e: MessageEvent) => {
+      if (e.origin === 'https://calendly.com' && e.data?.event) {
+        if (e.data.event === 'calendly.event_scheduled') {
+          // PRIMARY CONVERSION: Calendly scheduling completed
+          // This is the highest-intent action - user committed time
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            // Fire Google Ads conversion
+            (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-17084982836/CALENDLY_SCHEDULED_LABEL', // TODO: Replace with actual conversion label from Google Ads
+              'value': 200,
+              'currency': 'USD',
+              'event_category': 'boca_raton_lead',
+              'event_label': 'calendly_scheduled'
+            });
+            // Also fire GA4 event for analytics
+            (window as any).gtag('event', 'calendly_scheduled', {
+              'event_category': 'boca_raton_conversion',
+              'event_label': 'consultation_booked',
+              'value': 200,
+              'page_location': window.location.href
+            });
+            console.log('Conversion tracked: Calendly scheduled');
+          }
+        } else if (e.data.event === 'calendly.date_and_time_selected') {
+          // Secondary: User selected a time (shows intent)
+          trackEvent('calendly_time_selected', 'time_slot_chosen');
+        }
+      }
+    };
+
+    window.addEventListener('message', handleCalendlyEvent);
+
     return () => {
-      // Cleanup script on unmount
+      // Cleanup script and event listener on unmount
+      window.removeEventListener('message', handleCalendlyEvent);
       const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
       if (existingScript) {
         existingScript.remove();

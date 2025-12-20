@@ -19,14 +19,49 @@ const initialFormData: ContactFormData = {
   message: '',
 };
 
-// Helper function to track GA4 events
-const trackGAEvent = (eventLabel: string) => {
+// Helper function to track GA4 events and Google Ads conversions
+const trackGAEvent = (eventLabel: string, isConversion: boolean = false, value: number = 0, conversionLabel?: string) => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
+    // Always fire GA4 event
     (window as any).gtag('event', 'click', {
       'event_category': 'contact_form_engagement',
       'event_label': eventLabel,
-      'value': 1
+      'value': value
     });
+    
+    // Fire Google Ads conversion if specified
+    if (isConversion && conversionLabel) {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': `AW-17084982836/${conversionLabel}`,
+        'value': value,
+        'currency': 'USD',
+        'event_category': 'boca_raton_lead',
+        'event_label': eventLabel
+      });
+      console.log(`Conversion tracked: ${eventLabel}`);
+    }
+  }
+};
+
+// Helper for form submission conversion (primary)
+const trackFormSubmitConversion = () => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    // PRIMARY CONVERSION: Form submission
+    (window as any).gtag('event', 'conversion', {
+      'send_to': 'AW-17084982836/FORM_SUBMIT_LABEL', // TODO: Replace with actual conversion label from Google Ads
+      'value': 100,
+      'currency': 'USD',
+      'event_category': 'boca_raton_lead',
+      'event_label': 'form_submit_qualified'
+    });
+    // Also fire GA4 event
+    (window as any).gtag('event', 'form_submit', {
+      'event_category': 'boca_raton_conversion',
+      'event_label': 'contact_form_submitted',
+      'value': 100,
+      'page_location': window.location.href
+    });
+    console.log('Conversion tracked: Form submitted');
   }
 };
 
@@ -130,6 +165,8 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
 
       if (response.ok) {
         setSubmitStatus('success');
+        // Track form submission as primary conversion
+        trackFormSubmitConversion();
         setTimeout(() => {
           onClose();
         }, 2000);
@@ -334,7 +371,7 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                   <a 
                     href="tel:+17189347100" 
                     className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
-                    onClick={() => trackGAEvent('phone_call_button')}
+                    onClick={() => trackGAEvent('phone_call_click', true, 25, 'PHONE_CLICK_LABEL')} // TODO: Replace PHONE_CLICK_LABEL with actual label
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -344,7 +381,7 @@ const ContactFormPopup: React.FC<ContactFormPopupProps> = ({ isOpen, onClose }) 
                   <a 
                     href="mailto:info@dnddesigncenter.com" 
                     className="inline-flex items-center justify-center space-x-2 text-[#C5A267] hover:text-[#B49157] font-medium transition-colors"
-                    onClick={() => trackGAEvent('email_link_button')}
+                    onClick={() => trackGAEvent('email_link_click', false, 10)} // Email is engagement signal, not conversion
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

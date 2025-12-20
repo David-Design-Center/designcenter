@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import BocaRatonHeroTop from "../components/boca-raton/BocaRatonHeroTop";
 import HomeCollections from "../components/home/HomeCollections";
@@ -11,6 +12,33 @@ import BocaRatonTextSection from "../components/boca-raton/BocaRatonTextSection"
 import { BocaRatonAccordionFeature } from '../components/boca-raton/BocaRatonAccordionFeature';
 
 function BocaRatonInteriorDesigner() {
+  // Load Inspectlet session recording for this page only
+  useEffect(() => {
+    // Avoid loading in development or if already loaded
+    if (typeof window === 'undefined' || (window as any).__inspld) return;
+    
+    (window as any).__insp = (window as any).__insp || [];
+    (window as any).__insp.push(['wid', 1105015992]);
+    
+    const loadInspectlet = () => {
+      if ((window as any).__inspld) return;
+      (window as any).__inspld = 1;
+      
+      const insp = document.createElement('script');
+      insp.type = 'text/javascript';
+      insp.async = true;
+      insp.id = 'inspsync';
+      insp.src = 'https://cdn.inspectlet.com/inspectlet.js?wid=1105015992&r=' + Math.floor(new Date().getTime() / 3600000);
+      
+      const firstScript = document.getElementsByTagName('script')[0];
+      if (firstScript && firstScript.parentNode) {
+        firstScript.parentNode.insertBefore(insp, firstScript);
+      }
+    };
+    
+    setTimeout(loadInspectlet, 0);
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
