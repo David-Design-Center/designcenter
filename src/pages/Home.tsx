@@ -9,6 +9,7 @@ import VisionnaireSection from "../components/home/VisionnaireSection";
 import SustainabilitySection from "../components/home/SustainabilitySection";
 import TextGenerateEffect from "../components/home/ParagraphSection";
 import { Feature197 } from '../components/ui/accordion-feature-section';
+import FollowOurJourneySection from "../components/home/FollowOurJourneySection";
 
 function Home() {
   return (
@@ -79,6 +80,7 @@ function Home() {
       <main className="pb-16">
         <HomeHeroTop />
         <HomeProjectsCards />
+        <FollowOurJourneySection />
         <SustainabilitySection />
         <VisionnaireSection />
         <TextGenerateEffect/>
