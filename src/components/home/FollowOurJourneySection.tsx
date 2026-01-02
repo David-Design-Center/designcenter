@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Play, ArrowRight, ArrowDown } from "lucide-react";
+import { Play, ArrowRight, ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 const videoUrls = [
   "https://res.cloudinary.com/designcenter/video/upload/v1767094959/jay2ri6u9kjtbxgqg3yy.mp4",
@@ -74,6 +74,9 @@ const VideoCard = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Generate poster image from video URL (Cloudinary transformation)
+  const posterUrl = videoUrl.replace('.mp4', '.jpg').replace('/upload/', '/upload/so_0/');
+
   const handleMouseEnter = () => {
     if (videoRef.current) {
       videoRef.current.play();
@@ -117,6 +120,7 @@ const VideoCard = ({
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
           src={videoUrl}
+          poster={posterUrl}
           muted
           loop
           playsInline
@@ -139,18 +143,14 @@ const VideoCard = ({
 
 const FollowOurJourneySection = () => {
   const [currentIndex, setCurrentIndex] = useState(Math.floor(videoUrls.length / 2));
-  const [isHovering, setIsHovering] = useState(false);
 
-  // Auto-rotate videos every 5 seconds (pause when hovering)
-  useEffect(() => {
-    if (isHovering) return;
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % videoUrls.length);
+  };
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % videoUrls.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isHovering]);
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + videoUrls.length) % videoUrls.length);
+  };
 
   const handleVideoClick = (videoUrl: string) => {
     // Open video in a new window/tab
@@ -158,9 +158,9 @@ const FollowOurJourneySection = () => {
   };
 
   return (
-    <section className="relative bg-gray-50 py-12 md:py-20">
+    <section className="relative bg-gray-50 py-12 md:py-20 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start overflow-hidden">
           {/* Left Column - Text and Social */}
           <div className="lg:col-span-5 flex flex-col justify-between min-h-0 lg:min-h-[600px] text-center lg:text-left">
             {/* Top Content - Headings */}
@@ -217,7 +217,7 @@ const FollowOurJourneySection = () => {
           </div>
 
           {/* Right Column - Video Carousel */}
-          <div className="lg:col-span-7 relative w-full h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] flex items-center justify-center [perspective:1000px] mt-8 lg:mt-0">
+          <div className="lg:col-span-7 relative w-full h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] flex items-center justify-center [perspective:1000px] mt-8 lg:mt-0 overflow-hidden">
             {videoUrls.map((videoUrl, index) => {
               const offset = index - currentIndex;
               const total = videoUrls.length;
@@ -232,11 +232,27 @@ const FollowOurJourneySection = () => {
                   videoUrl={videoUrl}
                   onClick={() => handleVideoClick(videoUrl)}
                   position={pos}
-                  onHoverStart={() => setIsHovering(true)}
-                  onHoverEnd={() => setIsHovering(false)}
+                  onHoverStart={() => {}}
+                  onHoverEnd={() => {}}
                 />
               );
             })}
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+              aria-label="Previous video"
+            >
+              <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-gray-800" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+              aria-label="Next video"
+            >
+              <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-gray-800" />
+            </button>
           </div>
         </div>
       </div>
