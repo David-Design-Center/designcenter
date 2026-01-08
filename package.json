@@ -11,47 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build": "node scripts/generate-posts-json.cjs && vite build",
-    "postbuild": "node scripts/run-react-snap.cjs && node scripts/inject-blog-content.js",
     "add-blog": "node scripts/add-blog-post.js"
-  },
-  "reactSnap": {
-    "source": "dist",
-    "minifyHtml": {
-      "collapseWhitespace": false,
-      "removeComments": false
-    },
-    "inlineCss": false,
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ],
-    "concurrency": 4,
-    "skipThirdPartyRequests": true,
-    "timeout": 600000,
-    "include": [
-      "/",
-      "/blog",
-      "/blog/what-interior-designers-do",
-      "/blog/why-hire-a-designer",
-      "/blog/affordable-kitchen-remodel-guide",
-      "/blog/custom-closets-for-home-office",
-      "/collaboration",
-      "/crafted-calm",
-      "/designers",
-      "/how-we-work",
-      "/italian-kitchen-cabinets",
-      "/privacy",
-      "/productscollection",
-      "/sustainability",
-      "/terms"
-    ],
-    "puppeteer": {
-      "cache": false,
-      "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    },
-    "userAgent": "ReactSnap",
-    "fixWebpackChunksIssue": false,
-    "removeBlobs": true
   },
   "dependencies": {
     "@relume_io/relume-tailwind": "^1.3.0",
@@ -81,7 +41,6 @@
     "react-markdown": "^10.1.0",
     "react-particles": "^2.12.2",
     "react-router-dom": "^6.22.3",
-    "react-snap": "^1.23.0",
     "react-swipeable": "^7.0.1",
     "rehype-raw": "^7.0.0",
     "remark-breaks": "4.0.0",
