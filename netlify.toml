@@ -18,28 +18,3 @@
       "public",
       "dist"
     ]
-
-[[plugins]]
-  package = "@netlify/plugin-prerender"
-
-  [plugins.inputs]
-    # Enable prerendering for crawlers and AI agents
-    enabled = true
-    
-    # Skip loading resources that don't affect returned HTML
-    skipCSSFiles = true
-    skipImageFiles = true
-    skipVideoFiles = true
-    skipFontFiles = true
-    
-    # Skip common tracking, analytics and marketing domains
-    skipThirdPartyRequests = "googletagmanager.com, analytics.js"
-    
-    # Always skip these domains to speed up prerendering
-    alwaysSkip = "tracker.com, analytics.js, googletagmanager.com, calendly.com, cookiebot.com, inspectlet.com"
-    
-    # Cache prerendered pages for 72 hours (6-720 hours, default: 72)
-    cacheDuration = 72
-    
-    # Stale-while-revalidate duration in hours (0-168 hours, default: 24)
-    staleWhileRevalidateDuration = 24
