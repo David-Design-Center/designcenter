@@ -49,7 +49,7 @@ const BocaRatonHeroTop = () => {
           if (typeof window !== 'undefined' && (window as any).gtag) {
             // Fire Google Ads conversion
             (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17084982836/CALENDLY_SCHEDULED_LABEL', // TODO: Replace with actual conversion label from Google Ads
+              'send_to': 'AW-17084982836/P6POCKnJs9QbELTM4NI_',
               'value': 200,
               'currency': 'USD',
               'event_category': 'boca_raton_lead',
@@ -65,7 +65,18 @@ const BocaRatonHeroTop = () => {
             console.log('Conversion tracked: Calendly scheduled');
           }
         } else if (e.data.event === 'calendly.date_and_time_selected') {
-          // Secondary: User selected a time (shows intent)
+          // MICRO-CONVERSION: User selected a time (shows intent)
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            // Fire Google Ads micro-conversion
+            (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-17084982836/P6POCKnJs9QbELTM4NI_',
+              'value': 50,
+              'currency': 'USD',
+              'event_category': 'boca_raton_engagement',
+              'event_label': 'calendly_time_selected'
+            });
+          }
+          // Also track in GA4
           trackEvent('calendly_time_selected', 'time_slot_chosen');
         }
       }

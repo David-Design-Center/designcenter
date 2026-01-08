@@ -48,7 +48,7 @@ const trackFormSubmitConversion = () => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     // PRIMARY CONVERSION: Form submission
     (window as any).gtag('event', 'conversion', {
-      'send_to': 'AW-17084982836/FORM_SUBMIT_LABEL', // TODO: Replace with actual conversion label from Google Ads
+      'send_to': 'AW-17084982836/P6POCKnJs9QbELTM4NI_',
       'value': 100,
       'currency': 'USD',
       'event_category': 'boca_raton_lead',
