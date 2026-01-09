@@ -96,10 +96,10 @@ const BocaRatonAccordionFeature = ({ features = bocaRatonFeatures }: BocaRatonAc
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-900 leading-relaxed">
-            How We Transform Boca Raton Homes with Custom Italian Design
+            How We Transform Boca Raton Homes
           </h2>
           <p className="mt-4 text-m text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            From kitchens to closets, discover how D&D Design Center creates spaces that increase your home's value and finally feel intentional.
+            From kitchens to closets, discover how we create spaces and elevate everyday living.
           </p>
         </div>
 
@@ -151,33 +151,12 @@ const BocaRatonAccordionFeature = ({ features = bocaRatonFeatures }: BocaRatonAc
               ))}
             </Accordion>
           </div>
-          <div className="relative m-auto hidden w-1/2 overflow-hidden rounded-xl md:block order-1 md:order-2">
+          <div className="relative m-auto hidden w-1/2 overflow-hidden md:block order-1 md:order-2">
             <img
               src={activeImage}
               alt="Luxury Italian furniture for Boca Raton homes"
               className="aspect-[4/3] object-cover shadow-lg transition-all duration-500"
             />
-          </div>
-        </div>
-
-        {/* Social Proof */}
-        <div className="mt-12 p-8 bg-gray-50 rounded-lg">
-          <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div>
-              <blockquote className="text-gray-600 italic">
-                "D&D delivered exactly what they promised. The kitchen changed how we live in the house."
-              </blockquote>
-            </div>
-            <div>
-              <blockquote className="text-gray-600 italic">
-                "Every detail felt intentional. Zero stress. No surprises."
-              </blockquote>
-            </div>
-            <div>
-              <blockquote className="text-gray-600 italic">
-                "Our Boca Raton condo finally matches its location."
-              </blockquote>
-            </div>
           </div>
         </div>
       </div>

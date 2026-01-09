@@ -1,15 +1,11 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import BocaRatonHeroTop from "../components/boca-raton/BocaRatonHeroTop";
-import HomeCollections from "../components/home/HomeCollections";
-import HomeProjectsCards from "../components/home/HomeProjectsCards";
-import HomeHowWeWork from "../components/home/HomeHowWeWork";
 import BocaRatonFAQ from "../components/boca-raton/BocaRatonFAQ";
 import BocaRatonHeroBottom from "../components/boca-raton/BocaRatonHeroBottom";
 import VisionnaireSection from "../components/home/VisionnaireSection";
-import SustainabilitySection from "../components/home/SustainabilitySection";
 import BocaRatonTextSection from "../components/boca-raton/BocaRatonTextSection";
-import { BocaRatonAccordionFeature } from '../components/boca-raton/BocaRatonAccordionFeature';
+import { FullWidthImageGrid } from "../components/ui/FullWidthImageGrid";
 
 function BocaRatonInteriorDesigner() {
   // Load Inspectlet session recording for this page only
@@ -144,13 +140,20 @@ function BocaRatonInteriorDesigner() {
       
       <main className="pb-16">
         <BocaRatonHeroTop />
-        <HomeProjectsCards />
-        <SustainabilitySection />
+        <FullWidthImageGrid 
+          images={[
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974878/6_q7dwnv.avif", alt: "Luxury interior design project by D&D Design Center" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974874/2_lromdm.avif", alt: "Custom Italian kitchen design" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974874/7_cdmqlu.avif", alt: "Modern interior design for Boca Raton homes" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974872/5_c3vyli.avif", alt: "Elegant closet design and organization" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974872/1_thborc.avif", alt: "High-end residential interior" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974871/4_jhwvwu.avif", alt: "Contemporary living space design" },
+            { src: "https://res.cloudinary.com/designcenter/image/upload/v1767974872/3_i1bod2.avif", alt: "Premium home renovation" }
+          ]}
+          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
+        />
         <VisionnaireSection />
         <BocaRatonTextSection />
-        <HomeCollections />
-        <HomeHowWeWork />
-        <BocaRatonAccordionFeature />
         <BocaRatonFAQ />
         <BocaRatonHeroBottom />
       </main>

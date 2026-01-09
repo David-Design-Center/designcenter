@@ -52,9 +52,9 @@ const VisionnaireSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-20 bg-[#1A1A1A] relative overflow-hidden">
+    <section ref={sectionRef} className="py-6 pb-0 md:py-20 bg-[#1A1A1A] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center">
           {/* Left - Brands Showcase */}
           <div ref={brandsRef} className="relative order-2 md:order-1 grayscale">
             <BrandsShowcase 
@@ -69,13 +69,13 @@ const VisionnaireSection = () => {
 
           {/* Right - Content */}
           <div className="text-white space-y-4 md:space-y-6 order-1 md:order-2">
-            <h2 ref={titleRef} className="text-4xl sm:text-5xl md:text-7xl font-serif">
-              Why is Italian furniture the superior choice for luxury interiors?
+            <h2 ref={titleRef} className="text-2xl sm:text-5xl md:text-7xl font-serif">
+              We use exclusive Italian furniture for client interiors
             </h2>
             <p ref={textRef} className="text-white/80 text-base md:text-lg leading-relaxed font-light">
-        Italian luxury design stands apart for its balance of beauty and purpose. Our exclusive partnerships with bespoke Italian brands ensure every piece captures that harmony, crafted from the finest materials with meticulous attention to detail.
+            Italian luxury design stands apart for its balance of beauty and purpose. Our exclusive partnerships ensure every piece captures that harmony.
             </p>
-            <Link to="/collaboration" ref={ctaRef} className="inline-flex items-center gap-2 px-6 py-3 text-white font-medium rounded-sm hover:bg-[#B49157] transition-colors duration-300 group min-h-[44px]">
+            <Link to="/collaboration" ref={ctaRef} className="inline-flex items-center gap-2 px-6 pl-0 py-3 text-white font-medium rounded-sm hover:bg-[#B49157] transition-colors duration-300 group min-h-[44px]">
               <span>OUR PARTNERS</span>
               <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
             </Link>

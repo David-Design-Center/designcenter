@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollableBlurContainer } from '../ui/progressive-blur';
 
 const BocaRatonTextSection: React.FC = () => {
     const triggerFooterContact = () => {
@@ -6,82 +7,72 @@ const BocaRatonTextSection: React.FC = () => {
     };
 
     return (
-        <section 
-            className="relative py-12 sm:py-24 px-6 md:px-12 overflow-hidden" 
-            style={{ 
-                background: 'linear-gradient(to bottom, #FDFBF7, #F7F3EE)' 
-            }}
+        <ScrollableBlurContainer 
+            backgroundColor="#f5f4f3" 
+            height="80vh" 
+            blurHeight="120px"
         >
-            {/* Marble texture background */}
-            <div className="absolute inset-0 opacity-100 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/100 to-white/50" />
+            {/* Scroll indicator */}
+            <div className="pt-20 pb-4 grid content-start justify-items-center text-center text-black">
+                <span className="relative text-[10px] uppercase tracking-widest opacity-30 after:absolute after:left-1/2 after:-translate-x-1/2 after:top-full after:mt-2 after:h-10 after:w-px after:bg-gradient-to-b after:from-black/30 after:to-transparent after:content-['']">
+                    Scroll to explore
+                </span>
             </div>
-            
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 items-start lg:items-center relative z-10">
-                {/* Left Column with enhanced gold accent line */}
-                <div className="relative pl-12 flex-shrink-0 w-full lg:w-auto max-w-md">
-                    {/* Brushed gold vertical line with subtle glow */}
-                    <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-[#D4B77B] via-[#C5A267] to-[#9E7F43]">
-                        <div className="absolute -left-[2px] top-0 h-full w-[7px] bg-[#C5A267] opacity-40 blur-sm"></div>
-                    </div>
-                    
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight tracking-wide" 
-                        style={{ fontFamily: "'Playfair Display', serif" }}>
-                        <span className="uppercase font-light block mb-3">Boca Raton Kitchens That Actually Increase Home Value</span>
-                        <span className="normal-case text-lg sm:text-xl md:text-2xl text-[#9E7F43] font-light block mt-3" 
-                              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                            Where Boca Raton Homes Get Their Statement Kitchens
-                        </span>
-                    </h2>
+
+            {/* Main content - tight article style */}
+            <div className="w-full max-w-md space-y-8 px-14 pb-20 text-justify">
+
+                {/* Article content */}
+                <div className="text-xl text-black/50 leading-relaxed space-y-4">
+                    <p>
+                        Boca Raton homes demand a different approach. Natural light floods through floor-to-ceiling windows. Open floor plans connect indoor and outdoor living. The aesthetic blends resort-style luxury with everyday functionality.
+                    </p>
+                    <p>
+                        We don't impose design trends. We listen to how you live, then create spaces that work specifically for your home and neighborhood.
+                    </p>
                 </div>
 
-                {/* Right Column – Supporting Paragraph with soft shadow */}
-                <div className="pr-4 md:pr-10">
-                    <div className="relative">
-                        <p className="text-gray-700 text-base md:text-lg leading-relaxed font-light mb-6">
-                            "D&D Design Center creates custom Italian kitchens and closets for Boca Raton homeowners who refuse generic design. From concept to installation, everything is handled in-house with precision and accountability. It matters because shortcuts in luxury renovations are expensive and permanent."
-                        </p>
-                        
-                        {/* Emotional Benefits */}
-                        <div className="space-y-3 mb-6">
-                            <div className="flex items-start gap-3">
-                                <span className="text-[#C5A267] mt-1">✓</span>
-                                <span className="text-gray-600">Confidence your space is designed right before construction starts</span>
-                            </div>
-                            <div className="flex items-start gap-3">
-                                <span className="text-[#C5A267] mt-1">✓</span>
-                                <span className="text-gray-600">Relief knowing every detail is handled without chasing contractors</span>
-                            </div>
-                            <div className="flex items-start gap-3">
-                                <span className="text-[#C5A267] mt-1">✓</span>
-                                <span className="text-gray-600">Pride in owning a kitchen no neighbor can replicate</span>
-                            </div>
-                            <div className="flex items-start gap-3">
-                                <span className="text-[#C5A267] mt-1">✓</span>
-                                <span className="text-gray-600">Control over timeline, budget, and final outcome</span>
-                            </div>
-                        </div>
+                {/* Kitchens */}
+                <div>
+                    <p className="text-xl text-black/50">Kitchens</p>
+                    <p className="text-xl text-black/50 leading-relaxed">
+                        The heart of Boca Raton entertaining. We design for both casual family meals and catered events. Italian cabinetry handles humidity without warping. Stone countertops resist heat and sun exposure. Islands become focal points with integrated seating, wine storage, and prep zones.
+                    </p>
+                </div>
 
-                        {/* CTA Button */}
-                        <button
-                            onClick={triggerFooterContact}
-                            className="inline-flex items-center justify-center px-6 py-3 bg-[#C5A267] text-white font-medium rounded-sm hover:bg-[#B49157] transition-colors duration-200"
-                        >
-                            ACCESS PRIVATE DESIGN CONSULT
-                        </button>
+                {/* Closets */}
+                <div>
+                    <p className="text-xl text-black/50">Closets & Dressing Rooms</p>
+                    <p className="text-xl text-black/50 leading-relaxed">
+                        Climate-controlled organization for year-round resort wear and seasonal formal attire. Custom sections for shoes, bags, jewelry, and golf gear. Lighting designed for accurate color matching. Glass doors showcase designer pieces while protecting from dust and humidity.
+                    </p>
+                </div>
 
-                        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-radial from-[#C5A267]/10 to-transparent opacity-50"></div>
-                    </div>
+                {/* Living Spaces */}
+                <div>
+                    <p className="text-xl text-black/50">Living & Dining Rooms</p>
+                    <p className="text-xl text-black/50 leading-relaxed">
+                        Furniture placement that maximizes water views and natural light. Built-ins designed to hide technology while displaying art and collections. Materials chosen for durability against sun exposure and salt air.
+                    </p>
+                </div>
+
+                {/* Bathrooms */}
+                <div>
+                    <p className="text-xl text-black/50">Bathrooms & Spa Spaces</p>
+                    <p className="text-xl text-black/50 leading-relaxed">
+                        Spa-level luxury with hotel-grade ventilation. Heated floors, rain showers, and soaking tubs with water views. Dual vanities with dedicated storage for each person.
+                    </p>
+                </div>
+
+                {/* Outdoor */}
+                <div>
+                    <p className="text-xl text-black/50">Outdoor Living</p>
+                    <p className="text-xl text-black/50 leading-relaxed">
+                        Seamless transitions between indoor and outdoor spaces. Covered patios with full kitchens and weather-resistant cabinetry. Because in Boca Raton, outdoor spaces aren't seasonal—they're daily living areas.
+                    </p>
                 </div>
             </div>
-
-            {/* Guarantee Statement */}
-            <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-[#C5A267]/20">
-                <p className="text-center text-gray-600 italic">
-                    "If your 3D design doesn't meet your expectations, we revise it until it does — before construction begins."
-                </p>
-            </div>
-        </section>
+        </ScrollableBlurContainer>
     );
 };
 

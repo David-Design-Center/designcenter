@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import ScrollArrow from "../ui/ScrollArrow";
+import { useCallback, useState, useEffect } from "react";
+import { Button } from "../ui/button";
 
 // Helper function to track GA4 events
 const trackEvent = (eventName: string, eventLabel: string) => {
@@ -12,185 +12,150 @@ const trackEvent = (eventName: string, eventLabel: string) => {
   }
 };
 
+// Countdown end date: January 11, 2026 at midnight EST
+const COUNTDOWN_END = new Date('2026-01-11T00:00:00-05:00').getTime();
+
 const BocaRatonHeroTop = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const video = videoRef.current;
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const difference = COUNTDOWN_END - now;
 
-    const playVideo = () => {
-      if (video) {
-        video.play().catch((error) => {
-          console.log("Autoplay prevented:", error);
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    document.addEventListener("click", playVideo, { once: true });
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
 
-    return () => {
-      document.removeEventListener("click", playVideo);
-    };
+    return () => clearInterval(timer);
   }, []);
 
-  // Load Calendly widget script and track scheduling events
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Calendly event listener for conversion tracking
-    const handleCalendlyEvent = (e: MessageEvent) => {
-      if (e.origin === 'https://calendly.com' && e.data?.event) {
-        if (e.data.event === 'calendly.event_scheduled') {
-          // PRIMARY CONVERSION: Calendly scheduling completed
-          // This is the highest-intent action - user committed time
-          if (typeof window !== 'undefined' && (window as any).gtag) {
-            // Fire Google Ads conversion
-            (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17084982836/P6POCKnJs9QbELTM4NI_',
-              'value': 200,
-              'currency': 'USD',
-              'event_category': 'boca_raton_lead',
-              'event_label': 'calendly_scheduled'
-            });
-            // Also fire GA4 event for analytics
-            (window as any).gtag('event', 'calendly_scheduled', {
-              'event_category': 'boca_raton_conversion',
-              'event_label': 'consultation_booked',
-              'value': 200,
-              'page_location': window.location.href
-            });
-            console.log('Conversion tracked: Calendly scheduled');
-          }
-        } else if (e.data.event === 'calendly.date_and_time_selected') {
-          // MICRO-CONVERSION: User selected a time (shows intent)
-          if (typeof window !== 'undefined' && (window as any).gtag) {
-            // Fire Google Ads micro-conversion
-            (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17084982836/P6POCKnJs9QbELTM4NI_',
-              'value': 50,
-              'currency': 'USD',
-              'event_category': 'boca_raton_engagement',
-              'event_label': 'calendly_time_selected'
-            });
-          }
-          // Also track in GA4
-          trackEvent('calendly_time_selected', 'time_slot_chosen');
-        }
-      }
-    };
-
-    window.addEventListener('message', handleCalendlyEvent);
-
-    return () => {
-      // Cleanup script and event listener on unmount
-      window.removeEventListener('message', handleCalendlyEvent);
-      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
+  const triggerFooterContact = useCallback(() => {
+    trackEvent('contact_form_opened', 'hero_phone_click');
+    window.dispatchEvent(new CustomEvent('openContactForm'));
   }, []);
+
+  const images = [
+    "https://res.cloudinary.com/designcenter/image/upload/v1767974878/6_q7dwnv.avif",
+    "https://res.cloudinary.com/designcenter/image/upload/v1767974874/2_lromdm.avif",
+    "https://res.cloudinary.com/designcenter/image/upload/v1767974872/5_c3vyli.avif"
+  ];
 
   return (
-    <section className="relative min-h-screen overflow-visible">
-      {/* Background video & overlay */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-          poster="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif"
-        >
-          <source
-            src="https://res.cloudinary.com/designcenter/video/upload/v1765740067/txk6exbm9h3kwpggzlmj.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-      </div>
-
-      {/* Two-column layout */}
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="w-full max-w-5xl mx-auto px-8 sm:px-12 lg:px-16 py-20 sm:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-            
-            {/* Left Column - Value and Outcome */}
-            <div className="text-left">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif text-white leading-tight mb-4">
-                <span className="block">Boca Raton</span>
-                <span className="block text-[#C5A267]">Interior Designer</span>
+    <section className="w-full py-4 lg:py-10 bg-white pt-20 lg:pt-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <div className="flex gap-6 flex-col order-1">
+            <div className="flex gap-4 flex-col">
+              <h1 className="text-8xl md:text-20xl lg:text-20xl max-w-lg tracking-tight text-left font-bold text-[#1a1a2e]">
+                BOCA RATON <br></br>INTERIOR DESIGNER
               </h1>
-              
-              <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-light mb-4">
-                Specialist Interior Designer - Get Free 3D Design
+              <p className="text-md md:text-xl leading-relaxed text-gray-600 max-w-md text-left">
+                We are an Interior Design Firm from New York, with 20 years of experience designing luxury Italian interiors in Boca Raton.
               </p>
-              
-              <p className="text-sm sm:text-base text-white/80 font-light mb-2 max-w-md">
-                Looking for an interior designer in Boca Raton? Schedule a design consultation. <br />No Pressure Consultation. Not a Sales Call.
+            </div>
+            {/* Buttons - Desktop only */}
+            <div className="hidden md:flex flex-col gap-3">
+              <p className="text-sm text-gray-500">
+                Before you invest, grab a free visualization of your new home risk free. Offer is limited.
               </p>
-              <p className="text-xs text-white/50 font-light mb-6 max-w-md">
-                Typical timeline: 3-6 months depending on project.
-              </p>
-
-              {/* Benefit bullets */}
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C5A267] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-white/90 text-sm">Increase resale value with Italian craftsmanship</span>
+              <Button size="lg" className="gap-3 w-fit" onClick={triggerFooterContact}>
+                CALL US TO RECEIVE A FREE RENDER
+              </Button>
+              {/* Countdown Timer - Desktop */}
+              <div className="flex gap-4 mt-2">
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-[#1a1a2e] tabular-nums">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">Days</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C5A267] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-white/90 text-sm">Remove renovation chaos with one partner</span>
+                <span className="text-2xl font-bold text-[#C5A267]">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-[#1a1a2e] tabular-nums">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">Hours</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C5A267] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-white/90 text-sm">Live daily in a space that feels intentional</span>
+                <span className="text-2xl font-bold text-[#C5A267]">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-[#1a1a2e] tabular-nums">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">Min</span>
                 </div>
-              </div>
-
-              {/* Social proof */}
-              <div className="border-l-2 border-[#C5A267] pl-3">
-                <p className="text-white/80 italic text-xs sm:text-sm">
-                  "Our renovation finally feels worth the investment."
-                </p>
-                <p className="text-[#C5A267] text-xs mt-1">Verified Boca Raton Homeowner</p>
+                <span className="text-2xl font-bold text-[#C5A267]">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-[#1a1a2e] tabular-nums">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">Sec</span>
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Right Column - Calendly Scheduling */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl w-full lg:max-w-sm mx-auto lg:mx-0">
-              {/* Header above Calendly */}
-              <div className="bg-[#1A1A1A] px-3 py-2 text-center rounded-t-lg">
-                <h2 className="text-base sm:text-lg font-serif text-white mb-0.5">
-                  Schedule a Private Design Consultation
-                </h2>
-                <p className="text-white/70 text-xs">
-                  No obligation. No sales pressure. 15 minutes.
-                </p>
-              </div>
-              
-              {/* Calendly Widget */}
-              <div 
-                className="calendly-inline-widget" 
-                data-url="https://calendly.com/dnddesigncenter-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=c5a267"
-                style={{ minWidth: '280px', height: '500px', width: '100%' }}
+          {/* Right Column - Image Grid */}
+          <div className="grid grid-cols-2 gap-4 order-2">
+            <div className="aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={images[0]} 
+                alt="Luxury Italian kitchen design" 
+                className="w-full h-full object-cover"
+                loading="eager"
               />
+            </div>
+            <div className="row-span-2 overflow-hidden bg-gray-100">
+              <img 
+                src={images[1]} 
+                alt="Custom interior design project" 
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden bg-gray-100">
+              <img 
+                src={images[2]} 
+                alt="Modern living space design" 
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Buttons - Mobile only, below images */}
+          <div className="flex md:hidden flex-col gap-3 order-3 w-full bg-[#1a1a2e] p-6 -mx-6">
+            <p className="text-md text-white text-center">
+              Before you invest, get a free visualization of your new home risk free
+            </p>
+            <Button size="lg" className="gap-3 w-full" onClick={triggerFooterContact}>
+              CALL US TO RECIEVE A FREE RENDER
+            </Button>
+            {/* Countdown Timer */}
+            <div className="flex justify-center gap-4 mt-4">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-white tabular-nums">{String(timeLeft.days).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">Days</span>
+              </div>
+              <span className="text-3xl font-bold text-[#C5A267]">:</span>
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-white tabular-nums">{String(timeLeft.hours).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">Hours</span>
+              </div>
+              <span className="text-3xl font-bold text-[#C5A267]">:</span>
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-white tabular-nums">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">Min</span>
+              </div>
+              <span className="text-3xl font-bold text-[#C5A267]">:</span>
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold text-white tabular-nums">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">Sec</span>
+              </div>
             </div>
           </div>
         </div>
@@ -200,4 +165,3 @@ const BocaRatonHeroTop = () => {
 };
 
 export default BocaRatonHeroTop;
-
