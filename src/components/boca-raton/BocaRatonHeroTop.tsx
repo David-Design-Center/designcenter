@@ -12,8 +12,8 @@ const trackEvent = (eventName: string, eventLabel: string) => {
   }
 };
 
-// Countdown end date: January 11, 2026 at midnight EST
-const COUNTDOWN_END = new Date('2026-01-11T00:00:00-05:00').getTime();
+// Countdown end date: January 16, 2026 at midnight EST
+const COUNTDOWN_END = new Date('2026-01-16T00:00:00-05:00').getTime();
 
 const BocaRatonHeroTop = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
