@@ -3,7 +3,6 @@ import bedroomData from './quiz/bedroom.json';
 import diningData from './quiz/dining.json';
 import livingData from './quiz/living.json';
 import kitchenData from './quiz/kitchen.json';
-import { v4 as uuidv4 } from 'uuid';
 
 interface RoomJsonData {
   title: string;
@@ -13,8 +12,8 @@ interface RoomJsonData {
 
 // Convert JSON data to QuizImage format
 const convertToQuizImage = (data: RoomJsonData[], room: string): QuizImage[] => {
-  return data.map(item => ({
-    id: uuidv4(),  // Generate unique ID for each image
+  return data.map((item, index) => ({
+    id: `${room}-${index}`,  // Generate unique ID from room and index
     title: item.title,
     url: item.link,
     description: item.description, // Add description field

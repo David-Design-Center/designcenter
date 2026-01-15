@@ -33,7 +33,7 @@ export const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
     
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
     setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5); // 5px buffer for browser rounding
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5); // 5px for browser rounding
   };
 
   // Handle scroll to position

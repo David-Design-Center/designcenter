@@ -2,16 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import BlogPost from './BlogPost';
 import { Filter } from 'lucide-react';
-import matter from 'gray-matter';
-import { Buffer } from 'buffer';
-if (typeof window !== 'undefined') {
-  (window as any).Buffer = Buffer;
-}
+import postsData from '../../data/posts.json';
 
 const categories = ['All', 'Design', 'Inspiration', 'Trends', 'Sustainability', 'Craftsmanship'];
-
-// Dynamically import all markdown files in src/posts
-const postFiles = import.meta.glob('../../posts/*.md', { query: '?raw', import: 'default' });
 
 const BlogGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -20,37 +13,31 @@ const BlogGrid = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const loadPosts = () => {
       setIsLoading(true);
       try {
-        const loadedPosts = await Promise.all(
-          Object.entries(postFiles).map(async ([path, resolver]) => {
-            const raw = await resolver();
-            const { data, content } = matter(raw as string);
-            // Generate slug from filename
-            const fileName = path.split('/').pop()?.replace('.md', '');
-            return {
-              ...data,
-              content,
-              slug: fileName,
-            };
-          })
-        );
+        const loadedPosts = Object.entries(postsData).map(([slug, entry]: [string, any]) => ({
+          ...entry.data,
+          content: entry.content,
+          slug,
+        }));
+        
         // Sort by date (newest first)
         loadedPosts.sort((a, b) => {
-          const dateA = (a as any).date ? new Date((a as any).date).getTime() : 0;
-          const dateB = (b as any).date ? new Date((b as any).date).getTime() : 0;
+          const dateA = a.date ? new Date(a.date).getTime() : 0;
+          const dateB = b.date ? new Date(b.date).getTime() : 0;
           return dateB - dateA;
         });
+        
         setPosts(loadedPosts);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('Error loading posts:', error);
       } finally {
         setIsLoading(false);
       }
     };
   
-    fetchPosts();
+    loadPosts();
   }, []);
 
   const filteredPosts = selectedCategory === 'All'
