@@ -5,7 +5,7 @@ import HowWeWorkStages from '../components/howwework/HowWeWorkStages';
 import HowWeWorkCallToAction from '../components/howwework/HowWeWorkCallToAction';
 import { FeatureStepsDemo } from '../components/howwework/FeatureStepsDemo';
 import { AnimatePresence } from 'framer-motion';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import { useEffect, useState } from 'react';
@@ -65,8 +65,8 @@ const HowWeWork = () => {
         triggerFooterContact={triggerFooterContact}
       />
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

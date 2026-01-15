@@ -2,6 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Phone, Volume2, VolumeX } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+// Helper function to track phone call clicks with Google Ads conversion
+const trackPhoneClick = (location: string) => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    // GA4 event
+    (window as any).gtag('event', 'click', {
+      'event_category': 'phone_call',
+      'event_label': location,
+      'value': 25
+    });
+    // Google Ads conversion for phone clicks
+    (window as any).gtag('event', 'conversion', {
+      'send_to': 'AW-17084982836/LZqdCPeO_eUbELTM4NI_',
+      'value': 25,
+      'currency': 'USD',
+      'event_category': 'phone_lead',
+      'event_label': location
+    });
+    console.log(`Phone click tracked: ${location}`);
+  }
+};
+
 interface NavbarProps {
   isScrolled: boolean;
   isMenuOpen: boolean;
@@ -178,6 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   href="tel:+17189347100" 
                   className="flex items-center justify-center w-10 h-10 text-white bg-[#C5A267] rounded-full"
                   aria-label="Call us"
+                  onClick={() => trackPhoneClick('navbar_mobile_phone')}
                 >
                   <Phone className="w-5 h-5" />
                 </a>

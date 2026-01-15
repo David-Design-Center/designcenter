@@ -5,12 +5,14 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  projectType: string;
 }
 
 const initialFormData: ContactFormData = {
   name: '',
   email: '',
   message: '',
+  projectType: '',
 };
 
 // Helper for form submission conversion
@@ -102,12 +104,17 @@ const BocaRatonHeroBottom = () => {
     return formData.name.trim().length >= 2 && 
            formData.email.trim() && 
            isEmailValid &&
-           formData.message.trim().length >= 10;
+           formData.message.trim().length >= 10 &&
+           formData.projectType !== '';
   };
 
   return (
-    <section className="w-full bg-[#f5f4f3] py-16 lg:py-24">
-      <div className="max-w-xl mx-auto px-6 lg:px-8">
+    <section className="w-full relative bg-cover bg-center py-16 lg:py-24" style={{ backgroundImage: 'url(https://res.cloudinary.com/designcenter/image/upload/v1767974872/5_c3vyli.avif)' }}>
+      {/* White overlay */}
+      <div className="absolute inset-0 bg-white/95"></div>
+      
+      {/* Content */}
+      <div className="max-w-xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
           <p className="text-gray-600">
@@ -193,6 +200,28 @@ const BocaRatonHeroBottom = () => {
                 required
                 minLength={10}
               />
+            </div>
+
+            {/* Project Type Dropdown */}
+            <div>
+              <label htmlFor="project-type" className="block text-sm font-medium text-gray-700 mb-2">
+                What area(s) are you looking to redesign? *
+              </label>
+              <select
+                id="project-type"
+                name="project-type"
+                value={formData.projectType}
+                onChange={(e) => handleInputChange('projectType', e.target.value)}
+                className="w-full px-4 py-3 border border-gray-200 focus:ring-2 focus:ring-[#C5A267] focus:border-[#C5A267] transition-all bg-white"
+                required
+              >
+                <option value="">-- Select an Option --</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Bathroom">Bathroom</option>
+                <option value="Closet/Dressing Room">Closet/Dressing Room</option>
+                <option value="Outdoor Living Space">Outdoor Living Space</option>
+                <option value="Full Home">Full Home</option>
+              </select>
             </div>
 
             {/* Submit Button */}

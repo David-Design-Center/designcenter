@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import DesignersHero from '../components/designers/DesignersHero';
 import DesignerCard from '../components/designers/DesignerCard';
 import DesignersCTA from '../components/designers/DesignersCTA';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 
 interface Designer {
@@ -74,8 +74,8 @@ const Designers: React.FC = () => {
 
       <DesignersCTA onContactTeam={triggerFooterContact} />
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

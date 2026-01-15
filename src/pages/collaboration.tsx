@@ -5,7 +5,7 @@ import VisionnaireCTA from '../components/collaboration/VisionnaireCTA';
 import VisionnaireThankYou from '../components/collaboration/VisionnaireThankYou';
 import { HeroScrollDemo } from '../components/ui/HeroScrollDemo';
 import { GridMotionDemo } from '../components/collaboration/GridMotionDemo';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import VisionnaireBrands from '../components/collaboration/VisionnaireBrands';
@@ -52,8 +52,8 @@ const Collaboration = () => {
         <VisionnaireCTA triggerFooterContact={triggerFooterContact} />
       </main>
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

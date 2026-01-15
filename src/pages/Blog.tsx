@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import BlogHero from '../components/blog/BlogHero';
 import BlogGrid from '../components/blog/BlogGrid';
 import BlogCTA from '../components/blog/BlogCTA';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 
 const Blog = () => {
@@ -29,8 +29,8 @@ const Blog = () => {
         <BlogCTA triggerFooterContact={triggerFooterContact} />
       </main>
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

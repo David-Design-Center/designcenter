@@ -7,7 +7,7 @@ import Footer from './components/ui/Footer';
 import Home from './pages/Home';
 import Loading from './components/ui/Loading';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import ContactFormPopup from './components/ui/ContactFormPopup';
+import BocaRatonFormModal from './components/boca-raton/BocaRatonFormModal';
 import FloatingContactButton from './components/ui/FloatingContactButton';
 import { useContactForm } from './hooks/useContactForm';
 
@@ -170,8 +170,8 @@ function App() {
             {/* Floating Contact Button */}
             <FloatingContactButton onClick={openContactForm} />
             
-            {/* Contact Form Popup */}
-            <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+            {/* Contact Form Modal */}
+            <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
           </Router>
         </div>
       </div>

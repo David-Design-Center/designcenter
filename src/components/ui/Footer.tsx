@@ -11,6 +11,27 @@ import {
 import { Link } from 'react-router-dom';
 import { useScrollManager } from '../../hooks/useScrollManager';
 
+// Helper function to track phone call clicks with Google Ads conversion
+const trackPhoneClick = (location: string) => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    // GA4 event
+    (window as any).gtag('event', 'click', {
+      'event_category': 'phone_call',
+      'event_label': location,
+      'value': 25
+    });
+    // Google Ads conversion for phone clicks
+    (window as any).gtag('event', 'conversion', {
+      'send_to': 'AW-17084982836/LZqdCPeO_eUbELTM4NI_',
+      'value': 25,
+      'currency': 'USD',
+      'event_category': 'phone_lead',
+      'event_label': location
+    });
+    console.log(`Phone click tracked: ${location}`);
+  }
+};
+
 interface FooterProps {
   id?: string;
   onExpandChange?: (expanded: boolean) => void;  // Add this new prop
@@ -25,6 +46,7 @@ const ContactInfo = ({ isMobile }: { isMobile: boolean }) => (
       <a
         href="tel:+17189347100"
         className={`flex items-center space-x-3 ${isMobile ? 'text-base' : 'text-sm'} text-gray-600 min-h-[44px]`}
+        onClick={() => trackPhoneClick('footer_phone_link')}
       >
         <Phone className="w-4 h-4 text-[#C5A267] flex-shrink-0" />
         <span>(718) 934-7100</span>

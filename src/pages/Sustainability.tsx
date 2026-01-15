@@ -4,7 +4,7 @@ import SustainabilityShowcase from '../components/sustainability/SustainabilityS
 import SustainabilityStats from '../components/sustainability/SustainabilityStats';
 import SustainabilityPath from '../components/sustainability/SustainabilityPath';
 import SustainabilityCTA from '../components/sustainability/SustainabilityCTA';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 
@@ -31,8 +31,8 @@ const Sustainability = () => {
         triggerFooterContact={triggerFooterContact}
       />
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };

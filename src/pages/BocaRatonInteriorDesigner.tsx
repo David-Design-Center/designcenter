@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import BocaRatonHeroTop from "../components/boca-raton/BocaRatonHeroTop";
 import BocaRatonFAQ from "../components/boca-raton/BocaRatonFAQ";
 import BocaRatonHeroBottom from "../components/boca-raton/BocaRatonHeroBottom";
+import BocaRatonMidCTA from "../components/boca-raton/BocaRatonMidCTA";
+import BocaRatonTestimonialWithImage from "../components/boca-raton/BocaRatonTestimonialWithImage";
 import VisionnaireSection from "../components/home/VisionnaireSection";
 import BocaRatonTextSection from "../components/boca-raton/BocaRatonTextSection";
 import { FullWidthImageGrid } from "../components/ui/FullWidthImageGrid";
@@ -152,8 +154,10 @@ function BocaRatonInteriorDesigner() {
           ]}
           columns={{ mobile: 1, tablet: 2, desktop: 3 }}
         />
+        <BocaRatonMidCTA />
         <VisionnaireSection />
         <BocaRatonTextSection />
+        <BocaRatonTestimonialWithImage />
         <BocaRatonFAQ />
         <BocaRatonHeroBottom />
       </main>

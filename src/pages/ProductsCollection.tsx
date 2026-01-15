@@ -8,7 +8,7 @@ import { useSwipeable } from 'react-swipeable';
 import { ProductCollectionSteps } from '../components/productcollection/ProductCollectionSteps';
 import { HeroScrollDemoProduct } from '../components/ui/HeroScrollDemoProduct';
 import ProductCollectionCTA from '../components/productcollection/ProductCollectionCTA';
-import ContactFormPopup from '../components/ui/ContactFormPopup';
+import BocaRatonFormModal from '../components/boca-raton/BocaRatonFormModal';
 import { useContactForm } from '../hooks/useContactForm';
 import { Helmet } from 'react-helmet';
 import { Feature197 } from '../components/ui/accordion-feature-section';
@@ -195,8 +195,8 @@ const ProductsCollection = () => {
         triggerFooterContact={triggerFooterContact} 
       />
       
-      {/* Contact Form Popup */}
-      <ContactFormPopup isOpen={isContactFormOpen} onClose={closeContactForm} />
+      {/* Contact Form Modal */}
+      <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
     </div>
   );
 };
