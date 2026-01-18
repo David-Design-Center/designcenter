@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Play, ArrowRight, ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef } from "react";
+import { Play, ArrowRight, ArrowDown, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 
 const videoUrls = [
   "https://res.cloudinary.com/designcenter/video/upload/v1767094959/jay2ri6u9kjtbxgqg3yy.mp4",
@@ -58,41 +58,63 @@ const getSocialSVG = (icon: string): string => {
 
 const VideoCard = ({
   videoUrl,
-  onClick,
   position,
-  onHoverStart,
-  onHoverEnd,
 }: {
   videoUrl: string;
-  onClick: () => void;
   position: number;
-  onHoverStart: () => void;
-  onHoverEnd: () => void;
 }) => {
   const isCenter = position === 0;
   const isAdjacent = Math.abs(position) === 1;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Generate poster image from video URL (Cloudinary transformation)
-  const posterUrl = videoUrl.replace('.mp4', '.jpg').replace('/upload/', '/upload/so_0/');
+  // Generate optimized poster image from video URL (Cloudinary transformation)
+  // Using w_400 for smaller file size, f_auto for format optimization, q_auto for quality
+  const posterUrl = videoUrl
+    .replace('.mp4', '.jpg')
+    .replace('/upload/', '/upload/so_0,f_auto,q_auto,w_400/');
 
-  const handleMouseEnter = () => {
+  const handlePlayClick = () => {
+    if (isVideoLoaded && videoRef.current) {
+      // Video already loaded, toggle play/pause
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    } else {
+      // Load video for the first time
+      setIsLoading(true);
+      setIsVideoLoaded(true);
+    }
+  };
+
+  const handleVideoCanPlay = () => {
+    setIsLoading(false);
     if (videoRef.current) {
       videoRef.current.play();
       setIsPlaying(true);
     }
-    onHoverStart();
   };
 
-  const handleMouseLeave = () => {
+  const handleVideoEnded = () => {
+    setIsPlaying(false);
+  };
+
+  // Reset video state when card moves out of center position
+  const prevPositionRef = useRef(position);
+  if (prevPositionRef.current === 0 && position !== 0 && isPlaying) {
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
-      setIsPlaying(false);
     }
-    onHoverEnd();
-  };
+    setIsPlaying(false);
+  }
+  prevPositionRef.current = position;
 
   return (
     <div
@@ -111,29 +133,41 @@ const VideoCard = ({
     >
       <div
         className="relative w-full h-full rounded-2xl overflow-hidden cursor-pointer group"
-        onClick={onClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onClick={handlePlayClick}
       >
-        {/* Video background */}
-        <video
-          ref={videoRef}
+        {/* Poster image (always shown as background) */}
+        <img
+          src={posterUrl}
+          alt="Video thumbnail"
           className="absolute inset-0 w-full h-full object-cover"
-          src={videoUrl}
-          poster={posterUrl}
-          muted
-          loop
-          playsInline
-          preload="metadata"
+          loading="lazy"
         />
+
+        {/* Video element (only rendered after user clicks play) */}
+        {isVideoLoaded && (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            src={videoUrl}
+            muted
+            playsInline
+            preload="auto"
+            onCanPlay={handleVideoCanPlay}
+            onEnded={handleVideoEnded}
+          />
+        )}
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
-        {/* Play button centered - hide when playing */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}>
+        {/* Play/Pause button centered */}
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}>
           <div className="w-16 h-16 lg:w-20 lg:h-20 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300 group-hover:scale-110">
-            <Play className="w-8 h-8 lg:w-10 lg:h-10 text-gray-800 ml-1" fill="currentColor" />
+            {isLoading ? (
+              <Loader2 className="w-8 h-8 lg:w-10 lg:h-10 text-gray-800 animate-spin" />
+            ) : (
+              <Play className="w-8 h-8 lg:w-10 lg:h-10 text-gray-800 ml-1" fill="currentColor" />
+            )}
           </div>
         </div>
       </div>
@@ -150,11 +184,6 @@ const FollowOurJourneySection = () => {
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + videoUrls.length) % videoUrls.length);
-  };
-
-  const handleVideoClick = (videoUrl: string) => {
-    // Open video in a new window/tab
-    window.open(videoUrl, "_blank");
   };
 
   return (
@@ -230,10 +259,7 @@ const FollowOurJourneySection = () => {
                 <VideoCard
                   key={index}
                   videoUrl={videoUrl}
-                  onClick={() => handleVideoClick(videoUrl)}
                   position={pos}
-                  onHoverStart={() => {}}
-                  onHoverEnd={() => {}}
                 />
               );
             })}
