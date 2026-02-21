@@ -78,11 +78,12 @@ const HomeHeroTop = () => {
               className="mb-3 text-7xl sm:text-6xl md:text-8xl lg:text-10xl transform-gpu uppercase text-white/90 leading-tight"
               style={{ perspective: "800px" }}
             >
-              <span className="title-word block">D&D Design Center</span>
+              <span className="title-word block">Best Interior Designer Brooklyn<br></br>D&D Design Center
+</span>
               <span
                 className="block text-2xl sm:text-3xl md:text-4xl lg:text-6xl mt-2 crafted-shine text-shadow break-words text-balance"
               >
-                Luxury Interiors for Modern Living
+               Home Furniture & Decor
               </span>
             </h1>
             <a

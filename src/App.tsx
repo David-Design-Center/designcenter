@@ -22,6 +22,7 @@ import Designers from './pages/Designers';
 import CraftedCalm from './pages/CraftedCalm';
 import ItalianKitchenCabinets from './pages/ItalianKitchenCabinets';
 import BocaRatonInteriorDesigner from './pages/BocaRatonInteriorDesigner';
+import Kitchens from './pages/Kitchens';
 import BookRedirect from './components/ui/BookRedirect';
 
 // Keep lazy loading only for legal pages (Privacy & Terms)
@@ -148,6 +149,7 @@ function App() {
                 <Route path="/designers" element={<Designers />} />
                 <Route path="/crafted-calm" element={<CraftedCalm triggerFooterContact={openContactForm} />} />
                 <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
+                <Route path="/kitchens" element={<Kitchens />} />
                 <Route path="/boca-raton-interior-designer" element={<BocaRatonInteriorDesigner />} />
                 <Route path="/book" element={<BookRedirect openContactForm={openContactForm} />} />
                 
