@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && node scripts/inject-env.cjs"
   publish = "dist"
 
 # Note: trailingSlash = "never" was removed because it caused redirect loops
