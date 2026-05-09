@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ParticleBackground from '../sustainability/ParticleBackground'; // Add this import
+import ParticleBackground from '../shared/ParticleBackground'; // Add this import
 
 interface DesignersCTAProps {
   onContactTeam: () => void;

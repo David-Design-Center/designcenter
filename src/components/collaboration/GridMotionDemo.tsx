@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GridMotion } from "../ui/grid-motion";
+import { GridMotion } from "../animations/grid-motion";
 
 export function GridMotionDemo() {
   const [isMobile, setIsMobile] = useState(false);

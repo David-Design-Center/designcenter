@@ -10,8 +10,7 @@
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build": "node scripts/generate-posts-json.cjs && vite build",
-    "add-blog": "node scripts/add-blog-post.js"
+    "build": "vite build"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.2.4",

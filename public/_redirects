@@ -6,26 +6,22 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 # 3. (Optional) Force URL normalization for certain routes
 /ProductsCollection   /productscollection   301!
 
-# 3a. Serve productscollection directly (prevents folder redirect loop from react-snap)
-/productscollection   /productscollection/index.html   200!
+# 3a. Serve productscollection directly (SPA route)
+/productscollection   /index.html   200
 
-# 4. Redirect old product URLs to /productscollection
+# 4. Redirect legacy product URLs to /productscollection
 /index.php?route=product/product&product_id=76&page=2    /productscollection    301
 /index.php?route=product/category&path=67                /productscollection    301
 /New%20arrival?page=1                                    /productscollection    301
 /faucets?page=1                                          /productscollection    301
 /faucets                                                 /productscollection    301
 /all-doors                                               /productscollection    301
-/bed-room                                                /productscollection    301
 /kids-furniture                                          /productscollection    301
 /all-lighting                                            /productscollection    301
-/traditional                                             /productscollection    301
 /living-room?page=1                                      /productscollection    301
 /living-room?page=2                                      /productscollection    301
 /living-room?page=3                                      /productscollection    301
 /living-room                                             /productscollection    301
-/sample-sales                                            /productscollection    301
-/vanities                                                /productscollection    301
 /vanities?page=1                                         /productscollection    301
 /vanities?page=2                                         /productscollection    301
 /vanities?page=3                                         /productscollection    301
@@ -34,15 +30,27 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 /vanities?page=6                                         /productscollection    301
 /vanities?page=7                                         /productscollection    301
 /entertainment-center                                    /productscollection    301
-/sliding-door-closet                                     /productscollection    301
 /sliding-door-closet?page=1                              /productscollection    301
 /accessories                                             /productscollection    301
-/walk-in-closet                                          /productscollection    301
 /italianbath                                             /productscollection    301
-/italian-furniture-new-york                             /productscollection    301
 /italian-closets-new-york                               /productscollection    301
 /hinged-door-closet?page=1                               /productscollection    301
 /hinged-door-closet?page=2                               /productscollection    301
+
+# 4a. Gone URLs (return 410)
+/bed-room                                                /gone  410
+/blog/custom-closets-for-home-office                     /gone  410
+/blog/custom-closets-for-home-office/                    /gone  410
+/blog/why-hire-a-designer                                /gone  410
+/blog/why-hire-a-designer/                               /gone  410
+/italian-kitchen-new-york                                /gone  410
+/traditional                                             /gone  410
+/vanities                                                /gone  410
+/walk-in-closet                                          /gone  410
+/italian-furniture-new-york                              /gone  410
+/tiles                                                   /gone  410
+/sliding-door-closet                                     /gone  410
+/sample-sales                                            /gone  410
 
 
 # 4b. Additional legacy URLs (GSC examples)
@@ -51,6 +59,8 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 /portfolio-:id/*                                        /productscollection    301
 /tiles/*                                                /productscollection    301
 
+# 4c. Service area legacy redirect
+/boca-raton-interior-designer  /service-areas/boca-raton-florida  301!
 
 # 5. Catch-all for your SPA
 /*  /index.html  200

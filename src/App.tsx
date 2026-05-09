@@ -1,33 +1,38 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
-import ScrollToTop from './components/ui/ScrollToTop';
-import Navbar from './components/ui/Navbar';
-import Footer from './components/ui/Footer';
+import ScrollToTop from './components/layout/ScrollToTop';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import Loading from './components/ui/Loading';
-import ErrorBoundary from './components/ui/ErrorBoundary';
-import BocaRatonFormModal from './components/boca-raton/BocaRatonFormModal';
-import FloatingContactButton from './components/ui/FloatingContactButton';
+import Loading from './components/layout/Loading';
+import ErrorBoundary from './components/layout/ErrorBoundary';
+import ContactFormModal from './components/service-area/ContactFormModal';
+import FloatingContactButton from './components/layout/FloatingContactButton';
 import { useContactForm } from './hooks/useContactForm';
 
 // Direct imports for all important pages (better for SEO/crawling)
-import Sustainability from './pages/Sustainability';
-import HowWeWork from './pages/HowWeWork';
-import ProductsCollection from './pages/ProductsCollection';
-import Collaboration from './pages/collaboration';
-import Blog from './pages/Blog';
-import BlogPostPage from './components/blog/BlogPostPage';
-import Designers from './pages/Designers';
-import CraftedCalm from './pages/CraftedCalm';
-import ItalianKitchenCabinets from './pages/ItalianKitchenCabinets';
-import BocaRatonInteriorDesigner from './pages/BocaRatonInteriorDesigner';
-import Kitchens from './pages/Kitchens';
-import BookRedirect from './components/ui/BookRedirect';
+import Sustainability from './pages/studio/Sustainability';
+import HowWeWork from './pages/studio/HowWeWork';
+import ProductsCollection from './pages/services/ProductsCollection';
+import Collaboration from './pages/studio/Collaboration';
+import Designers from './pages/studio/Designers';
+import CraftedCalm from './pages/studio/Quiz';
+import ItalianKitchenCabinets from './pages/services/ItalianKitchenCabinets';
+import Kitchens from './pages/services/Kitchens';
+import BookRedirect from './components/layout/BookRedirect';
+
+// Service Area pages
+import ServiceAreasIndex from './pages/service-areas/ServiceAreasIndex';
+import BocaRatonPage from './pages/service-areas/BocaRatonPage';
+import NewYorkCityPage from './pages/service-areas/NewYorkCityPage';
+import LongIslandPage from './pages/service-areas/LongIslandPage';
+import NewJerseyPage from './pages/service-areas/NewJerseyPage';
+import MiamiPage from './pages/service-areas/MiamiPage';
 
 // Keep lazy loading only for legal pages (Privacy & Terms)
-const Privacy = lazy(() => import('./pages/Privacy'));
-const Terms = lazy(() => import('./pages/Terms'));
+const Privacy = lazy(() => import('./pages/policy/Privacy'));
+const Terms = lazy(() => import('./pages/policy/Terms'));
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,7 +64,7 @@ function App() {
       "url": "https://dnddesigncenter.com",
       "logo": "https://res.cloudinary.com/designcenter/image/upload/D_D_Logo.avif",
       "image": "https://res.cloudinary.com/designcenter/image/upload/D_D_New_York_Showroom.avif",
-      "description": "Luxury bespoke furniture solutions...",
+      "description": "Luxury bespoke furniture solutions.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "2615 East 17th Street",
@@ -71,27 +76,14 @@ function App() {
       "telephone": "+1 718-934-7100",
       "openingHours": "Mo-Su 10:00-19:00",
       "serviceArea": [
-        { "@type": "AdministrativeArea", "name": "New York" },
-        { "@type": "City", "name": "Brooklyn" },
-        { "@type": "City", "name": "Manhattan" },
-        { "@type": "City", "name": "Queens" },
-        { "@type": "City", "name": "Long Island" },
-        { "@type": "AdministrativeArea", "name": "New Jersey" },
-        { "@type": "City", "name": "Miami" },
-        { "@type": "City", "name": "Orlando" },
-        { "@type": "City", "name": "Tampa" },
-        { "@type": "AdministrativeArea", "name": "Florida" },
-        { "@type": "City", "name": "Columbus" },
-        { "@type": "City", "name": "Cleveland" },
-        { "@type": "AdministrativeArea", "name": "Ohio" },
-        { "@type": "Country", "name": "United States" }
+        { "@type": "AdministrativeArea", "name": "Brooklyn" }
       ],
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+1 718-934-7100",
         "contactType": "customer service",
         "areaServed": "US",
-        "availableLanguage": ["English", "Russian"]
+        "availableLanguage": ["English"]
       },
       "sameAs": [
         "https://www.instagram.com/dnddesigncenter.nyc/",
@@ -144,13 +136,24 @@ function App() {
                 <Route path="/how-we-work" element={<HowWeWork />} />
                 <Route path="/productscollection" element={<ProductsCollection />} />
                 <Route path="/collaboration" element={<Collaboration />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/blog" element={<Navigate to="/" replace />} />
+                <Route path="/blog/:slug" element={<Navigate to="/" replace />} />
                 <Route path="/designers" element={<Designers />} />
                 <Route path="/crafted-calm" element={<CraftedCalm triggerFooterContact={openContactForm} />} />
                 <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
                 <Route path="/kitchens" element={<Kitchens />} />
-                <Route path="/boca-raton-interior-designer" element={<BocaRatonInteriorDesigner />} />
+                
+                {/* Service Area Pages */}
+                <Route path="/service-areas" element={<ServiceAreasIndex />} />
+                <Route path="/service-areas/boca-raton-florida" element={<BocaRatonPage />} />
+                <Route path="/service-areas/new-york-city" element={<NewYorkCityPage />} />
+                <Route path="/service-areas/long-island" element={<LongIslandPage />} />
+                <Route path="/service-areas/new-jersey" element={<NewJerseyPage />} />
+                <Route path="/service-areas/miami-florida" element={<MiamiPage />} />
+                
+                {/* Legacy redirect */}
+                <Route path="/boca-raton-interior-designer" element={<Navigate to="/service-areas/boca-raton-florida" replace />} />
+                
                 <Route path="/book" element={<BookRedirect openContactForm={openContactForm} />} />
                 
                 <Route path="/privacy" element={
@@ -173,7 +176,7 @@ function App() {
             <FloatingContactButton onClick={openContactForm} />
             
             {/* Contact Form Modal */}
-            <BocaRatonFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
+            <ContactFormModal isOpen={isContactFormOpen} onClose={closeContactForm} />
           </Router>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import ScrollArrow from "../ui/ScrollArrow";
+import ScrollArrow from "../layout/ScrollArrow";
 
 // Helper function to track GA4 events
 const trackEvent = (eventName: string, eventLabel: string) => {
@@ -83,7 +83,7 @@ const HomeHeroTop = () => {
               <span
                 className="block text-2xl sm:text-3xl md:text-4xl lg:text-6xl mt-2 crafted-shine text-shadow break-words text-balance"
               >
-               Home Furniture & Decor
+               Home Furniture & Italian Design
               </span>
             </h1>
             <a
@@ -93,7 +93,7 @@ const HomeHeroTop = () => {
               className="text-white/90 text-m sm:text-base md:text-xl lg:text-2xl font-light text-shadow hover:text-[#B49157] transition-colors duration-200 underline"
               onClick={() => trackEvent('click', 'google_maps_showroom')}
             >
-              Visit our NYC Showroom 📍
+              Visit our Brooklyn Showroom
             </a>
           </div>
           

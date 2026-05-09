@@ -16,12 +16,10 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          blog: ['./src/pages/Blog.tsx'],
-          blogPost: ['./src/components/blog/BlogPostPage.tsx'],
-          collaboration: ['./src/pages/collaboration.tsx'],
-          product: ['./src/pages/ProductsCollection.tsx'],
-          howwework: ['./src/pages/HowWeWork.tsx'],
-          sustainability: ['./src/pages/Sustainability.tsx'],
+          collaboration: ['./src/pages/studio/Collaboration.tsx'],
+          product: ['./src/pages/services/ProductsCollection.tsx'],
+          howwework: ['./src/pages/studio/HowWeWork.tsx'],
+          sustainability: ['./src/pages/studio/Sustainability.tsx'],
         },             
       },
       external: ['gatsby'], // Exclude Gatsby from the bundle

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../shared/button";
 import BocaRatonFormModal from "./BocaRatonFormModal";
 
 const BocaRatonMidCTA = () => {

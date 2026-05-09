@@ -53,7 +53,7 @@ const VisionnaireSection = () => {
 
   return (
     <section ref={sectionRef} className="py-6 pb-0 md:py-20 bg-[#1A1A1A] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center">
           {/* Left - Brands Showcase */}
           <div ref={brandsRef} className="relative order-2 md:order-1 grayscale">

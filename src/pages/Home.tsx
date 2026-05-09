@@ -8,14 +8,14 @@ import HomeHeroBottom from "../components/home/HomeHeroBottom";
 import VisionnaireSection from "../components/home/VisionnaireSection";
 import SustainabilitySection from "../components/home/SustainabilitySection";
 import TextGenerateEffect from "../components/home/ParagraphSection";
-import { Feature197 } from '../components/ui/accordion-feature-section';
+import { Feature197 } from '../components/shared/accordion-feature-section';
 import FollowOurJourneySection from "../components/home/FollowOurJourneySection";
 
 function Home() {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-          <title>Luxury Italian Interiors by D&D Design Center</title>
+          <title>Best Interior Designer Brooklyn - if you’re looking for Interior design services near me or home remodel near me - D&D Design Center is the place to be</title>
           <meta
             name="description"
             content="Bespoke Italian kitchens, closets, baths & interiors. 6000 square feet Brooklyn showroom. Free 30-min consult."

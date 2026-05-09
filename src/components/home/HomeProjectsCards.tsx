@@ -72,13 +72,13 @@ const HomeProjectsCards = () => {
       // Create a ScrollTrigger that fades the cards in when the section enters.
       ScrollTrigger.create({
         trigger: cardsContainerRef.current,
-        start: "top bottom", // When the top of the container reaches the bottom of the viewport.
+        start: "top bottom",
         onEnter: () => {
           gsap
-            .timeline({ delay: 1, immediateRender: false })
+            .timeline({ delay: 0, immediateRender: false })
             .to(cardsToAnimate, {
               opacity: 1,
-              duration: 1.2,
+              duration: 0.4,
               ease: "power2.out",
             });
         },
@@ -94,8 +94,8 @@ const HomeProjectsCards = () => {
     if (displayLevel === "sub" && backButtonRef.current) {
       gsap.fromTo(
         backButtonRef.current,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 1, ease: "power2.out" }
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }
       );
     }
   }, [displayLevel]);
@@ -112,7 +112,7 @@ const HomeProjectsCards = () => {
     // Set timer for description appearance
     hoverTimerRef.current = setTimeout(() => {
       setShowDescription(itemId);
-    }, 500); // 0.5 second delay
+    }, 150);
   };
 
   const handleMouseLeave = () => {
@@ -154,7 +154,7 @@ const HomeProjectsCards = () => {
         // Fade out the container completely.
         gsap.to(container, {
           opacity: 0,
-          duration: 1.4,
+          duration: 0.3,
           ease: "power2.inOut",
           onComplete: () => {
             // Update state only after the fade-out is complete.
@@ -169,7 +169,7 @@ const HomeProjectsCards = () => {
             // Fade the container back in.
             gsap.to(container, {
               opacity: 1,
-              duration: 1.4,
+              duration: 0.3,
               ease: "power2.out",
               onComplete: () => {
                 setIsTransitioning(false);
@@ -194,7 +194,7 @@ const HomeProjectsCards = () => {
       setContainerHeight(`${container.offsetHeight}px`);
       gsap.to(container, {
         opacity: 0,
-        duration: 1.4,
+        duration: 0.3,
         ease: "power2.inOut",
         onComplete: () => {
           setDisplayItems(mainCategories);
@@ -204,7 +204,7 @@ const HomeProjectsCards = () => {
           gsap.set(container, { opacity: 0 });
           gsap.to(container, {
             opacity: 1,
-            duration: 1.4,
+            duration: 0.3,
             ease: "power2.out",
             onComplete: () => {
               setIsTransitioning(false);
@@ -287,7 +287,7 @@ const HomeProjectsCards = () => {
         ?.title.toUpperCase() === "FURNITURE"
       ? "Pick a Room"
       : "Pick a Style"
-    : "Click on the cards to view"}
+    : "Which room are you designing?"}
 </h2>
 </div>
 
@@ -297,7 +297,7 @@ const HomeProjectsCards = () => {
     ${
       displayLevel === "sub"
         ? "grid grid-cols-3 sm:grid-cols-3 gap-4 p-6 custom-md:p-8 overflow-x-auto sm:overflow-x-visible"
-        : "grid grid-cols-2 custom-md:flex custom-md:flex-wrap gap-4 p-6 custom-md:p-8"
+        : "grid grid-cols-3 custom-md:flex custom-md:flex-wrap gap-4 p-6 custom-md:p-8"
     }
     w-full max-w-7xl mx-auto mt-2 relative
   `}
@@ -319,7 +319,7 @@ const HomeProjectsCards = () => {
         overflow-hidden 
         cursor-pointer 
         ease-out 
-        duration-500
+        duration-200
         will-change-transform 
         transform 
         hover:scale-[1.02]
@@ -351,7 +351,7 @@ const HomeProjectsCards = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <div
-          className="w-full h-full bg-cover bg-center transition-transform duration-300"
+          className="w-full h-full bg-cover bg-center transition-transform duration-200"
           style={{
             backgroundImage: `url(${item.image})`,
             transform: (hoveredId === item.id || activeId === item.id) ? "scale(1)" : "scale(1.2)",
@@ -396,21 +396,21 @@ const HomeProjectsCards = () => {
       <div className="relative">
         {/* Title with delayed fade and slide animation from left */}
         <div
-          className={`overflow-hidden transition-all duration-300 ${
+          className={`overflow-hidden transition-all duration-150 ${
             (showDescription === item.id || activeId === item.id)
               ? 'max-h-20 opacity-100'
               : 'max-h-0 opacity-0'
           }`}
         >
           <h3
-            className={`text-white/90 font-bold mb-2 transition-all duration-400 ease-out transform ${
+            className={`text-white/90 font-bold mb-2 transition-all duration-150 ease-out transform ${
               (showDescription === item.id || activeId === item.id)
                 ? 'translate-x-0 opacity-100'
                 : '-translate-x-4 opacity-0'
             }`}
             style={{ 
               fontSize: 'clamp(1.25rem, 6vw, 2rem)',
-              transitionDelay: (showDescription === item.id || activeId === item.id) ? '50ms' : '0ms'
+              transitionDelay: '0ms'
             }}
           >
             {item.title}
@@ -419,21 +419,21 @@ const HomeProjectsCards = () => {
         
         {/* Description with delayed fade and slide animation */}
         <div
-          className={`overflow-hidden transition-all duration-300 ${
+          className={`overflow-hidden transition-all duration-150 ${
             (showDescription === item.id || activeId === item.id)
               ? 'max-h-40 opacity-100'
               : 'max-h-0 opacity-0'
           }`}
         >
           <p
-            className={`text-white/80 leading-relaxed transition-all duration-400 ease-out transform ${
+            className={`text-white/80 leading-relaxed transition-all duration-150 ease-out transform ${
               (showDescription === item.id || activeId === item.id)
                 ? 'translate-x-0 opacity-100'
                 : '-translate-x-4 opacity-0'
             }`}
             style={{ 
               fontSize: 'clamp(0.875rem, 3.5vw, 1.25rem)',
-              transitionDelay: (showDescription === item.id || activeId === item.id) ? '100ms' : '0ms'
+              transitionDelay: '0ms'
             }}
           >
             {item.description}
@@ -462,7 +462,7 @@ const HomeProjectsCards = () => {
           items-center 
           justify-center 
           transition-transform 
-          duration-300 
+          duration-150 
           group-hover:translate-y-1
           min-w-[44px]
           min-h-[44px]
@@ -477,7 +477,7 @@ const HomeProjectsCards = () => {
             group-hover:opacity-100 
             transform-gpu 
             transition-all 
-            duration-300
+            duration-150
             ${(hoveredId === item.id || activeId === item.id) ? "rotate-180" : ""}
           `}
           aria-label="Expand for more details"

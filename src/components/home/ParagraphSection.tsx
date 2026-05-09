@@ -23,7 +23,7 @@ const ParagraphSection: React.FC = () => {
                     
                     <h2 className="text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight tracking-wide" 
                         style={{ fontFamily: "'Playfair Display', serif" }}>
-                        <span className="uppercase font-light block mb-3">Home is an investment</span>
+                        <span className="uppercase font-light block mb-3">What do we do?</span>
                         <span className="normal-case text-lg sm:text-xl md:text-2xl text-[#9E7F43] font-light block mt-3" 
                               style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                             Brooklyn's Premier Design Center

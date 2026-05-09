@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { DynamicFrameLayout } from "../ui/dynamic-frame-layout"
+import { DynamicFrameLayout } from "../animations/dynamic-frame-layout"
 
 // Define the type for brand data
 type Brand = {

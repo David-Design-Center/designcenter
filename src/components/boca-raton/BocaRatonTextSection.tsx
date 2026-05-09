@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollableBlurContainer } from '../ui/progressive-blur';
+import { ScrollableBlurContainer } from '../animations/progressive-blur';
 
 const BocaRatonTextSection: React.FC = () => {
     const triggerFooterContact = () => {

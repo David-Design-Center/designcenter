@@ -109,7 +109,7 @@ const BocaRatonHeroBottom = () => {
   };
 
   return (
-    <section className="w-full relative bg-cover bg-center py-16 lg:py-24" style={{ backgroundImage: 'url(https://res.cloudinary.com/designcenter/image/upload/v1767974872/5_c3vyli.avif)' }}>
+    <section className="w-full relative bg-cover bg-center py-16 lg:py-24">
       {/* White overlay */}
       <div className="absolute inset-0 bg-white/95"></div>
       

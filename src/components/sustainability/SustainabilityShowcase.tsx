@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useInView } from 'react-intersection-observer';
-import Tooltip from '../ui/Tooltip';
+import Tooltip from '../shared/Tooltip';
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import ScrollArrow from "../ui/ScrollArrow";
+import ScrollArrow from "../layout/ScrollArrow";
 
 const VisionnaireHero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

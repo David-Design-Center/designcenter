@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../shared/button";
 import { Phone, Send, Check } from "lucide-react";
 
 // Helper for form submission conversion

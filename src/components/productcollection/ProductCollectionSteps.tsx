@@ -1,4 +1,4 @@
-import { FeatureSteps } from "../ui/feature-section"
+import { FeatureSteps } from "../shared/feature-section"
 
 const features = [
   { 

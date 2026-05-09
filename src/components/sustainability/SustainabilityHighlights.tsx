@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Leaf, Factory, Recycle } from 'lucide-react';
-import ParticleBackground from './ParticleBackground';
+import ParticleBackground from '../shared/ParticleBackground';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight } from 'lucide-react';
 import { Link } from "react-router-dom";

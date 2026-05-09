@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThreeDCardSlider } from '../ui/3DCardSlider';
+import { ThreeDCardSlider } from '../shared/3DCardSlider';
 
 const slides = [
   {
