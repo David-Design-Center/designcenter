@@ -21,6 +21,7 @@ import CraftedCalm from './pages/studio/Quiz';
 import ItalianKitchenCabinets from './pages/services/ItalianKitchenCabinets';
 import Kitchens from './pages/services/Kitchens';
 import BookRedirect from './components/layout/BookRedirect';
+import Blog from './pages/blog/Blog';
 
 // Service Area pages
 import ServiceAreasIndex from './pages/service-areas/ServiceAreasIndex';
@@ -136,8 +137,8 @@ function App() {
                 <Route path="/how-we-work" element={<HowWeWork />} />
                 <Route path="/productscollection" element={<ProductsCollection />} />
                 <Route path="/collaboration" element={<Collaboration />} />
-                <Route path="/blog" element={<Navigate to="/" replace />} />
-                <Route path="/blog/:slug" element={<Navigate to="/" replace />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<Navigate to="/blog" replace />} />
                 <Route path="/designers" element={<Designers />} />
                 <Route path="/crafted-calm" element={<CraftedCalm triggerFooterContact={openContactForm} />} />
                 <Route path="/italian-kitchen-cabinets" element={<ItalianKitchenCabinets />} />
