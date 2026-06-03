@@ -56,11 +56,14 @@ function ServiceAreaPage({ config }: ServiceAreaPageProps) {
         <meta property="og:url" content={`${baseUrl}${config.seo.canonicalPath}`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={config.seo.twitterTitle} />
         <meta name="twitter:description" content={config.seo.twitterDescription} />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
 
         {/* JSON-LD LocalBusiness */}
         <script type="application/ld+json">

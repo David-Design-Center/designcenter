@@ -7,13 +7,13 @@ export const bocaRatonConfig: ServiceAreaConfig = {
   formType: 'Boca Raton',
 
   seo: {
-    title: 'Boca Raton Interior Designer | Luxury Italian Kitchens & Closets | D&D Design Center',
-    description: 'Custom Italian kitchens and closets for Boca Raton homeowners. Increase your home value with Italian craftsmanship. Free 3D design render. White-glove installation in 90 days.',
+    title: 'Boca Raton Interior Designer | Italian Kitchens & Closets | D&D',
+    description: 'Custom Italian kitchens and closets for Boca Raton homes. Free 3D design render and white-glove installation.',
     canonicalPath: '/service-areas/boca-raton-florida',
-    ogTitle: 'Boca Raton Interior Designer | Luxury Italian Kitchens & Closets',
-    ogDescription: 'Custom Italian kitchens and closets tailored for Boca Raton homes, lifestyles, and property values. Free 3D design consultation.',
-    twitterTitle: 'Boca Raton Interior Designer | Luxury Italian Kitchens & Closets',
-    twitterDescription: 'Custom Italian kitchens and closets tailored for Boca Raton homes. Free 3D design render.',
+    ogTitle: 'Boca Raton Interior Designer | Italian Kitchens & Closets | D&D',
+    ogDescription: 'Custom Italian kitchens and closets for Boca Raton homes. Free 3D design consult.',
+    twitterTitle: 'Boca Raton Interior Designer | Italian Kitchens & Closets | D&D',
+    twitterDescription: 'Custom Italian kitchens and closets for Boca Raton homes. Free 3D design consult.',
   },
 
   jsonLd: {

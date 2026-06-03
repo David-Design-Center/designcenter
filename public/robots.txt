@@ -1,4 +1,7 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /index.php
+Disallow: /cgi-bin/
+Disallow: /cgi-bin/otsing
 
 Sitemap: https://dnddesigncenter.com/sitemap.xml

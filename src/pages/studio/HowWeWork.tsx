@@ -46,9 +46,23 @@ const HowWeWork = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A]">
       <Helmet>
-        <title>Our Design Process for Luxury Homes | D&D Design Center</title>
-        <meta name="description" content="Learn about our process and how we create luxury custom design at D&D Design Center." />
+        <title>Luxury Interior Design Process | D&D Design Center</title>
+        <meta name="description" content="Our step-by-step process for Italian kitchens, custom furniture, and full-home interiors across NYC." />
         <link rel="canonical" href="https://dnddesigncenter.com/how-we-work" />
+        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        <meta property="og:title" content="Luxury Interior Design Process | D&D Design Center" />
+        <meta property="og:description" content="Our step-by-step process for Italian kitchens, custom furniture, and full-home interiors across NYC." />
+        <meta property="og:url" content="https://dnddesigncenter.com/how-we-work" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Luxury Interior Design Process | D&D Design Center" />
+        <meta name="twitter:description" content="Our step-by-step process for Italian kitchens, custom furniture, and full-home interiors across NYC." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
       </Helmet>
       <HowWeWorkHero />
       <HowWeWorkStages />

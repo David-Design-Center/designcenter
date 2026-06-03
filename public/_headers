@@ -1,6 +1,24 @@
 /footer
   X-Robots-Tag: noindex
 
+/admin
+  X-Robots-Tag: noindex
+
+/admin/*
+  X-Robots-Tag: noindex
+
+/admin/index.html
+  X-Robots-Tag: noindex
+
+/index.php
+  X-Robots-Tag: noindex
+
+/cgi-bin/*
+  X-Robots-Tag: noindex
+
+/cgi-bin/otsing
+  X-Robots-Tag: noindex
+
 /accessories
   X-Robots-Tag: noindex
 
@@ -152,9 +170,6 @@
   X-Robots-Tag: noindex
 
 /hinged-door-closet?page=2
-  X-Robots-Tag: noindex
-
-/admin
   X-Robots-Tag: noindex
 
 # Optional: only if you decide this page shouldn’t rank

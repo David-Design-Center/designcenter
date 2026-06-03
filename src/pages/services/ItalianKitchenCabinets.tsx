@@ -100,25 +100,28 @@ const ItalianKitchenCabinets = () => {
     <div className="bg-white">
       <Helmet>
         {/* ── Primary SEO ── */}
-    <title>Italian Kitchen Cabinets NYC – Luxury Designs, 3D in 7 Days | D&D</title>
+        <title>Custom Italian Kitchen Cabinets NYC | D&D Design Center</title>
     <meta name="description"
-      content="Handcrafted in Italy. Installed in NY in ~8 weeks. See 20+ finishes in our Brooklyn showroom. Free 30‑min consult and a 3D plan in 7 days." />
+      content="Custom Italian kitchen cabinets built for NYC apartments. Made in Italy, installed by our Brooklyn team. Free 3D design consult." />
         <link rel="canonical" href="https://dnddesigncenter.com/italian-kitchen-cabinets" />
         <meta name="robots"
               content="index,follow,max-snippet:200,max-image-preview:large" />
 
         {/* ── OG / Twitter ── */}
-        <meta property="og:title"
-              content="Italian Kitchen Cabinets NYC – Free 3-D Design in 7 Days" />
-        <meta property="og:description"
-              content="See 20 finishes in our Brooklyn showroom. Book your complimentary consult today." />
-        <meta property="og:image"
-              content="https://cdn11.bigcommerce.com/s-8npu8mt3gx/images/stencil/original/products/649/30261/Aster_Atelier_thumbnail1612x1072__03721.1715692884.jpg?c=2" />
+          <meta property="og:title"
+            content="Custom Italian Kitchen Cabinets NYC | D&D Design Center" />
+          <meta property="og:description"
+            content="Custom Italian cabinets for NYC homes. Visit the Brooklyn showroom and get a free 3D design consult." />
+          <meta property="og:image"
+            content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif" />
         <meta property="og:image:width"  content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url"   content="https://dnddesigncenter.com/italian-kitchen-cabinets" />
         <meta property="og:type"  content="product" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Custom Italian Kitchen Cabinets NYC | D&D Design Center" />
+        <meta name="twitter:description" content="Custom Italian cabinets for NYC homes. Visit the Brooklyn showroom and get a free 3D design consult." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Modern/Kitchen_Modern_8.avif" />
 
         {/* ── Consolidated structured data ── */}
         <script type="application/ld+json">

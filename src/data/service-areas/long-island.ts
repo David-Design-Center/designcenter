@@ -8,13 +8,13 @@ export const longIslandConfig: ServiceAreaConfig = {
   underConstruction: true,
 
   seo: {
-    title: 'Long Island Interior Designer | Luxury Italian Kitchens & Closets | D&D Design Center',
-    description: 'Custom Italian kitchens and closets for Long Island homeowners. From the Hamptons to the North Shore — Italian craftsmanship, free 3D design render, white-glove installation.',
+    title: 'Long Island Interior Designer | Italian Kitchens & Closets | D&D',
+    description: 'Custom Italian kitchens and closets for Long Island homes. From the North Shore to the Hamptons. Free 3D design render.',
     canonicalPath: '/service-areas/long-island',
-    ogTitle: 'Long Island Interior Designer | Luxury Italian Kitchens & Closets',
-    ogDescription: 'Bespoke Italian kitchens, closets, and interiors designed for Long Island homes. Free 3D design consultation.',
-    twitterTitle: 'Long Island Interior Designer | Luxury Italian Kitchens & Closets',
-    twitterDescription: 'Custom Italian kitchens and closets for Long Island homes. Free 3D design render.',
+    ogTitle: 'Long Island Interior Designer | Italian Kitchens & Closets | D&D',
+    ogDescription: 'Custom Italian kitchens and closets for Long Island homes. Free 3D design consult.',
+    twitterTitle: 'Long Island Interior Designer | Italian Kitchens & Closets | D&D',
+    twitterDescription: 'Custom Italian kitchens and closets for Long Island homes. Free 3D design consult.',
   },
 
   jsonLd: {

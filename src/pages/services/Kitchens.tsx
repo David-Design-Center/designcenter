@@ -107,20 +107,23 @@ const Kitchens = () => {
           HELMET / SEO
       ═══════════════════════════════════════════ */}
       <Helmet>
-        <title>Custom Italian Kitchens NYC – Brooklyn Showroom | D&D Design Center</title>
-        <meta name="description" content="Handcrafted Italian kitchens designed for New York living. Modern, Traditional & Art Deco styles. Visit our 6,000 sq ft Brooklyn showroom. Free 30-min design consultation." />
+        <title>Custom Italian Kitchens NYC | D&D Design Center</title>
+        <meta name="description" content="Handcrafted Italian kitchens in modern, traditional, and Art Deco styles. Visit our Brooklyn showroom for a free design consult." />
         <link rel="canonical" href="https://dnddesigncenter.com/kitchens" />
         <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
 
         {/* OG */}
-        <meta property="og:title" content="Custom Italian Kitchens NYC – Brooklyn Showroom | D&D" />
-        <meta property="og:description" content="Handcrafted Italian kitchens for NYC homes. Modern, Traditional & Art Deco. Free consultation." />
+        <meta property="og:title" content="Custom Italian Kitchens NYC | D&D Design Center" />
+        <meta property="og:description" content="Modern, traditional, and Art Deco Italian kitchens for NYC homes. Free design consultation." />
         <meta property="og:image" content={KITCHEN_IMAGES.hero} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://dnddesigncenter.com/kitchens" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Custom Italian Kitchens NYC | D&D Design Center" />
+        <meta name="twitter:description" content="Modern, traditional, and Art Deco Italian kitchens for NYC homes. Free design consultation." />
+        <meta name="twitter:image" content={KITCHEN_IMAGES.hero} />
 
         {/* JSON-LD: LocalBusiness + Service */}
         <script type="application/ld+json">

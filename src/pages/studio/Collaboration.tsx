@@ -17,9 +17,23 @@ const Collaboration = () => {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-        <title>Collaborations with Luxury Designers | D&D Design Center</title>
-        <meta name="description" content="Learn about our collaborations with top designers and brands at D&D Design Center." />
+        <title>Luxury Designer Collaborations | D&D Design Center</title>
+        <meta name="description" content="Discover exclusive collaborations with Visionnaire and leading Italian brands. See limited collections and bespoke interiors." />
         <link rel="canonical" href="https://dnddesigncenter.com/collaboration" />
+        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        <meta property="og:title" content="Luxury Designer Collaborations | D&D Design Center" />
+        <meta property="og:description" content="Exclusive collaborations with Visionnaire and leading Italian brands." />
+        <meta property="og:url" content="https://dnddesigncenter.com/collaboration" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Luxury Designer Collaborations | D&D Design Center" />
+        <meta name="twitter:description" content="Exclusive collaborations with Visionnaire and leading Italian brands." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

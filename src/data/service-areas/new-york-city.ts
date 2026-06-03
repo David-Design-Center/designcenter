@@ -7,13 +7,13 @@ export const newYorkCityConfig: ServiceAreaConfig = {
   formType: 'NYC',
 
   seo: {
-    title: 'NYC Interior Designer | Luxury Italian Kitchens & Closets | D&D Design Center',
-    description: 'Custom Italian kitchens and closets for New York City apartments, townhouses, and brownstones. Free 3D design render. White-glove installation by D&D Design Center.',
+    title: 'NYC Interior Designer | Italian Kitchens & Closets | D&D',
+    description: 'Custom Italian kitchens and closets for NYC apartments and townhouses. Free 3D design render and white-glove installation.',
     canonicalPath: '/service-areas/new-york-city',
-    ogTitle: 'NYC Interior Designer | Luxury Italian Kitchens & Closets',
-    ogDescription: 'Bespoke Italian kitchens, closets, and interiors designed for New York City homes. Free 3D design consultation.',
-    twitterTitle: 'NYC Interior Designer | Luxury Italian Kitchens & Closets',
-    twitterDescription: 'Custom Italian kitchens and closets for NYC apartments and townhouses. Free 3D design render.',
+    ogTitle: 'NYC Interior Designer | Italian Kitchens & Closets | D&D',
+    ogDescription: 'Custom Italian kitchens and closets for NYC homes. Free 3D design consult.',
+    twitterTitle: 'NYC Interior Designer | Italian Kitchens & Closets | D&D',
+    twitterDescription: 'Custom Italian kitchens and closets for NYC homes. Free 3D design consult.',
   },
 
   jsonLd: {

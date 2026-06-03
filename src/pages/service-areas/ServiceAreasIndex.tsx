@@ -13,13 +13,22 @@ function ServiceAreasIndex() {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-        <title>Service Areas | Luxury Italian Interior Design | D&D Design Center</title>
-        <meta name="description" content="D&D Design Center serves luxury interior design clients across New York City, Long Island, New Jersey, Boca Raton, and Miami. Custom Italian kitchens, closets, and full home renovations." />
+        <title>Service Areas | Italian Design Center NYC & Florida</title>
+        <meta name="description" content="We serve NYC, Long Island, New Jersey, Boca Raton, and Miami with Italian kitchens, closets, and interiors." />
         <link rel="canonical" href="https://dnddesigncenter.com/service-areas" />
-        <meta property="og:title" content="Service Areas | D&D Design Center" />
-        <meta property="og:description" content="Italian craftsmanship delivered across the Northeast and South Florida." />
+        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+        <meta property="og:title" content="Service Areas | Italian Design Center NYC & Florida" />
+        <meta property="og:description" content="Italian craftsmanship delivered across NYC and South Florida." />
         <meta property="og:url" content="https://dnddesigncenter.com/service-areas" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Service Areas | Italian Design Center NYC & Florida" />
+        <meta name="twitter:description" content="Italian craftsmanship delivered across NYC and South Florida." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
       </Helmet>
       
       <main className="pt-32 pb-24 px-6">

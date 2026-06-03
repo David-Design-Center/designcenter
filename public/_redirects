@@ -59,6 +59,11 @@ http://www.dnddesigncenter.com/*  https://dnddesigncenter.com/:splat  301!
 /portfolio-:id/*                                        /productscollection    301
 /tiles/*                                                /productscollection    301
 
+# 4d. Legacy search/contact URLs to remove
+/index.php?route=information/contact                    /gone                  410
+/cgi-bin/otsing                                         /gone                  410
+/cgi-bin/otsing/*                                       /gone                  410
+
 # 4c. Service area legacy redirect
 /boca-raton-interior-designer  /service-areas/boca-raton-florida  301!
 

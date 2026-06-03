@@ -15,9 +15,23 @@ const Sustainability = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Sustainable Home Interiors | D&D Design Center</title>
-        <meta name="description" content="Explore sustainable luxury with eco-conscious furniture and responsibly sourced materials designed for elegant, energy-efficient interiors." />
+        <title>Sustainable Luxury Interiors | D&D Design Center</title>
+        <meta name="description" content="Eco-conscious materials and responsibly sourced Italian furnishings for elegant, energy-efficient homes in NYC." />
         <link rel="canonical" href="https://dnddesigncenter.com/sustainability" />
+        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+
+        <meta property="og:title" content="Sustainable Luxury Interiors | D&D Design Center" />
+        <meta property="og:description" content="Eco-conscious materials and responsibly sourced Italian furnishings for NYC homes." />
+        <meta property="og:url" content="https://dnddesigncenter.com/sustainability" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sustainable Luxury Interiors | D&D Design Center" />
+        <meta name="twitter:description" content="Eco-conscious materials and responsibly sourced Italian furnishings for NYC homes." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Hero_Video_Banner.avif" />
       </Helmet>
       <SustainabilityHero />
       <SustainabilityHighlights

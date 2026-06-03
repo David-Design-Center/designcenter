@@ -8,13 +8,13 @@ export const newJerseyConfig: ServiceAreaConfig = {
   underConstruction: true,
 
   seo: {
-    title: 'New Jersey Interior Designer | Luxury Italian Kitchens & Closets | D&D Design Center',
-    description: 'Custom Italian kitchens and closets for New Jersey homeowners. From Bergen County to the Shore — Italian craftsmanship, free 3D design render, white-glove installation.',
+    title: 'New Jersey Interior Designer | Italian Kitchens & Closets | D&D',
+    description: 'Custom Italian kitchens and closets for New Jersey homes. From Bergen County to the Shore. Free 3D design render.',
     canonicalPath: '/service-areas/new-jersey',
-    ogTitle: 'New Jersey Interior Designer | Luxury Italian Kitchens & Closets',
-    ogDescription: 'Bespoke Italian kitchens, closets, and interiors designed for New Jersey homes. Free 3D design consultation.',
-    twitterTitle: 'New Jersey Interior Designer | Luxury Italian Kitchens & Closets',
-    twitterDescription: 'Custom Italian kitchens and closets for New Jersey homes. Free 3D design render.',
+    ogTitle: 'New Jersey Interior Designer | Italian Kitchens & Closets | D&D',
+    ogDescription: 'Custom Italian kitchens and closets for New Jersey homes. Free 3D design consult.',
+    twitterTitle: 'New Jersey Interior Designer | Italian Kitchens & Closets | D&D',
+    twitterDescription: 'Custom Italian kitchens and closets for New Jersey homes. Free 3D design consult.',
   },
 
   jsonLd: {

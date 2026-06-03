@@ -94,18 +94,18 @@ const ProductsCollection = () => {
       )}
       <Helmet>
         {/* ── Primary SEO ── */}
-    <title>Luxury Custom Kitchens & Furniture – NYC Showroom | D&D</title>
+    <title>Italian Kitchens & Furniture Collection NYC | D&D</title>
     <meta name="description"
-      content="Explore our curated Italian collection: kitchens, closets, lighting & more. Brooklyn showroom. Complimentary design consultation available." />
+      content="Browse Italian kitchens, closets, lighting, and furniture curated for NYC homes. Showroom visits and complimentary design consults." />
         <link rel="canonical" href="https://dnddesigncenter.com/productscollection" />
         <meta name="robots"
               content="index,follow,max-snippet:200,max-image-preview:large" />
 
         {/* ── OG / Twitter ── */}
-        <meta property="og:title"
-              content="Luxury Custom Kitchens & Interiors NYC – Explore the Collection" />
-        <meta property="og:description"
-              content="Discover the elegance of contemporary, custom Italian furnishings crafted for modern interiors." />
+          <meta property="og:title"
+            content="Italian Kitchens & Furniture Collection NYC | D&D" />
+          <meta property="og:description"
+            content="Explore Italian kitchens, closets, lighting, and furniture for NYC homes." />
         <meta property="og:image"
               content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Traditional/Kitchen_Traditional_6.avif" />
         <meta property="og:image:width"  content="1200" />
@@ -113,6 +113,9 @@ const ProductsCollection = () => {
         <meta property="og:url"   content="https://dnddesigncenter.com/productscollection" />
         <meta property="og:type"  content="website" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Italian Kitchens & Furniture Collection NYC | D&D" />
+        <meta name="twitter:description" content="Explore Italian kitchens, closets, lighting, and furniture for NYC homes." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/Product_2/Kitchen/Traditional/Kitchen_Traditional_6.avif" />
 
         {/* ── Consolidated structured data ── */}
         <script type="application/ld+json">

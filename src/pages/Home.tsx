@@ -15,12 +15,26 @@ function Home() {
   return (
     <div className="relative min-h-screen bg-white">
       <Helmet>
-          <title>Best Interior Designer Brooklyn - if you’re looking for Interior design services near me or home remodel near me - D&D Design Center is the place to be</title>
+          <title>D&D Design Center | Italian Kitchens & Furniture NYC</title>
           <meta
             name="description"
-            content="Bespoke Italian kitchens, closets, baths & interiors. 6000 square feet Brooklyn showroom. Free 30-min consult."
+            content="Italian kitchens, closets, and luxury furniture for NYC homes. Visit our 6,000 sq ft Brooklyn showroom and book a free 30-minute design consultation."
           />
-          <link rel="canonical" href="https://dnddesigncenter.com/" />
+          <link rel="canonical" href="https://dnddesigncenter.com" />
+          <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
+
+          <meta property="og:title" content="Italian Kitchens & Furniture NYC | D&D Design Center" />
+          <meta property="og:description" content="Visit the Brooklyn showroom for Italian kitchens, closets, and luxury furniture. Free design consultation." />
+          <meta property="og:url" content="https://dnddesigncenter.com" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="https://res.cloudinary.com/designcenter/image/upload/D_D_New_York_Showroom.avif" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Italian Kitchens & Furniture NYC | D&D Design Center" />
+          <meta name="twitter:description" content="Visit the Brooklyn showroom for Italian kitchens, closets, and luxury furniture. Free design consultation." />
+          <meta name="twitter:image" content="https://res.cloudinary.com/designcenter/image/upload/D_D_New_York_Showroom.avif" />
 
           {/* JSON-LD VideoObject for SEO */}
           <script type="application/ld+json">

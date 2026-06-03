@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { Helmet } from 'react-helmet';
 import ScrollToTop from './components/layout/ScrollToTop';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -60,12 +59,15 @@ function App() {
     script.type = "application/ld+json";
     script.text = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "FurnitureStore",
+      "@type": ["FurnitureStore", "LocalBusiness"],
+      "@id": "https://dnddesigncenter.com#business",
       "name": "D&D Design Center",
       "url": "https://dnddesigncenter.com",
       "logo": "https://res.cloudinary.com/designcenter/image/upload/D_D_Logo.avif",
       "image": "https://res.cloudinary.com/designcenter/image/upload/D_D_New_York_Showroom.avif",
-      "description": "Luxury bespoke furniture solutions.",
+      "description": "Italian kitchens, closets, and luxury furniture for NYC homes.",
+      "foundingDate": "2006",
+      "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "2615 East 17th Street",
@@ -74,10 +76,35 @@ function App() {
         "postalCode": "11235",
         "addressCountry": "US"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.586662,
+        "longitude": -73.953265
+      },
       "telephone": "+1 718-934-7100",
       "openingHours": "Mo-Su 10:00-19:00",
-      "serviceArea": [
-        { "@type": "AdministrativeArea", "name": "Brooklyn" }
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "areaServed": [
+        { "@type": "City", "name": "New York City" },
+        { "@type": "AdministrativeArea", "name": "Long Island" },
+        { "@type": "State", "name": "New Jersey" },
+        { "@type": "City", "name": "Boca Raton" },
+        { "@type": "City", "name": "Miami" }
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -104,20 +131,6 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <title>Italian Kitchens & Custom Furniture Brooklyn | Free Consult</title>
-        <meta name="description" content="Hand-built in Italy • Brooklyn showroom. Book your free 30-min design consult and receive a 3D sketch in 7 days." />
-        <meta name="robots" content="index,follow,max-snippet:200,max-image-preview:large" />
-        <meta property="og:title" content="Italian Kitchen Cabinets NYC – Free 3D Design in 7 Days" />
-        <meta property="og:description" content="See 20 finishes in our Brooklyn showroom and get a 3D render-no obligation." />
-        <meta property="og:image" content="https://cdn11.bigcommerce.com/s-8npu8mt3gx/images/stencil/original/products/649/30261/Aster_Atelier_thumbnail1612x1072__03721.1715692884.jpg?c=2" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://dnddesigncenter.com/italian-kitchen-cabinets" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="icon" href="https://res.cloudinary.com/designcenter/image/upload/Favicon_DnD.avif" />
-      </Helmet>
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <Router>

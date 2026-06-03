@@ -8,13 +8,13 @@ export const miamiFloridaConfig: ServiceAreaConfig = {
   underConstruction: true,
 
   seo: {
-    title: 'Miami Interior Designer | Luxury Italian Kitchens & Closets | D&D Design Center',
-    description: 'Custom Italian kitchens and closets for Miami homeowners. From Coral Gables to Miami Beach — Italian craftsmanship, free 3D design render, white-glove installation.',
+    title: 'Miami Interior Designer | Italian Kitchens & Closets | D&D',
+    description: 'Custom Italian kitchens and closets for Miami homes. From Coral Gables to Miami Beach. Free 3D design render.',
     canonicalPath: '/service-areas/miami-florida',
-    ogTitle: 'Miami Interior Designer | Luxury Italian Kitchens & Closets',
-    ogDescription: 'Bespoke Italian kitchens, closets, and interiors designed for Miami homes. Free 3D design consultation.',
-    twitterTitle: 'Miami Interior Designer | Luxury Italian Kitchens & Closets',
-    twitterDescription: 'Custom Italian kitchens and closets for Miami homes. Free 3D design render.',
+    ogTitle: 'Miami Interior Designer | Italian Kitchens & Closets | D&D',
+    ogDescription: 'Custom Italian kitchens and closets for Miami homes. Free 3D design consult.',
+    twitterTitle: 'Miami Interior Designer | Italian Kitchens & Closets | D&D',
+    twitterDescription: 'Custom Italian kitchens and closets for Miami homes. Free 3D design consult.',
   },
 
   jsonLd: {
